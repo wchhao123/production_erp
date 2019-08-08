@@ -27,7 +27,7 @@ public class SpringConfig {
     public DataSource dataSource() {
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/production_ssm?characterEncoding=utf8");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/product");
         dataSource.setUsername("root");
         dataSource.setPassword("123456");
         return dataSource;
@@ -58,11 +58,11 @@ public class SpringConfig {
     }
 
     //视图处理器
-    @Bean
+    /*@Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/jsp/");
         viewResolver.setSuffix(".jsp");
         return viewResolver;
-    }
+    }*/
 }

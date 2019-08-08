@@ -16,12 +16,11 @@ public class OrderServiceImpl implements IOrderService {
     private COrderMapper orderMapper;
 
     public ResponseOV<COrder> getPageCOrder(int index, int pageSize) {
-        ResponseOV<COrder> orderResponse = new ResponseOV<>();
+        ResponseOV<COrder> orderResponse = new ResponseOV<COrder>();
         long l = orderMapper.countByExample(null);
         List<COrder> pageCOrder = orderMapper.getPageCOrder((index - 1) * pageSize, pageSize);
         orderResponse.setTotal((int) l);
         orderResponse.setRows(pageCOrder);
         return orderResponse;
     }
-
 }
