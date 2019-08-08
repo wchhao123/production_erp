@@ -1,0 +1,4 @@
+target/
+.idea/
+production_erp.iml
+*.gitignore
