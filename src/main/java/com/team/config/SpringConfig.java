@@ -45,7 +45,7 @@ public class SpringConfig {
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer mapper = new MapperScannerConfigurer();
         mapper.setSqlSessionFactoryBeanName("sqlSessionFactoryBean");
-        mapper.setBasePackage("com.wyl.mapper");
+        mapper.setBasePackage("com.team.mapper");
         return mapper;
     }
 

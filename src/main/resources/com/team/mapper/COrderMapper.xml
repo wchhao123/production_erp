@@ -321,4 +321,36 @@
       status = #{status,jdbcType=INTEGER}
     where order_id = #{orderId,jdbcType=VARCHAR}
   </update>
+
+  <resultMap id="pageResultSet" type="com.team.bean.COrder">
+    <id column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="order_date" jdbcType="TIMESTAMP" property="orderDate" />
+    <result column="request_date" jdbcType="TIMESTAMP" property="requestDate" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="unit_price" jdbcType="DECIMAL" property="unitPrice" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="file" jdbcType="VARCHAR" property="file" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <association property="custom" javaType="com.team.bean.Custom">
+      <id column="custom_id" property="customId"/>
+      <result column="custom_name" property="customName"/>
+    </association>
+    <association property="product" javaType="com.team.bean.Product">
+      <id column="product_id" property="productId"/>
+      <result column="product_name" property="productName"/>
+    </association>
+  </resultMap>
+  <!--查询一个一个页面的order-->
+  <select id="getPageCOrder" resultMap="pageResultSet">
+    select
+    o.order_id,o.order_date,o.request_date,o.note,o.quantity,o.unit_price,o.unit,o.image,o.file,o.status,
+    c.custom_id,c.custom_name,
+    p.product_id,p.product_name
+    from c_order o
+    left join custom c on o.custom_id=c.custom_id
+    left join product p on o.product_id=p.product_id
+    limit #{index},#{pageSize}
+  </select>
 </mapper>

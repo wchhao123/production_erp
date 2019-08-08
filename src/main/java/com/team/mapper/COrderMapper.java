@@ -27,4 +27,6 @@ public interface COrderMapper {
     int updateByPrimaryKeySelective(COrder record);
 
     int updateByPrimaryKey(COrder record);
+
+    List<COrder> getPageCOrder(@Param("index") int index, @Param("pageSize") int pageSize);
 }
