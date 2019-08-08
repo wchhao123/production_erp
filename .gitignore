@@ -1,0 +1,6 @@
+target/
+generatorconfig.xml
+src/main/java/com/team/util/Generator.java
+*.idea/
+production_erp.iml
+production_erp1.iml

@@ -5,10 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.team</groupId>
-    <artifactId>production_erp1</artifactId>
+    <artifactId>production_erp</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-
     <!--spring-->
     <dependencies>
         <dependency>
