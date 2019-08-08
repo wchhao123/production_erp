@@ -45,7 +45,7 @@ public class SpringConfig {
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer mapper = new MapperScannerConfigurer();
         mapper.setSqlSessionFactoryBeanName("sqlSessionFactoryBean");
-        mapper.setBasePackage("com.wyl.mapper");
+        mapper.setBasePackage("com.team.mapper");
         return mapper;
     }
 
@@ -57,12 +57,12 @@ public class SpringConfig {
         return resolver;
     }
 
-    /*//视图处理器
+    //视图处理器
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/jsp/");
         viewResolver.setSuffix(".jsp");
         return viewResolver;
-    }*/
+    }
 }
