@@ -37,7 +37,7 @@ public class SpringMvcConfig implements WebMvcConfigurer {
     //静态资源
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/pic/**")
+        registry.addResourceHandler("/image/**")
                 .addResourceLocations("/WEB-INF/image/");
         registry.addResourceHandler("/css/**")
                 .addResourceLocations("/WEB-INF/css/");
