@@ -35,4 +35,9 @@ public class MaterialServiceImpl implements  MaterialService {
         materialResponseOV.setRows(pageMaterial);
         return materialResponseOV;
     }
+
+    @Override
+    public Material selectByPrimaryKey(String materialId) {
+        return materialMapper.selectByPrimaryKey(materialId);
+    }
 }

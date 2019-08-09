@@ -13,4 +13,6 @@ public interface MaterialService {
     List<Material> selectByExample(MaterialExample example);
 
     ResponseOV<Material> getPageMaterial(int page, int rows);
+
+    Material selectByPrimaryKey(String materialId);
 }
