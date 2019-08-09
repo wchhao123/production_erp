@@ -2,8 +2,9 @@ package com.team.mapper;
 
 import com.team.bean.UnqualifyApply;
 import com.team.bean.UnqualifyApplyExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface UnqualifyApplyMapper {
     long countByExample(UnqualifyApplyExample example);
@@ -27,4 +28,7 @@ public interface UnqualifyApplyMapper {
     int updateByPrimaryKeySelective(UnqualifyApply record);
 
     int updateByPrimaryKey(UnqualifyApply record);
+
+    //分页查询不合格品
+    List<UnqualifyApply> getPageUnqualifyApply(@Param("page") int page, @Param("rows") int rows);
 }
