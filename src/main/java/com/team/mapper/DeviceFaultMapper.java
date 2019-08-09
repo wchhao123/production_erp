@@ -3,8 +3,12 @@ package com.team.mapper;
 import com.team.bean.DeviceFault;
 import com.team.bean.DeviceFaultExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import com.team.bean.DeviceType;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository
 public interface DeviceFaultMapper {
     long countByExample(DeviceFaultExample example);
 
@@ -27,4 +31,8 @@ public interface DeviceFaultMapper {
     int updateByPrimaryKeySelective(DeviceFault record);
 
     int updateByPrimaryKey(DeviceFault record);
+
+
+    List<DeviceFault> findDeviceFaultList(int page,int rows);
+
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MeasureServiceImpl implements MeasureService {
+public class FinalMeasureCheckServiceImpl implements FinalMeasureCheckService {
     @Autowired
     private FinalMeasuretCheckMapper finalMeasuretCheckMapper;
 

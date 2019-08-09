@@ -1,10 +1,13 @@
 package com.team.mapper;
 
+import com.team.bean.DeviceFault;
 import com.team.bean.DeviceMaintain;
 import com.team.bean.DeviceMaintainExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface DeviceMaintainMapper {
     long countByExample(DeviceMaintainExample example);
 
@@ -27,4 +30,7 @@ public interface DeviceMaintainMapper {
     int updateByPrimaryKeySelective(DeviceMaintain record);
 
     int updateByPrimaryKey(DeviceMaintain record);
+
+
+    List<DeviceMaintain> findDeviceMaintainList(int page, int rows);
 }
