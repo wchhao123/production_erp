@@ -13,6 +13,8 @@ public class TechnologyRequirement {
 
     private Date reviseTime;
 
+    private String technologyName;
+
     public String getTechnologyRequirementId() {
         return technologyRequirementId;
     }
