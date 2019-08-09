@@ -257,7 +257,7 @@
       note = #{note,jdbcType=VARCHAR}
     where unqualify_apply_id = #{unqualifyApplyId,jdbcType=VARCHAR}
   </update>
-  <resultMap id="PageResultMap" type="com.team.bean.UnqualifyApply">
+  <resultMap id="pageResultMap" type="com.team.bean.UnqualifyApply">
     <id column="unqualify_apply_id" jdbcType="VARCHAR" property="unqualifyApplyId" />
     <result column="product_id" jdbcType="VARCHAR" property="productId" />
     <result column="unqualify_item" jdbcType="VARCHAR" property="unqualifyItem" />
@@ -269,7 +269,7 @@
     <result column="product_name" property="productName"/>
     <result column="emp_name" property="empName"/>
   </resultMap>
-  <select id="getPageUnqualifyApply" resultMap="PageResultMap">
+  <select id="getPageUnqualifyApply" resultMap="pageResultMap">
     select
     ua.unqualify_apply_id,
     ua.product_id,
