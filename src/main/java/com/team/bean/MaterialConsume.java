@@ -19,6 +19,26 @@ public class MaterialConsume {
 
     private String note;
 
+    private Material material;
+
+    private Work work;
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
+    }
+
+    public Work getWork() {
+        return work;
+    }
+
+    public void setWork(Work work) {
+        this.work = work;
+    }
+
     public String getConsumeId() {
         return consumeId;
     }

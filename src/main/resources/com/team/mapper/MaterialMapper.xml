@@ -209,4 +209,16 @@
       note = #{note,jdbcType=VARCHAR}
     where material_id = #{materialId,jdbcType=VARCHAR}
   </update>
+
+  <resultMap id="pageResultSet" type="com.team.bean.Material">
+  <id column="material_id" jdbcType="VARCHAR" property="materialId" />
+  <result column="material_type" jdbcType="VARCHAR" property="materialType" />
+  <result column="status" jdbcType="VARCHAR" property="status" />
+  <result column="remaining" jdbcType="INTEGER" property="remaining" />
+  <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <!--分页查询-->
+<select id="getPageMaterial" resultMap="pageResultSet">
+  select material_id,material_type,status,remaining,note from material limit #{page},#{rows}
+</select>
 </mapper>

@@ -1,5 +1,6 @@
 package com.team.mapper;
 
+import com.team.bean.Material;
 import com.team.bean.MaterialReceive;
 import com.team.bean.MaterialReceiveExample;
 import java.util.List;
@@ -27,4 +28,8 @@ public interface MaterialReceiveMapper {
     int updateByPrimaryKeySelective(MaterialReceive record);
 
     int updateByPrimaryKey(MaterialReceive record);
+
+    List<MaterialReceive> queryMaterialReceive();
+
+
 }
