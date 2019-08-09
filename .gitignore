@@ -1,3 +1,4 @@
+target/
 generatorconfig.xml
 src/main/java/com/team/util/Generator.java
 src/main/resources/db.properties
