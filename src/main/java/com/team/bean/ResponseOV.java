@@ -8,6 +8,14 @@ public class ResponseOV<T> {
 
     private List<T> rows;
 
+    public ResponseOV() {
+    }
+
+    public ResponseOV(int total, List<T> rows) {
+        this.total = total;
+        this.rows = rows;
+    }
+
     public int getTotal() {
         return total;
     }

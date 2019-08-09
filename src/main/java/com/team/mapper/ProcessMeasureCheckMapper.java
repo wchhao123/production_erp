@@ -2,8 +2,9 @@ package com.team.mapper;
 
 import com.team.bean.ProcessMeasureCheck;
 import com.team.bean.ProcessMeasureCheckExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface ProcessMeasureCheckMapper {
     long countByExample(ProcessMeasureCheckExample example);
@@ -27,4 +28,6 @@ public interface ProcessMeasureCheckMapper {
     int updateByPrimaryKeySelective(ProcessMeasureCheck record);
 
     int updateByPrimaryKey(ProcessMeasureCheck record);
+
+    List<ProcessMeasureCheck> getPageProcessMeasureCheck();
 }

@@ -353,4 +353,14 @@
     left join product p on o.product_id=p.product_id
     limit #{index},#{pageSize}
   </select>
+
+  <delete id="batchDeleteByIds">
+    delete from c_order
+    <where>
+      order_id in
+      <foreach collection="ids" item="id" open="(" close=")" separator=",">
+        #{id}
+      </foreach>
+    </where>
+  </delete>
 </mapper>

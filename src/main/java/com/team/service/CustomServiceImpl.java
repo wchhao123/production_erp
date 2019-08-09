@@ -33,4 +33,11 @@ public class CustomServiceImpl implements ICustomService {
         ov.setRows(customs);
         return ov;
     }
+
+    @Override
+    public List<Custom> getCustoms() {
+        return customMapper.selectByExample(null);
+    }
+
+
 }
