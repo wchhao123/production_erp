@@ -43,6 +43,10 @@ public class SpringMvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("/WEB-INF/css/");
         registry.addResourceHandler("/js/**")
                 .addResourceLocations("/WEB-INF/js/");
+        registry.addResourceHandler("/pic/**")
+                .addResourceLocations("/WEB-INF/upload/pic/");
+        registry.addResourceHandler("/file/**")
+                .addResourceLocations("/WEB-INF/upload/file/");
     }
 
 

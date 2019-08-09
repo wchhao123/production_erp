@@ -32,4 +32,7 @@ public interface COrderMapper {
 
     /*pageOrders*/
     List<COrder> getPageCOrder(@Param("index") int index, @Param("pageSize") int pageSize);
+
+    //批删除
+    int batchDeleteByIds(String[] ids);
 }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("custom")
 public class CustomController {
@@ -29,5 +31,11 @@ public class CustomController {
     @ResponseBody
     public ResponseOV<Custom> list(int page, int rows) {
         return customService.getCustoms(page, rows);
+    }
+
+    @PostMapping("get_data")
+    @ResponseBody
+    public List<Custom> getData() {
+        return customService.getCustoms();
     }
 }
