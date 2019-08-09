@@ -1,6 +1,10 @@
 package com.team.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.sun.org.apache.regexp.internal.RE;
 import com.team.bean.COrder;
+import com.team.bean.COrderExample;
 import com.team.bean.ResponseOV;
 import com.team.mapper.COrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +45,18 @@ public class OrderServiceImpl implements IOrderService {
         int insert = orderMapper.insert(order);
         return insert == 1;
     }
+
+    @Override
+    public ResponseOV<COrder> searchOrderByCondition(int flag, String searchValue, int page, int rows) {
+        PageHelper.startPage(page, rows);
+        List<COrder> cOrders = orderMapper.searchOrderByCondition(flag, "%" + searchValue + "%");
+        PageInfo<COrder> info = new PageInfo<>(cOrders);
+
+        ResponseOV<COrder> ov = new ResponseOV<>();
+        ov.setTotal((int) info.getTotal());
+        ov.setRows(cOrders);
+        return ov;
+    }
+
 
 }

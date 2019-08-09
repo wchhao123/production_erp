@@ -14,4 +14,7 @@ public interface IOrderService {
     boolean deleteByIds(String[] ids);
 
     boolean insertOrder(COrder order);
+
+    //条件查询
+    ResponseOV<COrder> searchOrderByCondition(int flag, String searchValue, int page, int rows);
 }
