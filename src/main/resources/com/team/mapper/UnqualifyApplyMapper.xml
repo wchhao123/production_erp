@@ -286,4 +286,12 @@
     left join employee e on e.emp_id = ua.emp_id
     limit #{page}, #{rows}
   </select>
+
+  <delete id="batchDeleteByIds">
+    delete from unqualify_apply
+    where unqualify_apply_id in
+    <foreach collection="ids" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </delete>
 </mapper>
