@@ -12,8 +12,21 @@ public class UserRoleUtil {
         if (lock == 1) {
             map.put("rolename", "计划进度管理员");
             planManger(list);
+        }else if (lock==2) {
+            map.put("rolename", "设备管理管理员");
+            deviceManger(list);
         }
 
+    }
+
+    private static void deviceManger(List<String> list) {
+        for (String s  : author) {
+            list.add("device" + s);
+            list.add("deviceType" + s);
+            list.add("deviceCheck" + s);
+            list.add("deviceFault" + s);
+            list.add("deviceMaintain" + s);
+        }
     }
 
     private static void planManger(List<String> list) {
