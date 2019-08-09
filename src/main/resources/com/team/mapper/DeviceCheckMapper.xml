@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.mapper.DeviceCheckMapper">
+    <resultMap id="findDeviceCheckListResultMap" type="com.team.bean.DeviceCheck">
+        <id column="device_check_id" property="deviceCheckId"></id>
+        <result column="device_id" property="deviceId"></result>
+        <result column="device_check_emp_id" property="deviceCheckEmpId"></result>
+        <result column="device_check_date" property="deviceCheckDate"></result>
+        <result column="device_check_result" property="deviceCheckResult"></result>
+        <result column="device_check_fault_id" property="deviceCheckFaultId"></result>
+        <result column="device_name" property="deviceName"></result>
+        <result column="emp_name" property="deviceCheckEmp"></result>
+    </resultMap>
+    <select id="findDeviceCheckList" resultMap="findDeviceCheckListResultMap">
+        SELECT
+            device_check.device_check_id,
+            device_check.device_id,
+            device_check.device_check_emp_id,
+            device_check.device_check_date,
+            device_check.device_check_result,
+            device_check.device_check_fault_id,
+
+            device.device_name,
+            employee.emp_name
+        FROM device_check
+        LEFT JOIN device
+        ON device_check.device_id = device.device_id
+        LEFT JOIN employee
+        ON device_check.device_check_emp_id = employee.emp_id
+    </select>
+    
+    
   <resultMap id="BaseResultMap" type="com.team.bean.DeviceCheck">
     <id column="device_check_id" jdbcType="VARCHAR" property="deviceCheckId" />
     <result column="device_id" jdbcType="VARCHAR" property="deviceId" />

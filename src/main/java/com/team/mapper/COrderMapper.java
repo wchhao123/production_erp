@@ -4,7 +4,10 @@ import com.team.bean.COrder;
 import com.team.bean.COrderExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PathVariable;
 
+@Repository
 public interface COrderMapper {
     long countByExample(COrderExample example);
 
@@ -30,4 +33,10 @@ public interface COrderMapper {
 
     /*pageOrders*/
     List<COrder> getPageCOrder(@Param("index") int index, @Param("pageSize") int pageSize);
+
+    //批删除
+    int batchDeleteByIds(@Param("ids") String[] ids);
+
+    //条件查询
+    List<COrder> searchOrderByCondition(@Param("flag") int flag,@Param("searchValue") String searchValue);
 }

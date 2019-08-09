@@ -16,11 +16,32 @@ public class OrderServiceImpl implements IOrderService {
     private COrderMapper orderMapper;
 
     public ResponseOV<COrder> getPageCOrder(int index, int pageSize) {
-        ResponseOV<COrder> orderResponse = new ResponseOV<COrder>();
+        ResponseOV<COrder> orderResponse = new ResponseOV<>();
         long l = orderMapper.countByExample(null);
         List<COrder> pageCOrder = orderMapper.getPageCOrder((index - 1) * pageSize, pageSize);
         orderResponse.setTotal((int) l);
         orderResponse.setRows(pageCOrder);
         return orderResponse;
     }
+
+    @Override
+    public boolean updateOrder(COrder order) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteByIds(String[] ids) {
+        return false;
+    }
+
+    @Override
+    public boolean insertOrder(COrder order) {
+        return false;
+    }
+
+    @Override
+    public ResponseOV<COrder> searchOrderByCondition(int flag, String searchValue, int page, int rows) {
+        return null;
+    }
+
 }

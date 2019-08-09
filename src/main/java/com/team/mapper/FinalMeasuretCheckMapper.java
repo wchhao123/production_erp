@@ -2,8 +2,9 @@ package com.team.mapper;
 
 import com.team.bean.FinalMeasuretCheck;
 import com.team.bean.FinalMeasuretCheckExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface FinalMeasuretCheckMapper {
     long countByExample(FinalMeasuretCheckExample example);
@@ -27,4 +28,6 @@ public interface FinalMeasuretCheckMapper {
     int updateByPrimaryKeySelective(FinalMeasuretCheck record);
 
     int updateByPrimaryKey(FinalMeasuretCheck record);
+
+    List<FinalMeasuretCheck> getFinalMeasureCheck(@Param("page") int page, @Param("rows") int rows);
 }

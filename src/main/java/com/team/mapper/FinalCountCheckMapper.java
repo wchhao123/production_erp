@@ -2,8 +2,9 @@ package com.team.mapper;
 
 import com.team.bean.FinalCountCheck;
 import com.team.bean.FinalCountCheckExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface FinalCountCheckMapper {
     long countByExample(FinalCountCheckExample example);
@@ -27,4 +28,6 @@ public interface FinalCountCheckMapper {
     int updateByPrimaryKeySelective(FinalCountCheck record);
 
     int updateByPrimaryKey(FinalCountCheck record);
+
+    List<FinalCountCheck> getPageFinalCountCheck();
 }

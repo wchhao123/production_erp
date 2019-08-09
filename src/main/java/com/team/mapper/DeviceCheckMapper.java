@@ -4,7 +4,9 @@ import com.team.bean.DeviceCheck;
 import com.team.bean.DeviceCheckExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface DeviceCheckMapper {
     long countByExample(DeviceCheckExample example);
 
@@ -27,4 +29,6 @@ public interface DeviceCheckMapper {
     int updateByPrimaryKeySelective(DeviceCheck record);
 
     int updateByPrimaryKey(DeviceCheck record);
+
+    List<DeviceCheck> findDeviceCheckList(@Param("index") int index, @Param("pageSize") int pageSize);
 }

@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.mapper.DeviceFaultMapper">
-  <resultMap id="BaseResultMap" type="com.team.bean.DeviceFault">
+
+    <resultMap id="findDeviceFaultListResultMap" type="com.team.bean.DeviceFault">
+        <id column="device_fault_id" property="deviceFaultId"></id>
+        <result column="device_id" property="deviceId"></result>
+        <result column="device_fault_cause" property="deviceFaultCause"></result>
+        <result column="device_fault_detail" property="deviceFaultDetail"></result>
+        <result column="device_fault_date" property="deviceFaultDate"></result>
+        <result column="device_fault_maintenance" property="deviceFaultMaintenance"></result>
+        <result column="device_name" property="deviceName"></result>
+    </resultMap>
+    <select id="findDeviceFaultList" resultMap="findDeviceFaultListResultMap">
+        SELECT
+            device_fault.device_fault_id,
+            device_fault.device_id,
+            device_fault.device_fault_cause,
+            device_fault.device_fault_detail,
+            device_fault.device_fault_date,
+            device_fault.device_fault_maintenance,
+
+            device.device_name
+        FROM device_fault
+        LEFT JOIN device
+        ON device_fault.device_id = device.device_id
+    </select>
+
+    <resultMap id="BaseResultMap" type="com.team.bean.DeviceFault">
     <id column="device_fault_id" jdbcType="VARCHAR" property="deviceFaultId" />
     <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
     <result column="device_fault_cause" jdbcType="VARCHAR" property="deviceFaultCause" />
