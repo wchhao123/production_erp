@@ -257,4 +257,28 @@
       note = #{note,jdbcType=VARCHAR}
     where consume_id = #{consumeId,jdbcType=VARCHAR}
   </update>
+<resultMap id="materialConsume" type="com.team.bean.MaterialConsume">
+  <result column="consume_id"  property="consumeId" />
+  <result column="material_id"  property="materialId" />
+  <result column="consume_amount"  jdbcType="INTEGER" property="consumeAmount" />
+  <result column="consume_date"  property="consumeDate" />
+  <result column="sender"  property="sender" />
+  <result column="receiver" property="receiver" />
+  <result column="note" property="note" />
+  <association property="material" javaType="com.team.bean.Material">
+    <id column="material_id" property="materialId"/>
+    <result column="note" property="note"/>
+  </association>
+  <association property="work" javaType="com.team.bean.Work">
+    <id column="work_id" property="workId"/>
+  </association>
+</resultMap>
+
+  <select id="queryMaterialConsume" resultMap="materialConsume">
+    select  c.consume_id   , c.work_id ,  c.material_id ,  c.consume_amount , c.consume_date , c.sender , c.receiver , c.note ,
+    m.material_id  , m.note,
+    w.work_id from
+    material_consume c left join material m on c.material_id = m.material_id
+    left join work w on  c.work_id = w.work_id
+  </select>
 </mapper>

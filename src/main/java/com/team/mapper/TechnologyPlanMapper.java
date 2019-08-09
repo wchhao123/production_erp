@@ -2,8 +2,9 @@ package com.team.mapper;
 
 import com.team.bean.TechnologyPlan;
 import com.team.bean.TechnologyPlanExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TechnologyPlanMapper {
     long countByExample(TechnologyPlanExample example);
@@ -27,4 +28,6 @@ public interface TechnologyPlanMapper {
     int updateByPrimaryKeySelective(TechnologyPlan record);
 
     int updateByPrimaryKey(TechnologyPlan record);
+
+    List<TechnologyPlan> getPageTechnologyPlan(@Param("index") int index, @Param("pageSize") int pageSize);
 }

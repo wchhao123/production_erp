@@ -2,8 +2,10 @@ package com.team.mapper;
 
 import com.team.bean.Process;
 import com.team.bean.ProcessExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 public interface ProcessMapper {
     long countByExample(ProcessExample example);
@@ -27,4 +29,7 @@ public interface ProcessMapper {
     int updateByPrimaryKeySelective(Process record);
 
     int updateByPrimaryKey(Process record);
+
+    List<Process> getPageProcess(@Param("index") int index, @Param("pageSize") int pageSize);
+
 }
