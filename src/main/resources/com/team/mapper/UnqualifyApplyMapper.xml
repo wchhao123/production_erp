@@ -257,4 +257,33 @@
       note = #{note,jdbcType=VARCHAR}
     where unqualify_apply_id = #{unqualifyApplyId,jdbcType=VARCHAR}
   </update>
+  <resultMap id="PageResultMap" type="com.team.bean.UnqualifyApply">
+    <id column="unqualify_apply_id" jdbcType="VARCHAR" property="unqualifyApplyId" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="unqualify_item" jdbcType="VARCHAR" property="unqualifyItem" />
+    <result column="unqualify_count" jdbcType="INTEGER" property="unqualifyCount" />
+    <result column="assembly_date" jdbcType="TIMESTAMP" property="assemblyDate" />
+    <result column="emp_id" jdbcType="VARCHAR" property="empId" />
+    <result column="apply_date" jdbcType="TIMESTAMP" property="applyDate" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="product_name" property="productName"/>
+    <result column="emp_name" property="empName"/>
+  </resultMap>
+  <select id="getPageUnqualifyApply" resultMap="PageResultMap">
+    select
+    ua.unqualify_apply_id,
+    ua.product_id,
+    ua.unqualify_item,
+    ua.unqualify_count,
+    ua.assembly_date,
+    ua.emp_id,
+    ua.apply_date,
+    ua.note,
+    p.product_name,
+    e.emp_name
+    from unqualify_apply ua
+    left join product p on ua.product_id = p.product_id
+    left join employee e on e.emp_id = ua.emp_id
+    limit #{page}, #{rows}
+  </select>
 </mapper>
