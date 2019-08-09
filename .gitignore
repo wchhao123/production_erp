@@ -1,6 +1,7 @@
 target/
 generatorconfig.xml
 src/main/java/com/team/util/Generator.java
+src/main/resources/db.properties
 .idea/
 .idea/workspace.xml
 production_erp.iml
