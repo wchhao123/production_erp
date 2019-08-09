@@ -1,10 +1,12 @@
 package com.team.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInterceptor;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +19,8 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.sql.DataSource;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 @Configuration
@@ -27,36 +31,36 @@ public class SpringConfig {
 
     //数据源
     @Bean
-    public DataSource dataSource() {
+    public DataSource dataSource() throws IOException {
+        InputStream in = Resources.getResourceAsStream("db.properties");
+        Properties properties = new Properties();
+        properties.load(in);
         DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        /*dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/production_ssm?characterEncoding=utf8");
         dataSource.setUsername("root");
-        dataSource.setPassword("123456");
+        dataSource.setPassword("123456");*/
+        dataSource.setDriverClassName(properties.getProperty("db.driverClassName"));
+        dataSource.setUrl(properties.getProperty("db.url"));
+        dataSource.setUsername(properties.getProperty("db.username"));
+        dataSource.setPassword(properties.getProperty("db.password"));
         return dataSource;
     }
 
     //mybatis
     @Bean
-    public SqlSessionFactoryBean sqlSessionFactoryBean(DataSource dataSource) {
+    public SqlSessionFactoryBean sqlSessionFactoryBean(DataSource dataSource) throws IOException {
         SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
         factory.setDataSource(dataSource);
+        //pageHelper插件
+        PageInterceptor interceptor = new PageInterceptor();
+        Properties properties = new Properties();
+        properties.setProperty("helperDialect", "mysql");
+        interceptor.setProperties(properties);
+        factory.setPlugins(new Interceptor[]{interceptor});
+
         return factory;
     }
-/*    //分页
-    @Configuration
-    public class MyBatisConfig{
-        @Bean
-        public PageHelper pageHelper(){
-            PageHelper pageHelper = new PageHelper();
-            Properties p = new Properties();
-            p.setProperty("offsetAsPageNum","true");
-            p.setProperty("rowBoundsWithCount","true");
-            p.setProperty("reasonable","true");
-            pageHelper.setProperties(p);
-            return pageHelper;
-        }
-    }*/
 
     @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {

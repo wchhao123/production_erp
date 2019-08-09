@@ -1,12 +1,11 @@
 package com.team.controller;
 
 import com.team.bean.Custom;
+import com.team.bean.ResponseOV;
 import com.team.service.ICustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("custom")
@@ -21,5 +20,14 @@ public class CustomController {
         return customService.getCustomById(id);
     }
 
+    @GetMapping("find")
+    public String find() {
+        return "/WEB-INF/jsp/custom_list.jsp";
+    }
 
+    @GetMapping("list")
+    @ResponseBody
+    public ResponseOV<Custom> list(int page, int rows) {
+        return customService.getCustoms(page, rows);
+    }
 }
