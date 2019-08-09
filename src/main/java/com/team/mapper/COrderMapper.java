@@ -35,7 +35,7 @@ public interface COrderMapper {
     List<COrder> getPageCOrder(@Param("index") int index, @Param("pageSize") int pageSize);
 
     //批删除
-    int batchDeleteByIds(String[] ids);
+    int batchDeleteByIds(@Param("ids") String[] ids);
 
     //条件查询
     List<COrder> searchOrderByCondition(@Param("flag") int flag,@Param("searchValue") String searchValue);
