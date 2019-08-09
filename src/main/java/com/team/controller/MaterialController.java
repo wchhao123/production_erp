@@ -1,7 +1,9 @@
 package com.team.controller;
 
+import com.team.bean.COrder;
 import com.team.bean.Material;
 import com.team.bean.MaterialExample;
+import com.team.bean.ResponseOV;
 import com.team.service.MaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,14 +20,22 @@ public class MaterialController {
 
     @RequestMapping("material/find")
     public String material(){
-        return "material_list";
+        return "/WEB-INF/jsp/material_list.jsp";
     }
-    @RequestMapping("material/list")
+  /*  @RequestMapping("material/list")
     @ResponseBody
     public List<Material> material1(){
         MaterialExample example = new MaterialExample();
         long l = materialService.countByExample(example);
         List<Material> materials = materialService.selectByExample(example);
         return materials;
+    }*/
+
+    @RequestMapping("material/list")
+    @ResponseBody
+    public ResponseOV<Material> list(int page, int rows) {
+
+        ResponseOV<Material> pageMaterial = materialService.getPageMaterial(page, rows);
+        return pageMaterial;
     }
 }

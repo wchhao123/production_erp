@@ -1,7 +1,9 @@
 package com.team.service;
 
+import com.team.bean.COrder;
 import com.team.bean.Material;
 import com.team.bean.MaterialExample;
+import com.team.bean.ResponseOV;
 import com.team.mapper.MaterialMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,6 +22,17 @@ public class MaterialServiceImpl implements  MaterialService {
 
     @Override
     public List<Material> selectByExample(MaterialExample example) {
+
         return materialMapper.selectByExample(example);
+    }
+
+    @Override
+    public ResponseOV<Material> getPageMaterial(int page, int rows) {
+        ResponseOV<Material> materialResponseOV = new ResponseOV<>();
+        long l = materialMapper.countByExample(null);
+        List<Material> pageMaterial = materialMapper.getPageMaterial((page - 1) * rows, rows);
+        materialResponseOV.setTotal((int) l);
+        materialResponseOV.setRows(pageMaterial);
+        return materialResponseOV;
     }
 }

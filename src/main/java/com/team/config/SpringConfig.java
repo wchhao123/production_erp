@@ -1,8 +1,10 @@
 package com.team.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
 @ComponentScan(basePackages = "com.team",
@@ -27,7 +30,7 @@ public class SpringConfig {
     public DataSource dataSource() {
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/product");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/production_ssm?characterEncoding=utf8");
         dataSource.setUsername("root");
         dataSource.setPassword("123456");
         return dataSource;
@@ -40,6 +43,20 @@ public class SpringConfig {
         factory.setDataSource(dataSource);
         return factory;
     }
+/*    //分页
+    @Configuration
+    public class MyBatisConfig{
+        @Bean
+        public PageHelper pageHelper(){
+            PageHelper pageHelper = new PageHelper();
+            Properties p = new Properties();
+            p.setProperty("offsetAsPageNum","true");
+            p.setProperty("rowBoundsWithCount","true");
+            p.setProperty("reasonable","true");
+            pageHelper.setProperties(p);
+            return pageHelper;
+        }
+    }*/
 
     @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {
@@ -58,7 +75,7 @@ public class SpringConfig {
     }
 
     //视图处理器
-    /*@Bean
+   /* @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/jsp/");
