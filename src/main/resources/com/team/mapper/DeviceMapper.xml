@@ -77,6 +77,46 @@
     device_purchase_price, device_manufacture_date, device_service_life, device_keeper_id, 
     note
   </sql>
+
+    <resultMap id="devicePageResultMap" type="com.team.bean.Device">
+        <id column="device_id" property="deviceId"></id>
+        <result column="device_name" property="deviceName"></result>
+        <result column="device_type_id" property="deviceTypeId"></result>
+        <result column="device_status_id" property="deviceStatusId"></result>
+        <result column="device_status" property="deviceStatus"></result>
+        <result column="device_purchase_date" property="devicePurchaseDate"></result>
+        <result column="device_purchase_price" property="devicePurchasePrice"></result>
+        <result column="device_manufacture_date" property="deviceManufactureDate"></result>
+        <result column="device_service_life" property="deviceServiceLife"></result>
+        <result column="device_keeper_id" property="deviceKeeperId"></result>
+        <result column="note" property="note"></result>
+        <!--设备名称-->
+        <result column="device_type_name" property="deviceTypeName"></result>
+        <result column="emp_name" property="deviceKeeper"></result>
+    </resultMap>
+    <select id="selectDeviceList" resultMap="devicePageResultMap">
+      SELECT
+          d.device_id,
+          d.device_name,
+          t.device_type_id,
+          t.device_type_name,
+          d.device_status_id,
+          d.device_status,
+          d.device_purchase_date,
+          d.device_purchase_price,
+          d.device_manufacture_date,
+          d.device_service_life,
+          e.emp_id,
+          e.emp_name,
+          d.note
+        FROM device d
+          LEFT JOIN employee e
+            ON d.device_keeper_id = e.emp_id
+          LEFT JOIN  device_type t
+            ON t.device_type_id = d.device_type_id
+        LIMIT #{index},#{pageSize}
+    </select>
+
   <select id="selectByExample" parameterType="com.team.bean.DeviceExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

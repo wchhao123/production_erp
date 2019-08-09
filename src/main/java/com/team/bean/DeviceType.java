@@ -19,6 +19,16 @@ public class DeviceType {
 
     private Date deviceTypeWarranty;
 
+    private Integer deviceTypeIdd;
+
+    public Integer getDeviceTypeIdd() {
+        return deviceTypeIdd;
+    }
+
+    public void setDeviceTypeIdd(Integer deviceTypeIdd) {
+        this.deviceTypeIdd = deviceTypeIdd;
+    }
+
     public String getDeviceTypeId() {
         return deviceTypeId;
     }

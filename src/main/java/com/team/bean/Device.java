@@ -26,6 +26,49 @@ public class Device {
 
     private String note;
 
+
+    //1.设备种类
+    private DeviceType deviceType;
+    //2.保管人是哪个类呢？？？
+    private Employee employee;
+
+    //3.设备种类名称
+    private String deviceTypeName;
+    //4.保管人姓名
+    private String deviceKeeper;
+
+    public String getDeviceTypeName() {
+        return deviceTypeName;
+    }
+
+    public void setDeviceTypeName(String deviceTypeName) {
+        this.deviceTypeName = deviceTypeName;
+    }
+
+    public String getDeviceKeeper() {
+        return deviceKeeper;
+    }
+
+    public void setDeviceKeeper(String deviceKeeper) {
+        this.deviceKeeper = deviceKeeper;
+    }
+
+    public DeviceType getDeviceType() {
+        return deviceType;
+    }
+
+    public void setDeviceType(DeviceType deviceType) {
+        this.deviceType = deviceType;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
     public String getDeviceId() {
         return deviceId;
     }
