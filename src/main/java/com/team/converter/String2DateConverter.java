@@ -10,7 +10,8 @@ public class String2DateConverter implements Converter<String, Date> {
 
     @Override
     public Date convert(String s) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println(s);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:ss:mm");
         try {
             return sdf.parse(s);
         } catch (ParseException e) {
