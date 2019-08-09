@@ -289,4 +289,14 @@
       note = #{note,jdbcType=VARCHAR}
     where custom_id = #{customId,jdbcType=VARCHAR}
   </update>
+  <!--批量删除-->
+  <delete id="batchDeleteByIds">
+    delete from custom
+    <where>
+      custom_id in
+      <foreach collection="ids" item="id" open="(" close=")" separator=",">
+        #{id}
+      </foreach>
+    </where>
+  </delete>
 </mapper>
