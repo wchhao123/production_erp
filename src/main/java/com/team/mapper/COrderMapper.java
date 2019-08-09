@@ -4,7 +4,9 @@ import com.team.bean.COrder;
 import com.team.bean.COrderExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface COrderMapper {
     long countByExample(COrderExample example);
 

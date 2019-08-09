@@ -4,7 +4,9 @@ import com.team.bean.Device;
 import com.team.bean.DeviceExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface DeviceMapper {
     long countByExample(DeviceExample example);
 
@@ -27,4 +29,6 @@ public interface DeviceMapper {
     int updateByPrimaryKeySelective(Device record);
 
     int updateByPrimaryKey(Device record);
+
+    List<Device> selectDeviceList(@Param("index") int index, @Param("pageSize") int pageSize);
 }
