@@ -2,8 +2,9 @@ package com.team.mapper;
 
 import com.team.bean.ProcessCountCheck;
 import com.team.bean.ProcessCountCheckExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface ProcessCountCheckMapper {
     long countByExample(ProcessCountCheckExample example);
@@ -27,4 +28,6 @@ public interface ProcessCountCheckMapper {
     int updateByPrimaryKeySelective(ProcessCountCheck record);
 
     int updateByPrimaryKey(ProcessCountCheck record);
+
+    List<ProcessCountCheck> getPageProcessCountCheck();
 }

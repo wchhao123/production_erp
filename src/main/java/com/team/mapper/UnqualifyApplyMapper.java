@@ -31,4 +31,6 @@ public interface UnqualifyApplyMapper {
 
     //分页查询不合格品
     List<UnqualifyApply> getPageUnqualifyApply(@Param("page") int page, @Param("rows") int rows);
+
+    int batchDeleteByIds(@Param("ids") String[] ids);
 }

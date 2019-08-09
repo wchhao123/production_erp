@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.mapper.DeviceMaintainMapper">
+
+    <resultMap id="findDeviceMaintainListResultMap" type="com.team.bean.DeviceMaintain">
+        <id column="device_maintain_id" property="deviceMaintainId"></id>
+        <result column="device_fault_id" property="deviceFaultId"></result>
+        <result column="device_maintain_emp_id" property="deviceMaintainEmpId"></result>
+        <result column="device_maintain_date" property="deviceMaintainDate"></result>
+        <result column="device_maintain_result" property="deviceMaintainResult"></result>
+        <result column="device_maintain_cost" property="deviceMaintainCost"></result>
+        <result column="note" property="note"></result>
+        <result column="emp_name" property="deviceMaintainEmp"></result>
+    </resultMap>
+    <select id="findDeviceMaintainList" resultMap="findDeviceMaintainListResultMap">
+        SELECT
+            device_maintain.device_maintain_id,
+            device_maintain.device_fault_id,
+            device_maintain.device_maintain_emp_id,
+            device_maintain.device_maintain_date,
+            device_maintain.device_maintain_result,
+            device_maintain.device_maintain_cost,
+            device_maintain.note,
+
+            employee.emp_name
+        FROM device_maintain
+        LEFT JOIN employee
+        ON device_maintain.device_maintain_emp_id = employee.emp_id
+    </select>
   <resultMap id="BaseResultMap" type="com.team.bean.DeviceMaintain">
     <id column="device_maintain_id" jdbcType="VARCHAR" property="deviceMaintainId" />
     <result column="device_fault_id" jdbcType="VARCHAR" property="deviceFaultId" />
