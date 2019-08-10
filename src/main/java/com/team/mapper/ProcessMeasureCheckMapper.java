@@ -30,4 +30,6 @@ public interface ProcessMeasureCheckMapper {
     int updateByPrimaryKey(ProcessMeasureCheck record);
 
     List<ProcessMeasureCheck> getPageProcessMeasureCheck();
+
+    List<ProcessMeasureCheck> searchProcessMeasureCheckByCondition(@Param("searchValue") String searchValue);
 }

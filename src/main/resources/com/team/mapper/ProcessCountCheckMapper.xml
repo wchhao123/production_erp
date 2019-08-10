@@ -355,4 +355,24 @@
     from process_count_check pcc
     left join employee e on pcc.emp_id = e.emp_id
   </select>
+
+  <select id="searchProcessCountCheckByCondition" resultMap="pageResultMap">
+    select
+    pcc.p_count_check_id,
+    pcc.process_id,
+    pcc.check_item,
+    pcc.sample,
+    pcc.check_number,
+    pcc.unqualify,
+    pcc.qualify,
+    pcc.cdate,
+    pcc.measure_data,
+    pcc.emp_id,
+    pcc.result,
+    pcc.note,
+    e.emp_name
+    from process_count_check pcc
+    left join employee e on pcc.emp_id = e.emp_id
+    where p_count_check_id like #{searchValue}
+  </select>
 </mapper>

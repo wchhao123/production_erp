@@ -283,4 +283,21 @@
     from process_measure_check pmc
     left join employee e on pmc.emp_id = e.emp_id
   </select>
+
+  <!--条件查询-->
+  <select id="searchProcessMeasureCheckByCondition" resultMap="pageResultMap">
+    select
+    pmc.p_measure_check_id,
+    pmc.process_id,
+    pmc.check_item,
+    pmc.cdate,
+    pmc.measure_data,
+    pmc.emp_id,
+    pmc.result,
+    pmc.note,
+    e.emp_name
+    from process_measure_check pmc
+    left join employee e on pmc.emp_id = e.emp_id
+    where p_measure_check_id like #{searchValue}
+  </select>
 </mapper>
