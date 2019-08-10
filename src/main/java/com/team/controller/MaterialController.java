@@ -29,14 +29,15 @@ public class MaterialController {
     public String material(){
         return "/WEB-INF/jsp/material_list.jsp";
     }
-  /*  @RequestMapping("material/list")
-    @ResponseBody
-    public List<Material> material1(){
-        MaterialExample example = new MaterialExample();
-        long l = materialService.countByExample(example);
-        List<Material> materials = materialService.selectByExample(example);
-        return materials;
-    }*/
+ @RequestMapping("material/add_judge")
+ @ResponseBody
+ public String material2(){
+        return "";
+ }
+ @RequestMapping("material/add")
+ public String material3(){
+        return "/WEB-INF/jsp/material_add.jsp";
+ }
 
     @RequestMapping("material/list")
     @ResponseBody
