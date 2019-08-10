@@ -32,5 +32,6 @@ public interface ProcessMapper {
 
     List<Process> getPageProcess(@Param("index") int index, @Param("pageSize") int pageSize);
 
-    int batchDeleteByIds(String[] ids);
+    //批删除
+    int batchDeleteByIds(@Param("ids") String[] ids);
 }

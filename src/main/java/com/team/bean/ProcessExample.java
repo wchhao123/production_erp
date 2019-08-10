@@ -370,6 +370,9 @@ public class ProcessExample {
         protected Criteria() {
             super();
         }
+
+        public void andProcessNameLike(String s) {
+        }
     }
 
     public static class Criterion {
