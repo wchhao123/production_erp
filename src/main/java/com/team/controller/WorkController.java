@@ -36,7 +36,7 @@ public class WorkController {
     @PostMapping("get_data")
     @ResponseBody
     public List<Work> getData() {
-        return workService.getWorks();
+        return workService.selectByExample();
     }
 
     @GetMapping("edit_judge")
