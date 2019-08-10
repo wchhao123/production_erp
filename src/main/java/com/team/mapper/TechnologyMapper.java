@@ -27,4 +27,5 @@ public interface TechnologyMapper {
     int updateByPrimaryKeySelective(Technology record);
 
     int updateByPrimaryKey(Technology record);
+
 }
