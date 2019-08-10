@@ -1,19 +1,16 @@
 package com.team.controller;
 
-import com.team.bean.COrder;
+import com.team.bean.*;
 import com.team.bean.Process;
-import com.team.bean.ResponseOV;
-import com.team.bean.TechnologyPlan;
 import com.team.service.ProcessService;
 import com.team.service.TechnologyPlanService;
 import com.team.util.ControllerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -61,5 +58,49 @@ public class ProcessController {
         return ControllerUtil.returnMsg(b);
     }
 
+
+    @RequestMapping("get/{id}")
+    @ResponseBody
+    public Process getProcess(@PathVariable("id") String id) {
+        return processService.getProcessById(id);
+    }
+    @PostMapping("get_data")
+    @ResponseBody
+    public List<Process> getData() {
+        return processService.getProcesses();
+    }
+    @GetMapping("edit_judge")
+    @ResponseBody
+    public void editJudge() {
+    }
+    @GetMapping("edit")
+    public String editPage() {
+        return "/WEB-INF/jsp/process_edit.jsp";
+    }
+    @PostMapping("update_all")
+    @ResponseBody
+    public Map<String, String> updateAll(Process process) {
+        boolean b = processService.updateProcess(process);
+        return ControllerUtil.returnMsg(b);
+    }
+    @PostMapping("update_note")
+    @ResponseBody
+    public Map<String, String> updateNote(String processId, String note) {
+        boolean b = processService.updateProcessNoteById(processId, note);
+        return ControllerUtil.returnMsg(b);
+    }
+
+    @GetMapping(value = {"search_process_by_processId","search_process_by_processName"})
+    @ResponseBody
+    public ResponseOV<Process> searchProcessById(HttpServletRequest request,
+                                              String searchValue, int page, int rows) {
+        int flag;
+        if (request.getRequestURI().endsWith("search_process_by_processId")) {
+            flag = 1;
+        } else {
+            flag= 2;
+        }
+        return processService.searchProcessByCondition(flag,searchValue, page, rows);
+    }
 
 }

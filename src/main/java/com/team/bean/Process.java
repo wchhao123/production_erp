@@ -10,6 +10,7 @@ public class Process {
     private Integer quota;
 
     private TechnologyPlan technologyPlan;
+    private String note;
 
     public TechnologyPlan getTechnologyPlan() {
         return technologyPlan;
@@ -49,5 +50,13 @@ public class Process {
 
     public void setQuota(Integer quota) {
         this.quota = quota;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getNote() {
+        return note;
     }
 }
