@@ -290,7 +290,7 @@
     where custom_id = #{customId,jdbcType=VARCHAR}
   </update>
   <!--批量删除-->
-  <delete id="batchDeleteByIds">
+  <delete id="deleteByIds">
     delete from custom
     <where>
       custom_id in

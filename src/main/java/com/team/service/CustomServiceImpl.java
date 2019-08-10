@@ -77,5 +77,15 @@ public class CustomServiceImpl implements ICustomService {
         return ov;
     }
 
+    @Override
+    public boolean updateCustomNoteById(String customId, String note) {
+        Custom custom = new Custom();
+        custom.setCustomId(customId);
+        custom.setNote(note);
+
+        int i = customMapper.updateByPrimaryKeySelective(custom);
+        return i == 1;
+    }
+
 
 }

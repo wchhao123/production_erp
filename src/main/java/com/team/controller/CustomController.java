@@ -1,18 +1,14 @@
 package com.team.controller;
 
-import com.team.bean.COrder;
 import com.team.bean.Custom;
-import com.team.bean.Product;
 import com.team.bean.ResponseOV;
 import com.team.service.ICustomService;
 import com.team.util.ControllerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -54,7 +50,7 @@ public class CustomController {
 
     @GetMapping("edit")
     public String editPage() {
-        return "/WEB-INF/jsp/order_edit.jsp";
+        return "/WEB-INF/jsp/custom_edit.jsp";
     }
 
     @PostMapping("update_all")
@@ -62,6 +58,14 @@ public class CustomController {
     public Map<String, String> updateAll(Custom custom) {
 
         boolean b = customService.updateCustom(custom);
+        return ControllerUtil.returnMsg(b);
+    }
+
+    @PostMapping("update_note")
+    @ResponseBody
+    public Map<String, String> updateNote(String customId, String note) {
+
+        boolean b = customService.updateCustomNoteById(customId, note);
         return ControllerUtil.returnMsg(b);
     }
 

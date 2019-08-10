@@ -24,4 +24,6 @@ public interface ICustomService {
     boolean insertCustom(Custom custom);
 
     ResponseOV<Custom> searchCustomByCondition(int flag, String searchValue, int page, int rows);
+
+    boolean updateCustomNoteById(String customId, String note);
 }

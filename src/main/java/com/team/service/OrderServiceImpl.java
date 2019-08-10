@@ -44,4 +44,13 @@ public class OrderServiceImpl implements IOrderService {
         return null;
     }
 
+    @Override
+    public boolean updateNoteById(String orderId, String note) {
+        COrder order = new COrder();
+        order.setOrderId(orderId);
+        order.setNote(note);
+        int i = orderMapper.updateByPrimaryKeySelective(order);
+        return i == 1;
+    }
+
 }
