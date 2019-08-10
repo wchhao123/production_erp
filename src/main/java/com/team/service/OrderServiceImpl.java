@@ -66,4 +66,9 @@ public class OrderServiceImpl implements IOrderService {
         return orderMapper.selectByExample(null);
     }
 
+    @Override
+    public COrder getOrderById(String id) {
+        return orderMapper.selectOrderById(id);
+    }
+
 }
