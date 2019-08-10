@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -36,6 +37,11 @@ public class OrderController {
     @ResponseBody
     public ResponseOV<COrder> list(int page, int rows) {
         return orderService.getPageCOrder(page, rows);
+    }
+
+    @GetMapping("get_data")
+    public List<COrder> getData() {
+        return orderService.getCOrders();
     }
 
     @GetMapping("edit_judge")

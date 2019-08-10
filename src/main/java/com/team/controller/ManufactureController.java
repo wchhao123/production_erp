@@ -1,8 +1,9 @@
 package com.team.controller;
 
+import com.team.bean.Manufacture;
 import com.team.bean.ResponseOV;
 import com.team.bean.Work;
-import com.team.service.IWorkService;
+import com.team.service.IManufactureService;
 import com.team.util.ControllerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,27 +17,27 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("work")
-public class WorkController {
+@RequestMapping("manufacture")
+public class ManufactureController {
 
     @Autowired
-    private IWorkService workService;
+    private IManufactureService service;
 
     @GetMapping("find")
     public String find() {
-        return "/WEB-INF/jsp/work_list.jsp";
+        return "/WEB-INF/jsp/manufacture_list.jsp";
     }
 
     @GetMapping("list")
     @ResponseBody
-    public ResponseOV<Work> list(int page, int rows) {
-        return workService.getWorks(page, rows);
+    public ResponseOV<Manufacture> list(int page, int rows) {
+        return service.getManufacture(page, rows);
     }
 
     @PostMapping("get_data")
     @ResponseBody
-    public List<Work> getData() {
-        return workService.selectByExample();
+    public List<Manufacture> getData() {
+        return service.selectByExample();
     }
 
     @GetMapping("edit_judge")
@@ -47,14 +48,14 @@ public class WorkController {
 
     @GetMapping("edit")
     public String editPage() {
-        return "/WEB-INF/jsp/work_edit.jsp";
+        return "/WEB-INF/jsp/manufacture_edit.jsp";
     }
 
     @PostMapping("update_all")
     @ResponseBody
-    public Map<String, String> updateAll(Work work) {
+    public Map<String, String> updateAll(Manufacture manufacture) {
 
-        boolean b = workService.updateWork(work);
+        boolean b = service.updateManufacture(manufacture);
         return ControllerUtil.returnMsg(b);
     }
 
@@ -67,7 +68,7 @@ public class WorkController {
     @PostMapping("delete_batch")
     @ResponseBody
     public Map<String, String> deleteBatch(String[] ids) {
-        boolean b = workService.deleteWorksByIds(ids);
+        boolean b = service.deleteManufacturesByIds(ids);
         return ControllerUtil.returnMsg(b);
     }
 
@@ -79,32 +80,30 @@ public class WorkController {
 
     @GetMapping("add")
     public String addPage() {
-        return "/WEB-INF/jsp/work_add.jsp";
+        return "/WEB-INF/jsp/manufacture_add.jsp";
 
     }
 
     @PostMapping("insert")
     @ResponseBody
-    public Map<String, String> insert(Work work) {
-        boolean b = workService.insertWork(work);
+    public Map<String, String> insert(Manufacture manufacture) {
+        boolean b = service.insertManufacture(manufacture);
         return ControllerUtil.returnMsg(b);
     }
 
-    @GetMapping(value = {"search_work_by_workId", "search_work_by_workProduct",
-            "search_work_by_workDevice","search_work_by_workProcess"})
+    @GetMapping(value = {"search_manufacture_by_manufactureSn",
+            "search_manufacture_by_manufactureOrderId","search_manufacture_by_manufactureTechnologyName"})
     @ResponseBody
-    public ResponseOV<Work> searchOrderById(HttpServletRequest request,
+    public ResponseOV<Manufacture> searchOrderById(HttpServletRequest request,
                                             String searchValue, int page, int rows) {
         int flag;
-        if (request.getRequestURI().endsWith("search_work_by_workId")) {
+        if (request.getRequestURI().endsWith("search_manufacture_by_manufactureSn")) {
             flag = 1;
-        } else if (request.getRequestURI().endsWith("search_work_by_workProduct")) {
+        } else if (request.getRequestURI().endsWith("search_manufacture_by_manufactureOrderId")) {
             flag= 2;
-        } else if (request.getRequestURI().endsWith("search_work_by_workDevice")) {
-            flag = 3;
         } else {
-            flag = 4;
+            flag = 3;
         }
-        return workService.searchWorkByCondition(flag,searchValue, page, rows);
+        return service.searchManufactureByCondition(flag,searchValue, page, rows);
     }
 }

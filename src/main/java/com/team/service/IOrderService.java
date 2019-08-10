@@ -4,6 +4,8 @@ package com.team.service;
 import com.team.bean.COrder;
 import com.team.bean.ResponseOV;
 
+import java.util.List;
+
 public interface IOrderService {
 
     //获取一个页面的COrder
@@ -19,4 +21,6 @@ public interface IOrderService {
     ResponseOV<COrder> searchOrderByCondition(int flag, String searchValue, int page, int rows);
 
     boolean updateNoteById(String orderId, String note);
+
+    List<COrder> getCOrders();
 }
