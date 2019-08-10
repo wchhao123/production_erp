@@ -17,4 +17,6 @@ public interface IOrderService {
 
     //条件查询
     ResponseOV<COrder> searchOrderByCondition(int flag, String searchValue, int page, int rows);
+
+    boolean updateNoteById(String orderId, String note);
 }
