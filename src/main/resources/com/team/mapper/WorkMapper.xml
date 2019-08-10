@@ -226,4 +226,61 @@
       rating = #{rating,jdbcType=INTEGER}
     where work_id = #{workId,jdbcType=VARCHAR}
   </update>
+
+
+  <resultMap id="conditionResultMap" type="com.team.bean.Work">
+    <id column="work_id" jdbcType="VARCHAR" property="workId" />
+    <result column="process_number" jdbcType="VARCHAR" property="processNumber" />
+    <result column="rating" jdbcType="INTEGER" property="rating" />
+    <association property="product" javaType="com.team.bean.Product">
+    <id column="product_id"  property="productId"/>
+    <result column="product_name"  property="productName"/>
+  </association>
+    <association property="process" javaType="com.team.bean.Process">
+      <id column="process_id"  property="processId"/>
+    </association>
+    <association property="device" javaType="com.team.bean.Device">
+      <id column="device_id"  property="deviceId"/>
+      <result column="device_name" property="deviceName"/>
+    </association>
+  </resultMap>
+  <!--work-product-process-device联合查询-->
+  <select id="selectWorkByCondition" resultMap="conditionResultMap">
+    select
+    w.work_id, w.process_number, w.rating,
+    pd.product_id,pd.product_name,
+    pc.process_id,
+    d.device_id,d.device_name
+    from work w
+    left join product pd on w.product_id=pd.product_id
+    left join process pc on w.process_id=pc.process_id
+    left join device d on w.device_id=d.device_id
+    <where>
+      <choose>
+        <when test="flag == 0"/>
+        <when test="flag == 1">
+          w.work_id = #{searchValue}
+        </when>
+        <when test="flag == 2">
+          pd.product_name =  #{searchValue}
+        </when>
+        <when test="flag == 3">
+          pc.process_id =  #{searchValue}
+        </when>
+        <when test="flag == 4">
+          d.device_name = #{searchValue}
+        </when>
+      </choose>
+    </where>
+  </select>
+  <!--根据id批删除work-->
+  <delete id="batchDeleteWorkByIds">
+    delete from work
+    <where>
+        work_id in
+      <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+      </foreach>
+    </where>
+  </delete>
 </mapper>

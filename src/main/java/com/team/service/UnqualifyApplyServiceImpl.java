@@ -25,4 +25,22 @@ public class UnqualifyApplyServiceImpl implements UnqualifyApplyService {
         responseOV.setRows(rowsList);
         return responseOV;
     }
+
+    @Override
+    public boolean insertUnqualifyApply(UnqualifyApply unqualifyApply) {
+       int insert = unqualifyApplyMapper.insert(unqualifyApply);
+        return insert == 1;
+    }
+
+    @Override
+    public boolean deleteByIds(String[] ids) {
+        int i = unqualifyApplyMapper.batchDeleteByIds(ids);
+        return i != 0;
+    }
+
+    @Override
+    public boolean updateUnqualifyApply(UnqualifyApply unqualifyApply) {
+        int i = unqualifyApplyMapper.updateByPrimaryKeySelective(unqualifyApply);
+        return i == 1;
+    }
 }

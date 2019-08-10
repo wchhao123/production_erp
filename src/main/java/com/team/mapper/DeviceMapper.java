@@ -32,5 +32,5 @@ public interface DeviceMapper {
 
     List<Device> selectDeviceList(@Param("index") int index, @Param("pageSize") int pageSize);
 
-    List<Device> selectDeviceList(String deviceName, int index, int pageSize);
+    List<Device> search_device_by_condition(@Param("flag")int flag, @Param("condition")String condition);
 }

@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.mapper.DeviceTypeMapper">
+
+    <select id="search_deviceType_by_condition" resultMap="BaseResultMap">
+        SELECT
+            device_type_id,
+            device_type_name,
+            device_type_model,
+            device_type_spec,
+            device_type_supplier,
+            device_type_producer,
+            device_type_quantity,
+            device_type_warranty
+        FROM device_type
+        <where>
+            <choose>
+                <when test="flag == -1">
+
+                </when>
+                <when test="flag == 1">
+                    device_type.device_type_id LIKE #{condition}
+                </when>
+                <when test="flag == 2">
+                    device_type.device_type_name LIKE  #{condition}
+                </when>
+            </choose>
+        </where>
+    </select>
+
   <resultMap id="BaseResultMap" type="com.team.bean.DeviceType">
     <id column="device_type_id" jdbcType="VARCHAR" property="deviceTypeId" />
     <result column="device_type_name" jdbcType="VARCHAR" property="deviceTypeName" />

@@ -353,7 +353,7 @@
     left join product p on o.product_id=p.product_id
     limit #{index},#{pageSize}
   </select>
-
+<!--批删除-->
   <delete id="batchDeleteByIds">
     delete from c_order
     <where>
@@ -363,4 +363,27 @@
       </foreach>
     </where>
   </delete>
+  <!--条件查询-->
+  <select id="searchOrderByCondition" resultMap="pageResultSet">
+    select
+    o.order_id,o.order_date,o.request_date,o.note,o.quantity,o.unit_price,o.unit,o.image,o.file,o.status,
+    c.custom_id,c.custom_name,
+    p.product_id,p.product_name
+    from c_order o
+    left join custom c on o.custom_id=c.custom_id
+    left join product p on o.product_id=p.product_id
+    <where>
+      <choose>
+        <when test="flag == 1">
+          o.order_id like #{searchValue}
+        </when>
+        <when test="flag == 2">
+          c.custom_name like #{searchValue}
+        </when>
+        <otherwise>
+          p.product_name like #{searchValue}
+        </otherwise>
+      </choose>
+    </where>
+  </select>
 </mapper>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -42,11 +43,11 @@ public class DeviceController {
     public List<DeviceType> getDeviceTypeList() {
         return deviceService.getDeviceTypeList();
     }
-    @PostMapping("employee/get_data")
+    /*@PostMapping("employee/get_data")
     @ResponseBody
     public List<Employee> getEmployeeList() {
         return deviceService.getEmployeeList();
-    }
+    }*/
     @PostMapping("deviceList/insert")
     @ResponseBody
     public Map<String, String> insertDevice(Device device) {
@@ -83,66 +84,26 @@ public class DeviceController {
     }
     //1.4.设备台账模糊查询
     // deviceList/search_device_by_deviceName?searchValue=叉&page=1&rows=30
-    @RequestMapping("deviceList/search_device_by_deviceName")
+    @RequestMapping(value = {"deviceList/search_device_by_deviceId",
+                                "deviceList/search_device_by_deviceName",
+                                "deviceList/search_device_by_deviceTypeName"})
     @ResponseBody
-    public ResponseOV<Device> search_device_by_deviceName(String searchValue,int page, int rows) {
-        return deviceService.search_device_by_deviceName("%"+searchValue+"%",page,rows);
-    }
-    //deviceList/search_device_by_deviceId?searchValue=003&page=1&rows=30
-    //deviceList/search_device_by_deviceTypeName?searchValue=传送&page=1&rows=30
-    //deviceList/list?page=1&rows=30（什么条件也填时）
-
-
-
-
-
-
-
-    //2.设备种类
-    @GetMapping("device/deviceType")
-    public String find02() {
-        return "/WEB-INF/jsp/deviceType.jsp";
+    public ResponseOV<Device> search_device_by_condition(HttpServletRequest request,
+                                                         String searchValue,
+                                                         int page,
+                                                         int rows) {
+        int flag;
+        if (request.getRequestURI().endsWith("search_device_by_deviceId")) {
+            flag = 1;
+        } else if (request.getRequestURI().endsWith("search_device_by_deviceName")) {
+            flag= 2;
+        } else if (request.getRequestURI().endsWith("search_device_by_deviceTypeName")) {
+            flag = 3;
+        } else {
+            flag = -1;
+        }
+        return deviceService.search_device_by_condition(flag,"%"+searchValue+"%", page, rows);
     }
 
-    @RequestMapping("deviceType/list")
-    @ResponseBody
-    public ResponseOV<DeviceType> list02(int page, int rows) {
-        return deviceService.getPageDeviceType(page, rows);
-    }
 
-    //3.设备例检
-    @GetMapping("device/deviceCheck")
-    public String getDeviceCheckJsp(){
-        return "/WEB-INF/jsp/deviceCheck.jsp";
-    }
-
-    @RequestMapping("deviceCheck/list")
-    @ResponseBody
-    public ResponseOV<DeviceCheck> findDeviceCheckList(int page, int rows){
-        return deviceService.findDeviceCheckList(page,rows);
-    }
-
-    //4.设备故障
-    @GetMapping("device/deviceFault")
-    public String getdeviceFaultJsp(){
-        return "/WEB-INF/jsp/deviceFault.jsp";
-    }
-
-    @RequestMapping("deviceFault/list")
-    @ResponseBody
-    public ResponseOV<DeviceFault> finddeviceFaultList(int page, int rows){
-        return deviceService.findDeviceFaultList(page,rows);
-    }
-
-    //5.设备维修
-    @GetMapping("device/deviceMaintain")
-    public String getDeviceMaintainJsp(){
-        return "/WEB-INF/jsp/deviceMaintain.jsp";
-    }
-
-    @RequestMapping("deviceMaintain/list")
-    @ResponseBody
-    public ResponseOV<DeviceMaintain> findDeviceMaintainList(int page, int rows){
-        return deviceService.findDeviceMaintainList(page,rows);
-    }
 }

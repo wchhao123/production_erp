@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -51,15 +51,12 @@ public class OrderController {
 
     @PostMapping("update_all")
     @ResponseBody
-    public Map<String, String> updateAll(MultipartFile image, MultipartFile file , COrder order) {
+    public Map<String, String> updateAll(MultipartFile image, COrder order) {
 
         try {
             String imgRelativePath = "/pic/" + image.getOriginalFilename();
-            String fileRelativePath = "/file/" + file.getOriginalFilename();
             ControllerUtil.saveFile(image, context.getRealPath("/WEB-INF/upload" + imgRelativePath));
-            ControllerUtil.saveFile(image, context.getRealPath("/WEB-INF/upload" + fileRelativePath));
             order.setImage(imgRelativePath);
-            order.setFile(fileRelativePath);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -67,6 +64,14 @@ public class OrderController {
             return ControllerUtil.returnMsg(b);
         }
     }
+
+    @PostMapping("update_note")
+    @ResponseBody
+    public Map<String, String> updateNote(String orderId, String note) {
+        boolean b = orderService.updateNoteById(orderId, note);
+        return ControllerUtil.returnMsg(b);
+    }
+
 
     @GetMapping("delete_judge")
     @ResponseBody
@@ -88,8 +93,9 @@ public class OrderController {
     }
 
     @GetMapping("add")
-    public String appPage() {
+    public String addPage() {
         return "/WEB-INF/jsp/order_add.jsp";
+
     }
 
     @PostMapping("insert")
@@ -98,4 +104,21 @@ public class OrderController {
         boolean b = orderService.insertOrder(order);
         return ControllerUtil.returnMsg(b);
     }
+
+    @GetMapping(value = {"search_order_by_orderId",
+            "search_order_by_orderCustom","search_order_by_orderProduct"})
+    @ResponseBody
+    public ResponseOV<COrder> searchOrderById(HttpServletRequest request,
+                                              String searchValue, int page, int rows) {
+        int flag;
+        if (request.getRequestURI().endsWith("search_order_by_orderId")) {
+            flag = 1;
+        } else if (request.getRequestURI().endsWith("search_order_by_orderCustom")){
+            flag= 2;
+        } else {
+            flag = 3;
+        }
+        return orderService.searchOrderByCondition(flag,searchValue, page, rows);
+    }
+
 }

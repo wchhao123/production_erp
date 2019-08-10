@@ -27,4 +27,8 @@ public interface WorkMapper {
     int updateByPrimaryKeySelective(Work record);
 
     int updateByPrimaryKey(Work record);
+
+    List<Work> selectWorkByCondition(@Param("flag") int flag, @Param("searchValue") String searchValue);
+
+    int batchDeleteWorkByIds(String[] ids);
 }
