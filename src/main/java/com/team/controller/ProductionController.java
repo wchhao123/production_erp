@@ -25,6 +25,11 @@ public class ProductionController {
         return productService.getProductById(id);
     }
 
+    @GetMapping("find")
+    public String find() {
+        return "/WEB-INF/jsp/product_list.jsp";
+    }
+
     @GetMapping("list")
     @ResponseBody
     public ResponseOV<Product> list(int page, int rows) {
