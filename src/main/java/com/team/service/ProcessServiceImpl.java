@@ -35,4 +35,14 @@ public class ProcessServiceImpl implements ProcessService {
     public boolean deleteByIds(String[] ids) {
         return processMapper.batchDeleteByIds(ids) != 0;
     }
+
+    @Override
+    public Process getProcessById(String id) {
+        return processMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Process> getProcessList() {
+        return processMapper.selectByExample(null);
+    }
 }

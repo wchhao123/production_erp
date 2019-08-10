@@ -1,19 +1,14 @@
 package com.team.controller;
 
-import com.team.bean.COrder;
 import com.team.bean.Process;
 import com.team.bean.ResponseOV;
-import com.team.bean.TechnologyPlan;
 import com.team.service.ProcessService;
-import com.team.service.TechnologyPlanService;
 import com.team.util.ControllerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -61,5 +56,15 @@ public class ProcessController {
         return ControllerUtil.returnMsg(b);
     }
 
+    @GetMapping("process/get/{id}")
+    @ResponseBody
+    public Process getDeviceById(@PathVariable("id") String id) {
+        return processService.getProcessById(id);
+    }
 
+    @GetMapping("process/get_data")
+    @ResponseBody
+    public List<Process> getData() {
+        return processService.getProcessList();
+    }
 }

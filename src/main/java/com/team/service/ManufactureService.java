@@ -57,4 +57,9 @@ public class ManufactureService implements IManufactureService {
         ov.setTotal((int) info.getTotal());
         return ov;
     }
+
+    @Override
+    public Manufacture getManufactureById(String id) {
+        return mapper.selectByPrimaryKey(id);
+    }
 }

@@ -14,4 +14,8 @@ public interface IDeviceService {
     ResponseOV<DeviceFault> findDeviceFaultList(int page, int rows);
 
     ResponseOV<DeviceMaintain> findDeviceMaintainList(int page, int rows);
+
+    List<Device> getDevice();
+
+    Device getDeviceById(String id);
 }

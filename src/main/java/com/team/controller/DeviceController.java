@@ -6,8 +6,11 @@ import com.team.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 public class DeviceController {
@@ -72,5 +75,17 @@ public class DeviceController {
     @ResponseBody
     public ResponseOV<DeviceMaintain> findDeviceMaintainList(int page, int rows){
         return deviceService.findDeviceMaintainList(page,rows);
+    }
+
+    @GetMapping("deviceList/get/{id}")
+    @ResponseBody
+    public Device getDeviceById(@PathVariable("id") String id) {
+        return deviceService.getDeviceById(id);
+    }
+
+    @GetMapping("deviceList/get_data")
+    @ResponseBody
+    public List<Device> getData() {
+        return deviceService.getDevice();
     }
 }

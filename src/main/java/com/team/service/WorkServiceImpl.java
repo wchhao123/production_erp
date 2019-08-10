@@ -2,6 +2,7 @@ package com.team.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.team.bean.Custom;
 import com.team.bean.ResponseOV;
 import com.team.bean.Work;
 import com.team.mapper.WorkMapper;
@@ -25,6 +26,11 @@ public class WorkServiceImpl implements IWorkService {
     @Override
     public List<Work> selectByExample() {
         return workMapper.selectByExample(null);
+    }
+
+    @Override
+    public Work getWorkById(String id) {
+        return workMapper.selectByPrimaryKey(id);
     }
 
     @Override
