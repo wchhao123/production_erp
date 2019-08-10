@@ -12,10 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,5 +37,11 @@ public class TechnologyController {
     @ResponseBody
     public ResponseOV<Technology> list(int page, int rows) {
         return technologyService.getTechnologies(page, rows);
+    }
+
+    @PostMapping("get_data")
+    @ResponseBody
+    public List<Technology> getData() {
+        return technologyService.getTechnologies();
     }
 }

@@ -23,9 +23,11 @@ public class ProcessServiceImpl implements ProcessService {
         processResponse.setTotal((int) l);
         processResponse.setRows(pageProcess);
         return processResponse;
-//        List<COrder> pageCOrder = orderMapper.getPageCOrder((index - 1) * pageSize, pageSize);
-//        orderResponse.setTotal((int) l);
-//        orderResponse.setRows(pageCOrder);
-//        return orderResponse;
+    }
+
+    @Override
+    public int insertProcess(Process process) {
+        int i=processMapper.insertSelective(process);
+        return i;
     }
 }

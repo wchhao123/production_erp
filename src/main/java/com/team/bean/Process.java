@@ -9,6 +9,16 @@ public class Process {
 
     private Integer quota;
 
+    private TechnologyPlan technologyPlan;
+
+    public TechnologyPlan getTechnologyPlan() {
+        return technologyPlan;
+    }
+
+    public void setTechnologyPlan(TechnologyPlan technologyPlan) {
+        this.technologyPlan = technologyPlan;
+    }
+
     public String getProcessId() {
         return processId;
     }

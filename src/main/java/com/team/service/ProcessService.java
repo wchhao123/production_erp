@@ -5,4 +5,6 @@ import com.team.bean.ResponseOV;
 
 public interface ProcessService {
     ResponseOV<Process> getPageProcess(int index, int pageSize);
+
+    int insertProcess(Process process);
 }

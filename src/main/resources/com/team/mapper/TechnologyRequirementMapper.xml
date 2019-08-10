@@ -218,12 +218,13 @@
       <result column="requirement" jdbcType="VARCHAR" property="requirement" />
       <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
       <result column="revise_time" jdbcType="TIMESTAMP" property="reviseTime" />
-      <association  property="technology"  javaType="com.team.bean.Technology">
+      <result column="technology_name" jdbcType="VARCHAR" property="technologyName"/>
+      <!--<association  property="technology"  javaType="com.team.bean.Technology">
         <result column="technology_name" property="technologyName" jdbcType="VARCHAR"/>
         <result column="technology_id" property="technologyId" jdbcType="VARCHAR"/>
-      </association>
+      </association>-->
     </resultMap>
-    <select id="mixList" resultMap="BaseResultMap1">
+    <select id="mixTechnologyRequirement" resultMap="BaseResultMap1">
       select tr.technology_requirement_id,tr.technology_id,tr.requirement,tr.add_time,tr.revise_time,
       t.technology_name,t.technology_id
       from technology_requirement tr
