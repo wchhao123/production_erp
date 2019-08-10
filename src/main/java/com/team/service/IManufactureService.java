@@ -17,4 +17,6 @@ public interface IManufactureService {
     boolean insertManufacture(Manufacture manufacture);
 
     ResponseOV<Manufacture> searchManufactureByCondition(int flag, String searchValue, int page, int rows);
+
+    Manufacture getManufactureById(String id);
 }

@@ -1,5 +1,6 @@
 package com.team.controller;
 
+import com.team.bean.Custom;
 import com.team.bean.Manufacture;
 import com.team.bean.ResponseOV;
 import com.team.bean.Work;
@@ -7,10 +8,7 @@ import com.team.service.IManufactureService;
 import com.team.util.ControllerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -26,6 +24,12 @@ public class ManufactureController {
     @GetMapping("find")
     public String find() {
         return "/WEB-INF/jsp/manufacture_list.jsp";
+    }
+
+    @RequestMapping("get/{id}")
+    @ResponseBody
+    public Manufacture getCustom(@PathVariable("id") String id) {
+        return service.getManufactureById(id);
     }
 
     @GetMapping("list")
