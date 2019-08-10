@@ -226,4 +226,17 @@
       status = #{status,jdbcType=INTEGER}
     where product_id = #{productId,jdbcType=VARCHAR}
   </update>
+
+  <!--根据id批量删除-->
+  <delete id="batchDeleteByIds">
+    delete from product
+    <where>
+      product_id in
+      <foreach collection="ids" item="id" open="(" close=")" separator=",">
+        #{id}
+      </foreach>
+    </where>
+  </delete>
+
+
 </mapper>

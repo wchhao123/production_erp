@@ -1,11 +1,12 @@
 package com.team.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.team.bean.COrder;
 import com.team.bean.ResponseOV;
 import com.team.mapper.COrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -26,22 +27,43 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public boolean updateOrder(COrder order) {
-        return false;
+        return orderMapper.updateByPrimaryKey(order) == 1;
     }
 
     @Override
     public boolean deleteByIds(String[] ids) {
-        return false;
+        return orderMapper.batchDeleteByIds(ids) != 0;
     }
 
     @Override
     public boolean insertOrder(COrder order) {
-        return false;
+        return orderMapper.insert(order) == 1;
     }
 
     @Override
     public ResponseOV<COrder> searchOrderByCondition(int flag, String searchValue, int page, int rows) {
-        return null;
+        PageHelper.startPage(page, rows);
+        List<COrder> orders = orderMapper.searchOrderByCondition(flag, "%" + searchValue + "%");
+        PageInfo<COrder> info = new PageInfo<>(orders);
+
+        ResponseOV<COrder> ov = new ResponseOV<>();
+        ov.setRows(orders);
+        ov.setTotal((int) info.getTotal());
+        return ov;
+    }
+
+    @Override
+    public boolean updateNoteById(String orderId, String note) {
+        COrder order = new COrder();
+        order.setOrderId(orderId);
+        order.setNote(note);
+        int i = orderMapper.updateByPrimaryKeySelective(order);
+        return i == 1;
+    }
+
+    @Override
+    public List<COrder> getCOrders() {
+        return orderMapper.selectByExample(null);
     }
 
 }

@@ -1,6 +1,5 @@
 package com.team.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import com.team.bean.COrder;
 import com.team.bean.ResponseOV;
 import com.team.service.IOrderService;
@@ -14,9 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -38,6 +37,11 @@ public class OrderController {
     @ResponseBody
     public ResponseOV<COrder> list(int page, int rows) {
         return orderService.getPageCOrder(page, rows);
+    }
+
+    @GetMapping("get_data")
+    public List<COrder> getData() {
+        return orderService.getCOrders();
     }
 
     @GetMapping("edit_judge")
@@ -66,6 +70,14 @@ public class OrderController {
             return ControllerUtil.returnMsg(b);
         }
     }
+
+    @PostMapping("update_note")
+    @ResponseBody
+    public Map<String, String> updateNote(String orderId, String note) {
+        boolean b = orderService.updateNoteById(orderId, note);
+        return ControllerUtil.returnMsg(b);
+    }
+
 
     @GetMapping("delete_judge")
     @ResponseBody

@@ -26,4 +26,22 @@ public class MaterialConsumeServiceImpl implements MaterialConsumeService {
         return ov;
     }
 
+    @Override
+    public boolean insert(MaterialConsume record) {
+        int insert = materialConsumeMapper.insert(record);
+        return insert ==1;
+    }
+
+    @Override
+    public boolean deleteByPrimaryKey(String consumeId) {
+        int i = materialConsumeMapper.deleteByPrimaryKey(consumeId);
+        return i == 1;
+    }
+
+    @Override
+    public boolean updateByPrimaryKey(MaterialConsume record) {
+        int update = materialConsumeMapper.updateByPrimaryKey(record);
+        return update == 1;
+    }
+
 }

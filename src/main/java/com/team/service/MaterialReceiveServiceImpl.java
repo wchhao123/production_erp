@@ -27,8 +27,26 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
         return ov;
     }
 
-
+    @Override
+    public boolean deleteByPrimaryKey(String receiveId) {
+        int i = materialReceiveMapper.deleteByPrimaryKey(receiveId);
+        return i != 0;
     }
+
+    @Override
+    public boolean insert(MaterialReceive record) {
+        int insert = materialReceiveMapper.insert(record);
+        return insert == 1;
+    }
+
+    @Override
+    public boolean updateByPrimaryKeySelective(MaterialReceive record) {
+        int update = materialReceiveMapper.updateByPrimaryKey(record);
+        return update ==1;
+    }
+
+
+}
 
 
 

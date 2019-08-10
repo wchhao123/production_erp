@@ -20,6 +20,9 @@ public class UserRoleUtil {
         } else if (lock == 5) {
             map.put("rolename", "质量监控管理员");
             qualifyMonitor(list);
+        }else if (lock == 4){
+            map.put("rolename" , "物料监控管理员");
+                    materialManager(list);
         }
 
     }
@@ -47,6 +50,9 @@ public class UserRoleUtil {
             list.add("order" + s);
             list.add("custom" + s);
             list.add("product" + s);
+            list.add("manufacture" + s);
+            list.add("work" + s);
+            list.add("task" + s);
         }
     }
     private static void processManager(List<String> list) {
@@ -57,5 +63,11 @@ public class UserRoleUtil {
             list.add("technologyRequirement"+s);
         }
     }
-
+    private static void materialManager(List<String> list) {
+        for (String s : author) {
+            list.add("material" + s);
+            list.add("materialReceive" + s);
+            list.add("materialConsume" + s);
+        }
+    }
 }

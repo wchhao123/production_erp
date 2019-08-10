@@ -1,5 +1,6 @@
 package com.team.service;
 
+import com.team.bean.COrder;
 import com.team.bean.Process;
 import com.team.bean.ResponseOV;
 import com.team.mapper.ProcessMapper;
@@ -26,8 +27,12 @@ public class ProcessServiceImpl implements ProcessService {
     }
 
     @Override
-    public int insertProcess(Process process) {
-        int i=processMapper.insertSelective(process);
-        return i;
+    public boolean insertProcess(Process process) {
+        return processMapper.insert(process) == 1;
+    }
+
+    @Override
+    public boolean deleteByIds(String[] ids) {
+        return processMapper.batchDeleteByIds(ids) != 0;
     }
 }

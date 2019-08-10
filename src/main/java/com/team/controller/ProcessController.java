@@ -43,17 +43,23 @@ public class ProcessController {
     public String addPage() {
         return "/WEB-INF/jsp/process_add.jsp";
     }
-    /*@PostMapping("insert")
-    @ResponseBody
-    public Map<String, String> insert(Process process) {
-        int b = processService.insertProcess(process);
-        return ControllerUtil.returnMsg(b);
-    }*/
     @PostMapping("insert")
     @ResponseBody
-    public int insert(Process process) {
-        int b = processService.insertProcess(process);
-        return b;
+    public Map<String, String> insert(Process process) {
+        boolean b = processService.insertProcess(process);
+        return ControllerUtil.returnMsg(b);
     }
+
+    @GetMapping("delete_judge")
+    @ResponseBody
+    public void deleteJudge() {
+    }
+    @PostMapping("delete_batch")
+    @ResponseBody
+    public Map<String, String> deleteBatch(String[] ids) {
+        boolean b = processService.deleteByIds(ids);
+        return ControllerUtil.returnMsg(b);
+    }
+
 
 }

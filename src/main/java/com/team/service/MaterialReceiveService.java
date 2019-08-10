@@ -12,5 +12,8 @@ public interface MaterialReceiveService {
 
     ResponseOV<MaterialReceive>getMaterialReceive(int page , int rows);
 
+    boolean deleteByPrimaryKey(String receiveId);
+    boolean insert(MaterialReceive record);
+    boolean updateByPrimaryKeySelective(MaterialReceive record);
 
 }

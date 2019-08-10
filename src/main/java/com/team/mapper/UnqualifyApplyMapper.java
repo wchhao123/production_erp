@@ -33,4 +33,6 @@ public interface UnqualifyApplyMapper {
     List<UnqualifyApply> getPageUnqualifyApply(@Param("page") int page, @Param("rows") int rows);
 
     int batchDeleteByIds(@Param("ids") String[] ids);
+
+    List<UnqualifyApply> selectUnqualifyApplyByCondition(@Param("flag") int flag, @Param("searchValue") String searchValue);
 }

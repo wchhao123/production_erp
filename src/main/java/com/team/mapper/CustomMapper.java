@@ -27,4 +27,6 @@ public interface CustomMapper {
     int updateByPrimaryKeySelective(Custom record);
 
     int updateByPrimaryKey(Custom record);
+
+    int deleteByIds(@Param("ids") String[] ids);
 }
