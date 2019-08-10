@@ -27,4 +27,6 @@ public interface ManufactureMapper {
     int updateByPrimaryKeySelective(Manufacture record);
 
     int updateByPrimaryKey(Manufacture record);
+
+    List<Manufacture> selectManufactureByCondition(@Param("flag") int flag, @Param("searchValue") String searchValue);
 }

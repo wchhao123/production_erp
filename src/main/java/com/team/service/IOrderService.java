@@ -22,5 +22,5 @@ public interface IOrderService {
 
     boolean updateNoteById(String orderId, String note);
 
-    List<COrder> getOrdersData();
+    List<COrder> getCOrders();
 }

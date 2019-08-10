@@ -209,4 +209,40 @@
       working_hours = #{workingHours,jdbcType=DECIMAL}
     where task_id = #{taskId,jdbcType=VARCHAR}
   </update>
+
+  <resultMap id="conditionResultMap" type="com.team.bean.Task">
+    <id column="task_id" jdbcType="VARCHAR" property="taskId" />
+    <result column="task_quantity" jdbcType="INTEGER" property="taskQuantity" />
+    <result column="working_hours" jdbcType="DECIMAL" property="workingHours" />
+    <association property="manufacture" javaType="com.team.bean.Manufacture">
+      <id column="manufacture_sn" property="manufactureSn" />
+    </association>
+    <association property="work" javaType="com.team.bean.Work">
+      <id column="work_id" property="workId" />
+    </association>
+  </resultMap>
+  <!--task-work-manufacture联合查询-->
+  <select id="searchTaskByCondition" resultMap="conditionResultMap">
+    select
+    t.task_id,t.task_quantity,t.working_hours,
+    w.work_id,
+    m.manufacture_sn
+    from task t
+    left join work w on t.work_id=w.work_id
+    left join manufacture m on t.manufacture_sn=m.manufacture_sn
+    <where>
+      <choose>
+        <when test="flag == 0"/>
+        <when test="flag == 1">
+          t.task_id like #{val}
+        </when>
+         <when test="flag == 2">
+           w.work_id like #{val}
+        </when>
+         <when test="flag == 3">
+           m.manufacture_sn like #{val}
+        </when>
+      </choose>
+    </where>
+  </select>
 </mapper>

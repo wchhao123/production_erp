@@ -62,7 +62,7 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public List<COrder> getOrdersData() {
+    public List<COrder> getCOrders() {
         return orderMapper.selectByExample(null);
     }
 

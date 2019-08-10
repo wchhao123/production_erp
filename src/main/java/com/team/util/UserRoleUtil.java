@@ -50,6 +50,9 @@ public class UserRoleUtil {
             list.add("order" + s);
             list.add("custom" + s);
             list.add("product" + s);
+            list.add("manufacture" + s);
+            list.add("work" + s);
+            list.add("task" + s);
         }
     }
     private static void processManager(List<String> list) {

@@ -39,6 +39,11 @@ public class OrderController {
         return orderService.getPageCOrder(page, rows);
     }
 
+    @GetMapping("get_data")
+    public List<COrder> getData() {
+        return orderService.getCOrders();
+    }
+
     @GetMapping("edit_judge")
     @ResponseBody
     public void editJudge() {
@@ -121,11 +126,4 @@ public class OrderController {
         }
         return orderService.searchOrderByCondition(flag,searchValue, page, rows);
     }
-
-    @PostMapping("get_data")
-    @ResponseBody
-    public List<COrder> getData() {
-        return orderService.getOrdersData();
-    }
-
 }
