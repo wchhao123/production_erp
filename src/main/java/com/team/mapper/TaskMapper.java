@@ -27,4 +27,6 @@ public interface TaskMapper {
     int updateByPrimaryKeySelective(Task record);
 
     int updateByPrimaryKey(Task record);
+
+    List<Task> searchTaskByCondition(@Param("flag") int flag, @Param("val") String val);
 }
