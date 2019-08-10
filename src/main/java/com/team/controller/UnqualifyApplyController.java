@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Controller
@@ -84,5 +85,20 @@ public class UnqualifyApplyController {
     public Map<String, String> updateNote(UnqualifyApply unqualifyApply) {
         boolean b = unqualifyApplyService.updateUnqualifyApply(unqualifyApply);
         return ControllerUtil.returnMsg(b);
+    }
+
+    @GetMapping(value = {"search_unqualify_by_unqualifyId",
+            "search_unqualify_by_productName"})
+    @ResponseBody
+    public ResponseOV<UnqualifyApply> searchUnqualifyById(HttpServletRequest request,
+                                              String searchValue, int page, int rows) {
+        int flag = 0;
+        if (request.getRequestURI().endsWith("search_unqualify_by_unqualifyId")) {
+            flag = 1;
+        }
+        if(request.getRequestURI().endsWith("search_unqualify_by_productName")){
+            flag= 2;
+        }
+        return unqualifyApplyService.searchUnqualifyByCondition(flag, searchValue, page, rows);
     }
 }

@@ -294,4 +294,33 @@
       #{id}
     </foreach>
   </delete>
+
+  <!--模糊查询-->
+  <select id="selectUnqualifyApplyByCondition" resultMap="pageResultMap">
+    select
+    ua.unqualify_apply_id,
+    ua.product_id,
+    ua.unqualify_item,
+    ua.unqualify_count,
+    ua.assembly_date,
+    ua.emp_id,
+    ua.apply_date,
+    ua.note,
+    p.product_name,
+    e.emp_name
+    from unqualify_apply ua
+    left join product p on ua.product_id = p.product_id
+    left join employee e on e.emp_id = ua.emp_id
+    <where>
+      <choose>
+        <when test="flag == 0"/>
+        <when test="flag == 1">
+          unqualify_apply_id = #{searchValue}
+        </when>
+        <when test="flag == 2">
+          product_name like  #{searchValue}
+        </when>
+      </choose>
+    </where>
+  </select>
 </mapper>
