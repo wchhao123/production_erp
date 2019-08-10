@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("Work")
+@RequestMapping("work")
 public class WorkController {
 
     @Autowired
