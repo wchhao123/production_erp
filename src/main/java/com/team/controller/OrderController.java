@@ -1,6 +1,5 @@
 package com.team.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import com.team.bean.COrder;
 import com.team.bean.ResponseOV;
 import com.team.service.IOrderService;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Map;

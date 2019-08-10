@@ -60,4 +60,29 @@ public class UnqualifyApplyController {
         boolean b = unqualifyApplyService.deleteByIds(ids);
         return ControllerUtil.returnMsg(b);
     }
+
+    @GetMapping("edit_judge")
+    @ResponseBody
+    public void editJudge() {
+
+    }
+
+    @GetMapping("edit")
+    public String editPage() {
+        return "/WEB-INF/jsp/unqualify_edit.jsp";
+    }
+
+    @PostMapping("update_all")
+    @ResponseBody
+    public Map<String, String> updateAll(UnqualifyApply unqualifyApply) {
+        boolean b = unqualifyApplyService.updateUnqualifyApply(unqualifyApply);
+        return ControllerUtil.returnMsg(b);
+    }
+
+    @PostMapping("update_note")
+    @ResponseBody
+    public Map<String, String> updateNote(UnqualifyApply unqualifyApply) {
+        boolean b = unqualifyApplyService.updateUnqualifyApply(unqualifyApply);
+        return ControllerUtil.returnMsg(b);
+    }
 }

@@ -10,4 +10,6 @@ public interface UnqualifyApplyService {
     boolean insertUnqualifyApply(UnqualifyApply unqualifyApply);
 
     boolean deleteByIds(String[] ids);
+
+    boolean updateUnqualifyApply(UnqualifyApply unqualifyApply);
 }

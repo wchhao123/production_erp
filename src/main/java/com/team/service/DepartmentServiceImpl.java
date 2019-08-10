@@ -20,4 +20,9 @@ public class DepartmentServiceImpl implements IDepartmentService {
         responseOV.setRows(departments);
         return responseOV;
     }
+
+    @Override
+    public List<Department> getDepartmentData() {
+        return departmentMapper.selectByExample(null);
+    }
 }
