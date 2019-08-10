@@ -30,4 +30,6 @@ public interface FinalCountCheckMapper {
     int updateByPrimaryKey(FinalCountCheck record);
 
     List<FinalCountCheck> getPageFinalCountCheck();
+
+    List<FinalCountCheck> selectFinalCountCheckByCondition(@Param("flag") int flag, @Param("searchValue") String searchValue);
 }

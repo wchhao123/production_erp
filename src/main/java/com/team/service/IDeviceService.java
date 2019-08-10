@@ -14,6 +14,11 @@ public interface IDeviceService {
 
     boolean update(Device device);
 
+    ResponseOV<DeviceMaintain> findDeviceMaintainList(int page, int rows);
+
+    List<Device> getDevice();
+
+    Device getDeviceById(String id);
     boolean delete_batch(String ids);
 
     ResponseOV<Device> search_device_by_condition(int flag, String condition, int page, int rows);

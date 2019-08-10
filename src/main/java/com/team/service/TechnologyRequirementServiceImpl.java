@@ -25,7 +25,7 @@ public class TechnologyRequirementServiceImpl implements ITechnologyRequirementS
     @Override
     public ResponseOV<TechnologyRequirement> getTechnologyRequirementsById(int page, int rows) {
         PageHelper.startPage(page, rows);
-        List<TechnologyRequirement> technologyRequirements = technologyRequirementMapper.selectByExample(null);
+        List<TechnologyRequirement> technologyRequirements = technologyRequirementMapper.mixTechnologyRequirement();
         PageInfo<TechnologyRequirement> pageInfo = new PageInfo<>(technologyRequirements);
         long total = pageInfo.getTotal();
 

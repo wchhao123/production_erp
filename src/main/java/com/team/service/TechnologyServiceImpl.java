@@ -34,4 +34,9 @@ public class TechnologyServiceImpl implements ITechnologyService{
         ov.setRows(technologies);
         return ov;
     }
+
+    @Override
+    public List<Technology> getTechnologies() {
+        return technologyMapper.selectByExample(null);
+    }
 }

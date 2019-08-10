@@ -106,4 +106,16 @@ public class DeviceController {
     }
 
 
+
+    @GetMapping("deviceList/get/{id}")
+    @ResponseBody
+    public Device getDeviceById(@PathVariable("id") String id) {
+        return deviceService.getDeviceById(id);
+    }
+
+    @GetMapping("deviceList/get_data")
+    @ResponseBody
+    public List<Device> getData() {
+        return deviceService.getDevice();
+    }
 }

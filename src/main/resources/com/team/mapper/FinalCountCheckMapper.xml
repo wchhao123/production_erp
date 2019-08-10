@@ -355,4 +355,33 @@
     from final_count_check cc
     left join employee e on cc.emp_id = e.emp_id
   </select>
+
+  <select id="selectFinalCountCheckByCondition" resultMap="pageResultMap">
+    select
+    cc.f_count_check_id,
+    cc.order_id,
+    cc.check_item,
+    cc.sample,
+    cc.check_number,
+    cc.unqualify,
+    cc.qualify,
+    cc.cdate,
+    cc.measure_data,
+    cc.emp_id,
+    cc.result,
+    cc.note,
+    e.emp_name
+    from final_count_check cc
+    left join employee e on cc.emp_id = e.emp_id
+    where
+    <choose>
+      <when test="flag == 0" />
+      <when test="flag == 1">
+        f_count_check_id like #{searchValue}
+      </when>
+      <when test="flag == 2">
+        order_id like #{searchValue}
+      </when>
+    </choose>
+  </select>
 </mapper>

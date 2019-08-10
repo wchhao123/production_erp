@@ -23,7 +23,7 @@ public class DeviceServiceImpl implements IDeviceService {
         deviceResponseOV.setRows(pageCOrder);
         return deviceResponseOV;
     }
-
+    //2.设备种类
     @Autowired
     private DeviceTypeMapper deviceTypeMapper;
     @Override
@@ -70,4 +70,13 @@ public class DeviceServiceImpl implements IDeviceService {
         return responseOV;
     }
 
+    @Override
+    public List<Device> getDevice() {
+        return deviceMapper.selectByExample(null);
+    }
+
+    @Override
+    public Device getDeviceById(String id) {
+        return deviceMapper.selectByPrimaryKey(id);
+    }
 }
