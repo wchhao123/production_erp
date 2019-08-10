@@ -14,4 +14,14 @@ public interface IProductService {
     ResponseOV<Product> getProducts(int page, int rows);
 
     List<Product> getProducts();
+
+    boolean updateProduct(Product product);
+
+    boolean updateProductNoteById(String productId, String note);
+
+    boolean deleteByIds(String[] ids);
+
+    boolean insertProduct(Product product);
+
+    ResponseOV<Product> searchProductByCondition(int flag, String searchValue, int page, int rows);
 }
