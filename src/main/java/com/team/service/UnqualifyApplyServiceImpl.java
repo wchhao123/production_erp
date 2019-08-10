@@ -37,4 +37,10 @@ public class UnqualifyApplyServiceImpl implements UnqualifyApplyService {
         int i = unqualifyApplyMapper.batchDeleteByIds(ids);
         return i != 0;
     }
+
+    @Override
+    public boolean updateUnqualifyApply(UnqualifyApply unqualifyApply) {
+        int i = unqualifyApplyMapper.updateByPrimaryKeySelective(unqualifyApply);
+        return i == 1;
+    }
 }

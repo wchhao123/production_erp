@@ -2,8 +2,9 @@ package com.team.mapper;
 
 import com.team.bean.Employee;
 import com.team.bean.EmployeeExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface EmployeeMapper {
     long countByExample(EmployeeExample example);
@@ -27,4 +28,6 @@ public interface EmployeeMapper {
     int updateByPrimaryKeySelective(Employee record);
 
     int updateByPrimaryKey(Employee record);
+
+    Employee getEmployeeById(@Param("empId") String id);
 }

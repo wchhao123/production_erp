@@ -21,9 +21,9 @@ public class MaterialServiceImpl implements  MaterialService {
     }
 
     @Override
-    public List<Material> selectByExample(MaterialExample example) {
+    public List<Material> selectByExample() {
 
-        return materialMapper.selectByExample(example);
+        return materialMapper.selectByExample(null);
     }
 
     @Override
@@ -39,5 +39,23 @@ public class MaterialServiceImpl implements  MaterialService {
     @Override
     public Material selectByPrimaryKey(String materialId) {
         return materialMapper.selectByPrimaryKey(materialId);
+    }
+
+    @Override
+    public boolean insert(Material record) {
+        int insert = materialMapper.insert(record);
+        return insert ==1;
+    }
+
+    @Override
+    public boolean deleteByPrimaryKey(String materialId) {
+        int i = materialMapper.deleteByPrimaryKey(materialId);
+        return i != 0;
+    }
+
+    @Override
+    public boolean updateByPrimaryKey(Material record) {
+        int update = materialMapper.updateByPrimaryKey(record);
+        return update == 1;
     }
 }

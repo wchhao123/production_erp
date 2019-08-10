@@ -32,11 +32,11 @@ public class WorkController {
         return workService.getWorks(page, rows);
     }
 
-    /*@PostMapping("get_data")
+    @PostMapping("get_data")
     @ResponseBody
     public List<Work> getData() {
-        return workService.getWorks();
-    }*/
+        return workService.selectByExample();
+    }
 
     @GetMapping("edit_judge")
     @ResponseBody
@@ -93,7 +93,7 @@ public class WorkController {
             "search_work_by_workDevice","search_work_by_workProcess"})
     @ResponseBody
     public ResponseOV<Work> searchOrderById(HttpServletRequest request,
-                                               String searchValue, int page, int rows) {
+                                            String searchValue, int page, int rows) {
         int flag;
         if (request.getRequestURI().endsWith("search_work_by_workId")) {
             flag = 1;

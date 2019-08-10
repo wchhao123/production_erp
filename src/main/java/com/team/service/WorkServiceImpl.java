@@ -23,6 +23,11 @@ public class WorkServiceImpl implements IWorkService {
     }
 
     @Override
+    public List<Work> selectByExample() {
+        return workMapper.selectByExample(null);
+    }
+
+    @Override
     public boolean updateWork(Work work) {
         return workMapper.updateByPrimaryKey(work) == 1;
     }
