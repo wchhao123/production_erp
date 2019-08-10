@@ -9,6 +9,7 @@ import com.team.mapper.ManufactureMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class ManufactureService implements IManufactureService {
     @Override
     public boolean deleteManufacturesByIds(String[] ids) {
         ManufactureExample example = new ManufactureExample();
-        example.createCriteria().andOrderIdIn(Arrays.asList(ids));
+        example.createCriteria().andOrderIdIn(new ArrayList<>(Arrays.asList(ids)));
         return mapper.deleteByExample(example) != 0;
     }
 

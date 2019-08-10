@@ -126,5 +126,4 @@ public class OrderController {
         }
         return orderService.searchOrderByCondition(flag,searchValue, page, rows);
     }
-
 }
