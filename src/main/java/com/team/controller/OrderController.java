@@ -37,6 +37,7 @@ public class OrderController {
     }
 
     @GetMapping("get_data")
+    @ResponseBody
     public List<COrder> getData() {
         return orderService.getCOrders();
     }
