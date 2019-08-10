@@ -241,4 +241,24 @@
       note = #{note,jdbcType=VARCHAR}
     where receive_id = #{receiveId,jdbcType=VARCHAR}
   </update>
+  <resultMap id="MaterialResult" type="com.team.bean.MaterialReceive">
+    <result column="receive_id"  property="receiveId" />
+    <result column="material_id"  property="materialId" />
+    <result column="amount"   property="amount" />
+    <result column="receive_date"  property="receiveDate" />
+    <result column="sender"  property="sender" />
+    <result column="receiver" property="receiver" />
+    <result column="note" property="note" />
+    <association property="material" javaType="com.team.bean.Material">
+      <id column="material_id" property="materialId"/>
+      <result column="note" property="note"/>
+    </association>
+
+  </resultMap>
+  <select id="queryMaterialReceive" resultMap="MaterialResult">
+select c.receive_id   ,c.material_id ,  c.amount , c.receive_date , c.sender , c.receiver , c.note ,
+m.material_id  , m.note
+from
+material_receive c left join material m on c.material_id = m.material_id
+  </select>
 </mapper>

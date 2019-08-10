@@ -27,4 +27,6 @@ public interface MaterialMapper {
     int updateByPrimaryKeySelective(Material record);
 
     int updateByPrimaryKey(Material record);
+
+    List<Material> getPageMaterial(@Param("page") int page, @Param("rows") int rows);
 }

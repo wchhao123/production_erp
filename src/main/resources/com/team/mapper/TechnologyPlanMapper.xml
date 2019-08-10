@@ -259,4 +259,12 @@
       technology_plan_end = #{technologyPlanEnd,jdbcType=TIMESTAMP}
     where technology_plan_id = #{technologyPlanId,jdbcType=VARCHAR}
   </update>
+
+  <!--<select id="getPageTechnologyPlan" resultType="com.team.bean.TechnologyPlan">-->
+  <select id="getPageTechnologyPlan" resultMap="BaseResultMap">
+    select
+    technology_plan_id,technology_id,batch_amount,start_plan,end_plan,commit_plan,technology_plan_start,technology_plan_end
+    from technology_plan
+    limit #{index},#{pageSize}
+  </select>
 </mapper>

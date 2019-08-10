@@ -65,6 +65,14 @@ public class OrderController {
         }
     }
 
+    @PostMapping("update_note")
+    @ResponseBody
+    public Map<String, String> updateNote(String orderId, String note) {
+        boolean b = orderService.updateNoteById(orderId, note);
+        return ControllerUtil.returnMsg(b);
+    }
+
+
     @GetMapping("delete_judge")
     @ResponseBody
     public void deleteJudge() {

@@ -27,4 +27,6 @@ public interface MaterialConsumeMapper {
     int updateByPrimaryKeySelective(MaterialConsume record);
 
     int updateByPrimaryKey(MaterialConsume record);
+
+    List<MaterialConsume>queryMaterialConsume();
 }

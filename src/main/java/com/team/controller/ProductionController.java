@@ -7,10 +7,8 @@ import com.team.util.ControllerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
-import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -20,8 +18,6 @@ public class ProductionController {
 
     @Autowired
     private IProductService productService;
-    @Autowired
-    ServletContext context;
 
     @RequestMapping("get/{id}")
     @ResponseBody
@@ -43,23 +39,76 @@ public class ProductionController {
 
     @GetMapping("edit_judge")
     @ResponseBody
-    public void judge(){
+    public void editJudge() {
 
+    }
+
+    @GetMapping("edit")
+    public String editPage() {
+        return "/WEB-INF/jsp/product_edit.jsp";
     }
 
     @PostMapping("update_all")
     @ResponseBody
-    public Map<String, String> updateAll(MultipartFile image, Product product) {
-        //图片先上传再提交，上传功能不应该在这里
-        try {
-            String imgRelativePath = "/pic/" + image.getOriginalFilename();
-            ControllerUtil.saveFile(image, context.getRealPath("/WEB-INF/upload" + imgRelativePath));
-            product.setImage(imgRelativePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            boolean b = productService.updateProduct(product);
-            return ControllerUtil.returnMsg(b);
+    public Map<String, String> updateAll(Product product) {
+
+        boolean b = productService.updateProduct(product);
+        return ControllerUtil.returnMsg(b);
+    }
+
+    @PostMapping("update_note")
+    @ResponseBody
+    public Map<String, String> updateNote(String productId, String note) {
+
+        boolean b = productService.updateProductNoteById(productId, note);
+        return ControllerUtil.returnMsg(b);
+    }
+
+    @GetMapping("delete_judge")
+    @ResponseBody
+    public void deleteJudge() {
+
+    }
+
+    @PostMapping("delete_batch")
+    @ResponseBody
+    public Map<String, String> deleteBatch(String[] ids) {
+        boolean b = productService.deleteByIds(ids);
+        return ControllerUtil.returnMsg(b);
+    }
+
+    @GetMapping("add_judge")
+    @ResponseBody
+    public String insertJudge() {
+        return "";
+    }
+
+    @GetMapping("add")
+    public String addPage() {
+        return "/WEB-INF/jsp/product_add.jsp";
+
+    }
+
+    @PostMapping("insert")
+    @ResponseBody
+    public Map<String, String> insert(Product product) {
+        boolean b = productService.insertProduct(product);
+        return ControllerUtil.returnMsg(b);
+    }
+
+    @GetMapping(value = {"search_product_by_productId",
+            "search_product_by_productName","search_product_by_productType"})
+    @ResponseBody
+    public ResponseOV<Product> searchOrderById(HttpServletRequest request,
+                                              String searchValue, int page, int rows) {
+        int flag;
+        if (request.getRequestURI().endsWith("search_product_by_productId")) {
+            flag = 1;
+        } else if (request.getRequestURI().endsWith("search_product_by_productName")) {
+            flag= 2;
+        } else {
+            flag = 3;
         }
+        return productService.searchProductByCondition(flag,searchValue, page, rows);
     }
 }
