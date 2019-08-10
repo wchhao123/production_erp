@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -119,6 +120,12 @@ public class OrderController {
             flag = 3;
         }
         return orderService.searchOrderByCondition(flag,searchValue, page, rows);
+    }
+
+    @PostMapping("get_data")
+    @ResponseBody
+    public List<COrder> getData() {
+        return orderService.getOrdersData();
     }
 
 }

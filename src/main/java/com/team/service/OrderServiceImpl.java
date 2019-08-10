@@ -7,7 +7,6 @@ import com.team.bean.ResponseOV;
 import com.team.mapper.COrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -60,6 +59,11 @@ public class OrderServiceImpl implements IOrderService {
         order.setNote(note);
         int i = orderMapper.updateByPrimaryKeySelective(order);
         return i == 1;
+    }
+
+    @Override
+    public List<COrder> getOrdersData() {
+        return orderMapper.selectByExample(null);
     }
 
 }

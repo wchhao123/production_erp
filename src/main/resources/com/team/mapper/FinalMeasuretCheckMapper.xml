@@ -283,4 +283,29 @@
     left join employee e on m.emp_id = e.emp_id
     limit #{page}, #{rows}
   </select>
+
+  <select id="searchFinalMeasureCheckByCondition" resultMap="pageResultMap">
+    select
+    m.f_measure_check_id,
+    m.order_id,
+    m.check_item,
+    m.cdate,
+    m.measure_data,
+    m.emp_id,
+    m.result,
+    m.note,
+    e.emp_name
+    from final_measuret_check m
+    left join employee e on m.emp_id = e.emp_id
+    where
+    <choose>
+      <when test="flag == 0"></when>
+      <when test="flag == 1">
+        f_measure_check_id like #{searchValue}
+      </when>
+      <when test="flag == 2">
+        order_id like #{searchValue}
+    </when>
+    </choose>
+  </select>
 </mapper>

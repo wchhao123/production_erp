@@ -30,4 +30,6 @@ public interface FinalMeasuretCheckMapper {
     int updateByPrimaryKey(FinalMeasuretCheck record);
 
     List<FinalMeasuretCheck> getFinalMeasureCheck(@Param("page") int page, @Param("rows") int rows);
+
+    List<FinalMeasuretCheck> searchFinalMeasureCheckByCondition(@Param("flag") int flag, @Param("searchValue") String searchValue);
 }
