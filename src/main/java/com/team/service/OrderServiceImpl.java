@@ -1,5 +1,7 @@
 package com.team.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.team.bean.COrder;
 import com.team.bean.ResponseOV;
 import com.team.mapper.COrderMapper;
@@ -36,12 +38,19 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public boolean insertOrder(COrder order) {
-        return false;
+        return orderMapper.insert(order) == 1;
     }
 
     @Override
     public ResponseOV<COrder> searchOrderByCondition(int flag, String searchValue, int page, int rows) {
-        return null;
+        PageHelper.startPage(page, rows);
+        List<COrder> orders = orderMapper.searchOrderByCondition(flag, "%" + searchValue + "%");
+        PageInfo<COrder> info = new PageInfo<>(orders);
+
+        ResponseOV<COrder> ov = new ResponseOV<>();
+        ov.setRows(orders);
+        ov.setTotal((int) info.getTotal());
+        return ov;
     }
 
     @Override
