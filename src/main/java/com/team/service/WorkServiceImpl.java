@@ -41,7 +41,7 @@ public class WorkServiceImpl implements IWorkService {
     @Override
     public ResponseOV<Work> searchWorkByCondition(int flag, String searchValue, int page, int rows) {
         PageHelper.startPage(page, rows);
-        List<Work> works = workMapper.selectWorkByCondition(flag, searchValue);
+        List<Work> works = workMapper.selectWorkByCondition(flag, "%" + searchValue + "%");
         PageInfo<Work> info = new PageInfo<>(works);
 
         ResponseOV<Work> ov = new ResponseOV<>();
