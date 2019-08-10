@@ -29,6 +29,16 @@ public class Employee {
 
     private String departmentId;
 
+    private Department department;
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
     public String getEmpId() {
         return empId;
     }
@@ -130,6 +140,6 @@ public class Employee {
     }
 
     public void setDepartmentId(String departmentId) {
-        this.departmentId = departmentId == null ? null : departmentId.trim();
+        this.departmentId = departmentId;
     }
 }

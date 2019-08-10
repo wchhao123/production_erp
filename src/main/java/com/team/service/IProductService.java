@@ -14,4 +14,6 @@ public interface IProductService {
     ResponseOV<Product> getProducts(int page, int rows);
 
     List<Product> getProducts();
+
+    boolean updateProduct(Product product);
 }

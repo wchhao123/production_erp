@@ -37,4 +37,10 @@ public class ProductionServiceImpl implements IProductService{
     public List<Product> getProducts() {
         return productMapper.selectByExample(null);
     }
+
+    @Override
+    public boolean updateProduct(Product product) {
+        int update = productMapper.updateByPrimaryKeySelective(product);
+        return update == 1;
+    }
 }
