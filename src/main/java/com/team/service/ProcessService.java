@@ -5,4 +5,8 @@ import com.team.bean.ResponseOV;
 
 public interface ProcessService {
     ResponseOV<Process> getPageProcess(int index, int pageSize);
+
+    boolean insertProcess(Process process);
+
+    boolean deleteByIds(String[] ids);
 }

@@ -30,4 +30,8 @@ public interface TechnologyPlanMapper {
     int updateByPrimaryKey(TechnologyPlan record);
 
     List<TechnologyPlan> getPageTechnologyPlan(@Param("index") int index, @Param("pageSize") int pageSize);
+
+    TechnologyPlan getTechnologyPlanById(String id);
+
+    List<TechnologyPlan> getTechnologyPlans();
 }

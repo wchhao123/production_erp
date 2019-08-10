@@ -27,4 +27,6 @@ public interface TechnologyRequirementMapper {
     int updateByPrimaryKeySelective(TechnologyRequirement record);
 
     int updateByPrimaryKey(TechnologyRequirement record);
+
+    List<TechnologyRequirement> mixTechnologyRequirement();
 }

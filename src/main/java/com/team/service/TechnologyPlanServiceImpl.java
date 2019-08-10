@@ -16,12 +16,6 @@ public class TechnologyPlanServiceImpl implements TechnologyPlanService{
 
     @Override
     public ResponseOV<TechnologyPlan> getPageTechnologyPlan(int index, int pageSize) {
-        /*ResponseOV<Process> processResponse = new ResponseOV<>();
-        long l = processMapper.countByExample(null);
-        List<Process> pageProcess=processMapper.getPageProcess((index-1)*pageSize,pageSize);
-        processResponse.setTotal((int) l);
-        processResponse.setRows(pageProcess);
-        return processResponse;*/
 
         ResponseOV<TechnologyPlan> technologyPlanResponseOV=new ResponseOV<>();
         long l=technologyPlanMapper.countByExample(null);
@@ -29,6 +23,18 @@ public class TechnologyPlanServiceImpl implements TechnologyPlanService{
         technologyPlanResponseOV.setTotal((int) l);
         technologyPlanResponseOV.setRows(pageTechnologyPlan);
         return technologyPlanResponseOV;
-      //return null;
+
+    }
+
+    @Override
+    public TechnologyPlan getTechnologyPlanById(String id) {
+        TechnologyPlan technologyPlanById=technologyPlanMapper.getTechnologyPlanById(id);
+        return technologyPlanById;
+    }
+
+    @Override
+    public List<TechnologyPlan> getTechnologyPlans() {
+        List<TechnologyPlan> technologyPlans=technologyPlanMapper.getTechnologyPlans();
+        return technologyPlans;
     }
 }
