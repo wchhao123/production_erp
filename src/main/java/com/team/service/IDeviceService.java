@@ -14,4 +14,18 @@ public interface IDeviceService {
     ResponseOV<DeviceFault> findDeviceFaultList(int page, int rows);
 
     ResponseOV<DeviceMaintain> findDeviceMaintainList(int page, int rows);
+
+
+
+    List<DeviceType> getDeviceTypeList();
+
+    List<Employee> getEmployeeList();
+
+    boolean insertDevice(Device device);
+
+    boolean update(Device device);
+
+    boolean delete_batch(String ids);
+
+    ResponseOV<Device> search_device_by_deviceName(String deviceName,int index, int pageSize);
 }

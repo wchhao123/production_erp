@@ -114,6 +114,11 @@
             ON d.device_keeper_id = e.emp_id
           LEFT JOIN  device_type t
             ON t.device_type_id = d.device_type_id
+        <!--<where>
+            <if test="deviceName != null">
+                AND device_name LIKE #{deviceName}
+            </if>
+        </where>-->
         LIMIT #{index},#{pageSize}
     </select>
 

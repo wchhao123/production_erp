@@ -11,6 +11,7 @@ import java.util.List;
 
 @Service
 public class DeviceServiceImpl implements IDeviceService {
+    //1.设备台账
     @Autowired
     private DeviceMapper deviceMapper;
     @Override
@@ -22,9 +23,54 @@ public class DeviceServiceImpl implements IDeviceService {
         deviceResponseOV.setRows(pageCOrder);
         return deviceResponseOV;
     }
-    //2.设备种类
+
     @Autowired
     private DeviceTypeMapper deviceTypeMapper;
+    @Override
+    public List<DeviceType> getDeviceTypeList() {
+        return deviceTypeMapper.selectByExample(null);
+    }
+
+    @Autowired
+    private EmployeeMapper employeeMapper;
+    @Override
+    public List<Employee> getEmployeeList() {
+        return employeeMapper.selectByExample(null);
+    }
+
+    @Override
+    public boolean insertDevice(Device device) {
+        int i = deviceMapper.insert(device);
+        return i==1;
+    }
+
+    @Override
+    public boolean update(Device device) {
+        int i = deviceMapper.updateByPrimaryKeySelective(device);
+        return i==1;
+    }
+
+    @Override
+    public boolean delete_batch(String ids) {
+        int i = deviceMapper.deleteByPrimaryKey(ids);
+        return i==1;
+    }
+
+    @Override
+    public ResponseOV<Device> search_device_by_deviceName(String deviceName,int page, int rows) {
+        ResponseOV<Device> responseOV = new ResponseOV<>();
+
+        List<Device> devices = deviceMapper.selectDeviceList(deviceName,(page - 1) * rows,rows);
+
+        long total = new PageInfo<>(devices).getTotal();
+        responseOV.setTotal((int) total);
+        responseOV.setRows(devices);
+        return responseOV;
+    }
+
+    //2.设备种类
+    /*@Autowired
+    private DeviceTypeMapper deviceTypeMapper;*/
     @Override
     public ResponseOV<DeviceType> getPageDeviceType(int page, int rows) {//page第几页，rows多少条
         PageHelper.startPage(page,rows);

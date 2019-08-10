@@ -98,5 +98,4 @@ public class OrderController {
         boolean b = orderService.insertOrder(order);
         return ControllerUtil.returnMsg(b);
     }
-
 }

@@ -31,4 +31,6 @@ public interface DeviceMapper {
     int updateByPrimaryKey(Device record);
 
     List<Device> selectDeviceList(@Param("index") int index, @Param("pageSize") int pageSize);
+
+    List<Device> selectDeviceList(String deviceName, int index, int pageSize);
 }
