@@ -26,12 +26,12 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public boolean updateOrder(COrder order) {
-        return false;
+        return orderMapper.updateByPrimaryKey(order) == 1;
     }
 
     @Override
     public boolean deleteByIds(String[] ids) {
-        return false;
+        return orderMapper.batchDeleteByIds(ids) != 0;
     }
 
     @Override

@@ -262,13 +262,13 @@
           w.work_id = #{searchValue}
         </when>
         <when test="flag == 2">
-          pd.product_name =  #{searchValue}
+          pd.product_name like  #{searchValue}
         </when>
         <when test="flag == 3">
-          pc.process_id =  #{searchValue}
+          pc.process_id like  #{searchValue}
         </when>
         <when test="flag == 4">
-          d.device_name = #{searchValue}
+          d.device_name like #{searchValue}
         </when>
       </choose>
     </where>
