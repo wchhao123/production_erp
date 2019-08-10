@@ -85,5 +85,12 @@ public class FinalMeasureCheckController {
         }
         return finalMeasureCheckService.searchFinalMeasureCheckByCondition(flag, searchValue, page, rows);
     }
+
+    @PostMapping("update_note")
+    @ResponseBody
+    public Map<String, String> updateNote(FinalMeasuretCheck finalMeasureCheck){
+        boolean b = finalMeasureCheckService.updateFinalMeasuretCheck(finalMeasureCheck);
+        return ControllerUtil.returnMsg(b);
+    }
 }
 

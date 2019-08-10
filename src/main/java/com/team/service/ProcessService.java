@@ -14,5 +14,11 @@ public interface ProcessService {
 
     Process getProcessById(String id);
 
-    List<Process> getProcessList();
+    boolean updateProcess(Process process);
+
+    List<Process> getProcesses();
+
+    boolean updateProcessNoteById(String processId, String note);
+
+    ResponseOV<Process> searchProcessByCondition(int flag, String searchValue, int page, int rows);
 }

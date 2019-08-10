@@ -208,7 +208,16 @@
     limit #{index},#{pageSize}
   </select>
 
-
+  <!--批删除-->
+  <delete id="batchDeleteByIds">
+    delete from process
+    <where>
+      process_id in
+      <foreach collection="ids" item="id" open="(" close=")" separator=",">
+        #{id}
+      </foreach>
+    </where>
+  </delete>
 
 
 </mapper>

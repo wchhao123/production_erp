@@ -37,6 +37,7 @@ public class FinalMeasureCheckServiceImpl implements FinalMeasureCheckService {
 
     @Override
     public boolean updateFinalMeasuretCheck(FinalMeasuretCheck finalMeasuretCheck) {
+        //updateAll和uptateNote共用此方法，因此使用带Selective的
         int update = finalMeasuretCheckMapper.updateByPrimaryKeySelective(finalMeasuretCheck);
         return update == 1;
     }
