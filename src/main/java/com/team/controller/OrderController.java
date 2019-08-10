@@ -36,7 +36,7 @@ public class OrderController {
         return orderService.getPageCOrder(page, rows);
     }
 
-    @GetMapping("get_data")
+    @PostMapping("get_data")
     public List<COrder> getData() {
         return orderService.getCOrders();
     }
