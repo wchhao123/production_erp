@@ -17,4 +17,6 @@ public interface IWorkService {
     ResponseOV<Work> searchWorkByCondition(int flag, String searchValue, int page, int rows);
 
     List<Work> selectByExample();
+
+    Work getWorkById(String id);
 }

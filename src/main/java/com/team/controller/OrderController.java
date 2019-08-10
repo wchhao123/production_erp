@@ -6,10 +6,7 @@ import com.team.service.IOrderService;
 import com.team.util.ControllerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
@@ -40,6 +37,7 @@ public class OrderController {
     }
 
     @GetMapping("get_data")
+    @ResponseBody
     public List<COrder> getData() {
         return orderService.getCOrders();
     }
@@ -125,5 +123,11 @@ public class OrderController {
             flag = 3;
         }
         return orderService.searchOrderByCondition(flag,searchValue, page, rows);
+    }
+
+    @RequestMapping("get/{id}")
+    @ResponseBody
+    public COrder getOrder(@PathVariable("id") String id) {
+        return orderService.getOrderById(id);
     }
 }
