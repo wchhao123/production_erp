@@ -233,15 +233,15 @@
     <result column="process_number" jdbcType="VARCHAR" property="processNumber" />
     <result column="rating" jdbcType="INTEGER" property="rating" />
     <association property="product" javaType="com.team.bean.Product">
-    <id column="product_id" jdbcType="VARCHAR" property="productId"/>
-    <result column="product_name" javaType="VARCHAR" property="productName"/>
+    <id column="product_id"  property="productId"/>
+    <result column="product_name"  property="productName"/>
   </association>
     <association property="process" javaType="com.team.bean.Process">
-      <id column="process_id" jdbcType="VARCHAR" property="processId"/>
+      <id column="process_id"  property="processId"/>
     </association>
     <association property="device" javaType="com.team.bean.Device">
-      <id column="device_id" jdbcType="VARCHAR" property="deviceId"/>
-      <result column="device_name" javaType="VARCHAR" property="deviceName"/>
+      <id column="device_id"  property="deviceId"/>
+      <result column="device_name"  property="deviceName"/>
     </association>
   </resultMap>
   <!--work-product-process-device联合查询-->
