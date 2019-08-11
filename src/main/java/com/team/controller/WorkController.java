@@ -1,22 +1,20 @@
 package com.team.controller;
 
+import com.team.bean.Custom;
 import com.team.bean.ResponseOV;
 import com.team.bean.Work;
 import com.team.service.IWorkService;
 import com.team.util.ControllerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("Work")
+@RequestMapping("work")
 public class WorkController {
 
     @Autowired
@@ -25,6 +23,12 @@ public class WorkController {
     @GetMapping("find")
     public String find() {
         return "/WEB-INF/jsp/work_list.jsp";
+    }
+
+    @RequestMapping("get/{id}")
+    @ResponseBody
+    public Work getWork(@PathVariable("id") String id) {
+        return workService.getWorkById(id);
     }
 
     @GetMapping("list")

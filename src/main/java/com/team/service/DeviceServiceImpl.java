@@ -11,6 +11,7 @@ import java.util.List;
 
 @Service
 public class DeviceServiceImpl implements IDeviceService {
+    //1.设备台账
     @Autowired
     private DeviceMapper deviceMapper;
     @Override
@@ -26,53 +27,61 @@ public class DeviceServiceImpl implements IDeviceService {
     @Autowired
     private DeviceTypeMapper deviceTypeMapper;
     @Override
-    public ResponseOV<DeviceType> getPageDeviceType(int page, int rows) {//page第几页，rows多少条
-        PageHelper.startPage(page,rows);
-        ResponseOV<DeviceType> deviceResponseOV = new ResponseOV<>();
-        List<DeviceType> deviceTypes = deviceTypeMapper.selectByExample(null);
-        long total = new PageInfo<>(deviceTypes).getTotal();
-        deviceResponseOV.setTotal((int) total);
-        deviceResponseOV.setRows(deviceTypes);
-        return deviceResponseOV;
+    public List<DeviceType> getDeviceTypeList() {
+        return deviceTypeMapper.selectByExample(null);
     }
-    //3.设备检修
-    @Autowired
-    private DeviceCheckMapper deviceCheckMapper;
+
+    /*@Autowired
+    private EmployeeMapper employeeMapper;
+    @Override
+    public List<Employee> getEmployeeList() {
+        return employeeMapper.selectByExample(null);
+    }*/
 
     @Override
-    public ResponseOV<DeviceCheck> findDeviceCheckList(int page, int rows){
-        PageHelper.startPage(page,rows);
-        ResponseOV<DeviceCheck> responseOV=new ResponseOV<>();
-        List<DeviceCheck> deviceCheckList = deviceCheckMapper.findDeviceCheckList(page, rows);
-        long total = new PageInfo<>(deviceCheckList).getTotal();
-        responseOV.setTotal((int) total);
-        responseOV.setRows(deviceCheckList);
-        return responseOV;
+    public boolean insertDevice(Device device) {
+        int i = deviceMapper.insert(device);
+        return i==1;
     }
-    //4.设备故障
-    @Autowired
-    private DeviceFaultMapper deviceFaultMapper;
+
     @Override
-    public ResponseOV<DeviceFault> findDeviceFaultList(int page, int rows){
-        PageHelper.startPage(page,rows);
-        ResponseOV<DeviceFault> responseOV=new ResponseOV<>();
-        List<DeviceFault> DeviceFaultList = deviceFaultMapper.findDeviceFaultList(page, rows);
-        long total = new PageInfo<>(DeviceFaultList).getTotal();
-        responseOV.setTotal((int) total);
-        responseOV.setRows(DeviceFaultList);
-        return responseOV;
+    public boolean update(Device device) {
+        int i = deviceMapper.updateByPrimaryKeySelective(device);
+        return i==1;
     }
-    //5.设备维修
-    @Autowired
-    private DeviceMaintainMapper deviceMaintainMapper;
+
     @Override
     public ResponseOV<DeviceMaintain> findDeviceMaintainList(int page, int rows) {
+        return null;
+    }
+
+    @Override
+    public boolean delete_batch(String ids) {
+        int i = deviceMapper.deleteByPrimaryKey(ids);
+        return i==1;
+    }
+
+    @Override
+    public ResponseOV<Device> search_device_by_condition(int flag, String condition, int page, int rows) {
         PageHelper.startPage(page,rows);
-        ResponseOV<DeviceMaintain> responseOV=new ResponseOV<>();
-        List<DeviceMaintain> DeviceMaintainList = deviceMaintainMapper.findDeviceMaintainList(page, rows);
-        long total = new PageInfo<>(DeviceMaintainList).getTotal();
+
+        ResponseOV<Device> responseOV = new ResponseOV<>();
+
+        List<Device> devices = deviceMapper.search_device_by_condition(flag,condition);
+
+        long total = new PageInfo<>(devices).getTotal();
         responseOV.setTotal((int) total);
-        responseOV.setRows(DeviceMaintainList);
+        responseOV.setRows(devices);
         return responseOV;
+    }
+
+    @Override
+    public List<Device> getDevice() {
+        return deviceMapper.selectByExample(null);
+    }
+
+    @Override
+    public Device getDeviceById(String id) {
+        return deviceMapper.selectByPrimaryKey(id);
     }
 }

@@ -11,6 +11,26 @@ public class Task {
 
     private Long workingHours;
 
+    private Manufacture manufacture;
+
+    private Work work;
+
+    public Manufacture getManufacture() {
+        return manufacture;
+    }
+
+    public void setManufacture(Manufacture manufacture) {
+        this.manufacture = manufacture;
+    }
+
+    public Work getWork() {
+        return work;
+    }
+
+    public void setWork(Work work) {
+        this.work = work;
+    }
+
     public String getTaskId() {
         return taskId;
     }

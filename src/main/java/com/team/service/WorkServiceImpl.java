@@ -2,6 +2,7 @@ package com.team.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.team.bean.Custom;
 import com.team.bean.ResponseOV;
 import com.team.bean.Work;
 import com.team.mapper.WorkMapper;
@@ -28,6 +29,11 @@ public class WorkServiceImpl implements IWorkService {
     }
 
     @Override
+    public Work getWorkById(String id) {
+        return workMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public boolean updateWork(Work work) {
         return workMapper.updateByPrimaryKey(work) == 1;
     }
@@ -46,7 +52,7 @@ public class WorkServiceImpl implements IWorkService {
     @Override
     public ResponseOV<Work> searchWorkByCondition(int flag, String searchValue, int page, int rows) {
         PageHelper.startPage(page, rows);
-        List<Work> works = workMapper.selectWorkByCondition(flag, searchValue);
+        List<Work> works = workMapper.selectWorkByCondition(flag, "%" + searchValue + "%");
         PageInfo<Work> info = new PageInfo<>(works);
 
         ResponseOV<Work> ov = new ResponseOV<>();

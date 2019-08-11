@@ -33,4 +33,6 @@ public interface DeviceMaintainMapper {
 
 
     List<DeviceMaintain> findDeviceMaintainList(int page, int rows);
+
+    List<DeviceMaintain> search_deviceMaintain_by_condition(@Param("flag")int flag, @Param("condition")String condition);
 }

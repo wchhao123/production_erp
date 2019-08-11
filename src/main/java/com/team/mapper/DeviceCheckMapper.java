@@ -31,4 +31,6 @@ public interface DeviceCheckMapper {
     int updateByPrimaryKey(DeviceCheck record);
 
     List<DeviceCheck> findDeviceCheckList(@Param("index") int index, @Param("pageSize") int pageSize);
+
+    List<DeviceCheck> search_deviceCheck_by_condition(@Param("flag")int flag, @Param("condition")String condition);
 }

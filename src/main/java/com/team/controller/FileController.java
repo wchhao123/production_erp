@@ -36,9 +36,13 @@ public class FileController {
         return map;
     }
 
-    @RequestMapping("file/delete")
+    @RequestMapping({"file/delete","pic/delete"})
     @ResponseBody
-    public Map<String, String> deleteFile(String fileName) {
+    public Map<String, String> deleteFile(String fileName, String picName) {
+        if (picName != null) {
+            fileName = picName;
+        }
+        fileName = fileName.replace("file/download?fileName=","");
         File file = new File(context.getRealPath("/WEB-INF/upload" + fileName));
         if (file.exists())
             file.delete();
@@ -52,10 +56,24 @@ public class FileController {
         return "redirect:" + fileName;
     }
 
-    @RequestMapping("img/upload")
+    @RequestMapping("pic/upload")
     @ResponseBody
-    public Map<String, String> uploadImg() {
-        System.out.println("map");
-        return null;
+    public Map<String, String> uploadImg(MultipartFile[] imgs) {
+        Map<String, String> map = new HashMap<>();
+        for (MultipartFile img : imgs) {
+            //File file = new File(context.getRealPath("/WEB-INF/upload" + img.getOriginalFilename()));
+            String path = context.getRealPath("/WEB-INF/upload/" + img.getOriginalFilename());
+            try {
+                ControllerUtil.saveFile(img, path);
+                map.put("error", "0");
+                map.put("url", path);
+                return map;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        map.put("error", "1");
+        return map;
     }
+
 }

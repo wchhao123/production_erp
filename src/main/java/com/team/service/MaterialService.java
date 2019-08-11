@@ -22,4 +22,6 @@ public interface MaterialService {
     boolean updateByPrimaryKey(Material record);
 
     ResponseOV<Material> searchMaterialByCondition(int flag, String searchValue, int page, int rows);
+
+
 }

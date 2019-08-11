@@ -386,4 +386,15 @@
       </choose>
     </where>
   </select>
+
+  <select id="selectOrderById" resultMap="pageResultSet">
+    select
+    o.order_id,o.order_date,o.request_date,o.note,o.quantity,o.unit_price,o.unit,o.image,o.file,o.status,
+    c.custom_id,c.custom_name,
+    p.product_id,p.product_name
+    from c_order o
+    left join custom c on o.custom_id=c.custom_id
+    left join product p on o.product_id=p.product_id
+    where order_id = #{id}
+  </select>
 </mapper>

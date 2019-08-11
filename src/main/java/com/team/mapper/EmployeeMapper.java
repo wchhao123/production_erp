@@ -3,9 +3,11 @@ package com.team.mapper;
 import com.team.bean.Employee;
 import com.team.bean.EmployeeExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface EmployeeMapper {
     long countByExample(EmployeeExample example);
 

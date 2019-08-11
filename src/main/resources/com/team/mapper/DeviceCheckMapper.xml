@@ -28,6 +28,36 @@
         LEFT JOIN employee
         ON device_check.device_check_emp_id = employee.emp_id
     </select>
+    <select id="search_deviceCheck_by_condition" resultMap="findDeviceCheckListResultMap">
+        SELECT
+            device_check.device_check_id,
+            device_check.device_id,
+            device_check.device_check_emp_id,
+            device_check.device_check_date,
+            device_check.device_check_result,
+            device_check.device_check_fault_id,
+
+            device.device_name,
+            employee.emp_name
+        FROM device_check
+        LEFT JOIN device
+        ON device_check.device_id = device.device_id
+        LEFT JOIN employee
+        ON device_check.device_check_emp_id = employee.emp_id
+        <where>
+            <choose>
+                <when test="flag == -1">
+
+                </when>
+                <when test="flag == 1">
+                    device_check.device_check_id LIKE #{condition}
+                </when>
+                <when test="flag == 2">
+                    device.device_name LIKE  #{condition}
+                </when>
+            </choose>
+        </where>
+    </select>
     
     
   <resultMap id="BaseResultMap" type="com.team.bean.DeviceCheck">

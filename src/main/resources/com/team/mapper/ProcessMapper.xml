@@ -195,23 +195,29 @@
     where process_id = #{processId,jdbcType=VARCHAR}
   </update>
 
-  <select id="getPageProcess" resultType="com.team.bean.Process">
+  <resultMap id="processMap" type="com.team.bean.Process">
+    <result column="process_id" property="processId"/>
+    <result column="technology_plan_id" property="technologyPlanId"/>
+    <result column="sequence" property="sequence"/>
+    <result column="quota" property="quota"/>
+  </resultMap>
+  <select id="getPageProcess" resultMap="processMap">
     select
-    p.process_id,p.technology_plan_id,p.sequence,p.quota,
-    tp.technology_plan_id,tp.technology_id,tp.batch_amount,tp.start_plan,tp.end_plan,tp.commit_plan,tp.technology_plan_start,tp.technology_plan_end
+    p.process_id,p.technology_plan_id,p.sequence,p.quota
     from process p
-    left join technology_plan tp on p.technology_plan_id=tp.technology_plan_id
     limit #{index},#{pageSize}
   </select>
 
+  <!--批删除-->
+  <delete id="batchDeleteByIds">
+    delete from process
+    <where>
+      process_id in
+      <foreach collection="ids" item="id" open="(" close=")" separator=",">
+        #{id}
+      </foreach>
+    </where>
+  </delete>
 
-  <!--select
-  o.order_id,o.order_date,o.request_date,o.note,o.quantity,o.unit_price,o.unit,o.image,o.file,o.status,
-  c.custom_id,c.custom_name,
-  p.product_id,p.product_name
-  from c_order o
-  left join custom c on o.custom_id=c.custom_id
-  left join product p on o.product_id=p.product_id
-  limit #{index},#{pageSize}-->
 
 </mapper>

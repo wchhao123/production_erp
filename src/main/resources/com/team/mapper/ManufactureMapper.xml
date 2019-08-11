@@ -226,4 +226,42 @@
       end_date = #{endDate,jdbcType=TIMESTAMP}
     where manufacture_sn = #{manufactureSn,jdbcType=VARCHAR}
   </update>
+
+  <resultMap id="conditionResultMap" type="com.team.bean.Manufacture">
+    <id column="manufacture_sn" jdbcType="VARCHAR" property="manufactureSn" />
+    <result column="launch_quantity" jdbcType="INTEGER" property="launchQuantity" />
+    <result column="begin_date" jdbcType="TIMESTAMP" property="beginDate" />
+    <result column="end_date" jdbcType="TIMESTAMP" property="endDate" />
+    <association property="cOrder" javaType="com.team.bean.COrder">
+      <id column="order_id" property="orderId" />
+    </association>
+    <association property="technology" javaType="com.team.bean.Technology">
+      <id column="technology_id" property="technologyId" />
+      <result column="technology_name" property="technologyName"/>
+    </association>
+  </resultMap>
+
+  <select id="selectManufactureByCondition" resultMap="conditionResultMap">
+    select
+        m.manufacture_sn,m.launch_quantity,m.begin_date,m.end_date,
+        o.order_id,
+        t.technology_id,t.technology_name
+    from manufacture m
+    left join c_order o on m.order_id=o.order_id
+    left join technology t on m.technology_id=t.technology_id
+    <where>
+      <choose>
+        <when test="flag == 0"/>
+        <when test="flag == 1">
+          m.manufacture_sn like #{searchValue}
+        </when>
+        <when test="flag == 2">
+          o.order_id like  #{searchValue}
+        </when>
+        <when test="flag == 3">
+          t.technology_name like  #{searchValue}
+        </when>
+      </choose>
+    </where>
+  </select>
 </mapper>
