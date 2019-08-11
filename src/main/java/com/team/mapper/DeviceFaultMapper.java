@@ -35,4 +35,5 @@ public interface DeviceFaultMapper {
 
     List<DeviceFault> findDeviceFaultList(int page,int rows);
 
+    List<DeviceFault> search_deviceFault_by_condition(@Param("flag")int flag, @Param("condition")String condition);
 }

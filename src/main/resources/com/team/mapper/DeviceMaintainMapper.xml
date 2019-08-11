@@ -2,6 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.mapper.DeviceMaintainMapper">
 
+    <select id="search_deviceMaintain_by_condition" resultMap="findDeviceMaintainListResultMap">
+        SELECT
+            device_maintain.device_maintain_id,
+            device_maintain.device_fault_id,
+            device_maintain.device_maintain_emp_id,
+            device_maintain.device_maintain_date,
+            device_maintain.device_maintain_result,
+            device_maintain.device_maintain_cost,
+            device_maintain.note,
+
+            employee.emp_name
+        FROM device_maintain
+        LEFT JOIN employee
+        ON device_maintain.device_maintain_emp_id = employee.emp_id
+        <where>
+            <choose>
+                <when test="flag == -1">
+
+                </when>
+                <when test="flag == 1">
+                    device_maintain.device_maintain_id LIKE #{condition}
+                </when>
+                <when test="flag == 2">
+                    device_maintain.device_fault_id LIKE  #{condition}
+                </when>
+            </choose>
+        </where>
+    </select>
+
     <resultMap id="findDeviceMaintainListResultMap" type="com.team.bean.DeviceMaintain">
         <id column="device_maintain_id" property="deviceMaintainId"></id>
         <result column="device_fault_id" property="deviceFaultId"></result>

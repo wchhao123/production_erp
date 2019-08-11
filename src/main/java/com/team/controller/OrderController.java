@@ -92,8 +92,8 @@ public class OrderController {
 
     @GetMapping("add_judge")
     @ResponseBody
-    public String insertJudge() {
-        return "";
+    public void insertJudge() {
+
     }
 
     @GetMapping("add")

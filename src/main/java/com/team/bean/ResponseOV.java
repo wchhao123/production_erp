@@ -31,4 +31,12 @@ public class ResponseOV<T> {
     public void setRows(List<T> rows) {
         this.rows = rows;
     }
+
+    @Override
+    public String toString() {
+        return "ResponseOV{" +
+                "total=" + total +
+                ", rows=" + rows +
+                '}';
+    }
 }

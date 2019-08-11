@@ -3,14 +3,14 @@ package com.team.controller;
 import com.team.bean.*;
 import com.team.service.IDeviceService;
 import com.team.service.IOrderService;
+import com.team.util.ControllerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class DeviceController {
@@ -28,54 +28,84 @@ public class DeviceController {
     public ResponseOV<Device> list(int page, int rows) {
         return deviceService.getPageDevice(page, rows);
     }
-
-    //2.设备种类
-    @GetMapping("device/deviceType")
-    public String find02() {
-        return "/WEB-INF/jsp/deviceType.jsp";
-    }
-
-    @RequestMapping("deviceType/list")
+    //1.1.设备台账新增
+    @GetMapping("deviceList/add_judge")
     @ResponseBody
-    public ResponseOV<DeviceType> list02(int page, int rows) {
-        return deviceService.getPageDeviceType(page, rows);
-    }
+    public void getJsp() {
 
-    //3.设备例检
-    @GetMapping("device/deviceCheck")
-    public String getDeviceCheckJsp(){
-        return "/WEB-INF/jsp/deviceCheck.jsp";
     }
-
-    @RequestMapping("deviceCheck/list")
+    @GetMapping("deviceList/add")
+    public String appPage() {
+        return "/WEB-INF/jsp/deviceList_add.jsp";
+    }
+    @PostMapping("deviceType/get_data")
     @ResponseBody
-    public ResponseOV<DeviceCheck> findDeviceCheckList(int page, int rows){
-        return deviceService.findDeviceCheckList(page,rows);
+    public List<DeviceType> getDeviceTypeList() {
+        return deviceService.getDeviceTypeList();
     }
-
-    //4.设备故障
-    @GetMapping("device/deviceFault")
-    public String getdeviceFaultJsp(){
-        return "/WEB-INF/jsp/deviceFault.jsp";
-    }
-
-    @RequestMapping("deviceFault/list")
+    /*@PostMapping("employee/get_data")
     @ResponseBody
-    public ResponseOV<DeviceFault> finddeviceFaultList(int page, int rows){
-        return deviceService.findDeviceFaultList(page,rows);
-    }
-
-    //5.设备维修
-    @GetMapping("device/deviceMaintain")
-    public String getDeviceMaintainJsp(){
-        return "/WEB-INF/jsp/deviceMaintain.jsp";
-    }
-
-    @RequestMapping("deviceMaintain/list")
+    public List<Employee> getEmployeeList() {
+        return deviceService.getEmployeeList();
+    }*/
+    @PostMapping("deviceList/insert")
     @ResponseBody
-    public ResponseOV<DeviceMaintain> findDeviceMaintainList(int page, int rows){
-        return deviceService.findDeviceMaintainList(page,rows);
+    public Map<String, String> insertDevice(Device device) {
+        boolean b = deviceService.insertDevice(device);
+        return ControllerUtil.returnMsg(b);
     }
+    //1.2.设备台账修改
+    @GetMapping("deviceList/edit_judge")
+    @ResponseBody
+    public void edit_judge() {
+
+    }
+    @GetMapping("deviceList/edit")
+    public String edit() {
+        return "/WEB-INF/jsp/deviceList_edit.jsp";
+    }
+    @PostMapping("deviceList/update")
+    @ResponseBody
+    public Map<String, String> update(Device device) {
+        boolean b = deviceService.update(device);
+        return ControllerUtil.returnMsg(b);
+    }
+    //1.3.设备台账删除
+    @GetMapping("deviceList/delete_judge")
+    @ResponseBody
+    public void delete_judge() {
+
+    }
+    @PostMapping("deviceList/delete_batch")
+    @ResponseBody
+    public Map<String, String> delete_batch(String ids) {
+        boolean b = deviceService.delete_batch(ids);
+        return ControllerUtil.returnMsg(b);
+    }
+    //1.4.设备台账模糊查询
+    // deviceList/search_device_by_deviceName?searchValue=叉&page=1&rows=30
+    @RequestMapping(value = {"deviceList/search_device_by_deviceId",
+                                "deviceList/search_device_by_deviceName",
+                                "deviceList/search_device_by_deviceTypeName"})
+    @ResponseBody
+    public ResponseOV<Device> search_device_by_condition(HttpServletRequest request,
+                                                         String searchValue,
+                                                         int page,
+                                                         int rows) {
+        int flag;
+        if (request.getRequestURI().endsWith("search_device_by_deviceId")) {
+            flag = 1;
+        } else if (request.getRequestURI().endsWith("search_device_by_deviceName")) {
+            flag= 2;
+        } else if (request.getRequestURI().endsWith("search_device_by_deviceTypeName")) {
+            flag = 3;
+        } else {
+            flag = -1;
+        }
+        return deviceService.search_device_by_condition(flag,"%"+searchValue+"%", page, rows);
+    }
+
+
 
     @GetMapping("deviceList/get/{id}")
     @ResponseBody

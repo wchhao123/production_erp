@@ -25,6 +25,33 @@
         LEFT JOIN device
         ON device_fault.device_id = device.device_id
     </select>
+    <select id="search_deviceFault_by_condition" resultMap="findDeviceFaultListResultMap">
+        SELECT
+            device_fault.device_fault_id,
+            device_fault.device_id,
+            device_fault.device_fault_cause,
+            device_fault.device_fault_detail,
+            device_fault.device_fault_date,
+            device_fault.device_fault_maintenance,
+
+            device.device_name
+        FROM device_fault
+        LEFT JOIN device
+        ON device_fault.device_id = device.device_id
+        <where>
+            <choose>
+                <when test="flag == -1">
+
+                </when>
+                <when test="flag == 1">
+                    device_fault.device_fault_id LIKE #{condition}
+                </when>
+                <when test="flag == 2">
+                    device.device_name LIKE  #{condition}
+                </when>
+            </choose>
+        </where>
+    </select>
 
     <resultMap id="BaseResultMap" type="com.team.bean.DeviceFault">
     <id column="device_fault_id" jdbcType="VARCHAR" property="deviceFaultId" />

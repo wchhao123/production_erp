@@ -116,6 +116,43 @@
             ON t.device_type_id = d.device_type_id
         LIMIT #{index},#{pageSize}
     </select>
+    <select id="search_device_by_condition" resultMap="devicePageResultMap">
+      SELECT
+          d.device_id,
+          d.device_name,
+          t.device_type_id,
+          t.device_type_name,
+          d.device_status_id,
+          d.device_status,
+          d.device_purchase_date,
+          d.device_purchase_price,
+          d.device_manufacture_date,
+          d.device_service_life,
+          e.emp_id,
+          e.emp_name,
+          d.note
+        FROM device d
+          LEFT JOIN employee e
+            ON d.device_keeper_id = e.emp_id
+          LEFT JOIN  device_type t
+            ON t.device_type_id = d.device_type_id
+        <where>
+            <choose>
+                <when test="flag == -1">
+
+                </when>
+                <when test="flag == 1">
+                    d.device_id LIKE #{condition}
+                </when>
+                <when test="flag == 2">
+                    d.device_name LIKE  #{condition}
+                </when>
+                <when test="flag == 3">
+                    t.device_type_name LIKE  #{condition}
+                </when>
+            </choose>
+        </where>
+    </select>
 
   <select id="selectByExample" parameterType="com.team.bean.DeviceExample" resultMap="BaseResultMap">
     select

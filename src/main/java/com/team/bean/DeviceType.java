@@ -3,6 +3,21 @@ package com.team.bean;
 import java.util.Date;
 
 public class DeviceType {
+    @Override
+    public String toString() {
+        return "DeviceType{" +
+                "deviceTypeId='" + deviceTypeId + '\'' +
+                ", deviceTypeName='" + deviceTypeName + '\'' +
+                ", deviceTypeModel='" + deviceTypeModel + '\'' +
+                ", deviceTypeSpec='" + deviceTypeSpec + '\'' +
+                ", deviceTypeSupplier='" + deviceTypeSupplier + '\'' +
+                ", deviceTypeProducer='" + deviceTypeProducer + '\'' +
+                ", deviceTypeQuantity=" + deviceTypeQuantity +
+                ", deviceTypeWarranty=" + deviceTypeWarranty +
+                ", deviceTypeIdd=" + deviceTypeIdd +
+                '}';
+    }
+
     private String deviceTypeId;
 
     private String deviceTypeName;
