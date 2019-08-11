@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -77,5 +78,18 @@ public class MaterialReceiveController {
     public Map<String , String> updateAll(MaterialReceive material){
         boolean b = materialReceiveService.updateByPrimaryKeySelective(material);
         return ControllerUtil.returnMsg(b);
+    }
+
+    //查询
+    @RequestMapping(value = {"materialReceive/search_materialReceive_by_receiveId" , "materialReceive/search_materialReceive_by_materialId"})
+    @ResponseBody
+    public ResponseOV<MaterialReceive> searchCondition(HttpServletRequest request , String searchValue , int page , int rows){
+        int flag;
+        if (request.getRequestURI().endsWith("materialReceive/search_materialReceive_by_receiveId")){
+            flag =1;
+        }else {
+            flag = 2;
+        }
+        return materialReceiveService.searchMaterialReceiveByCondition(flag , searchValue  ,page , rows);
     }
 }

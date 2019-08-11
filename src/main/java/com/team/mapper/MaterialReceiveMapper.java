@@ -31,5 +31,5 @@ public interface MaterialReceiveMapper {
 
     List<MaterialReceive> queryMaterialReceive();
 
-
+    List<MaterialReceive> searchMaterialByCondition(@Param("flag")int flag , @Param("searchValue") String searchValue);
 }
