@@ -151,6 +151,8 @@
 																		"<font color='red'> 您没有授权！</font>");
 														rcode_flag = 1;
 														$("#randiv").show();
+													} else if (data.msg == "error") {
+														alert(data.error);
 													} else {
 														location.href = "${baseurl}home";
 													}
