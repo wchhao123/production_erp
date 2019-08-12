@@ -53,9 +53,15 @@ public class DeviceServiceImpl implements IDeviceService {
 
 
     @Override
-    public boolean delete_batch(String ids) {
-        int i = deviceMapper.deleteByPrimaryKey(ids);
-        return i==1;
+    public boolean delete_batch(String[] ids) {
+        boolean flag=true;
+        for (String id : ids) {
+            if (deviceMapper.deleteByPrimaryKey(id)!=1) {
+                flag=false;
+                break;
+            }
+        }
+        return flag;
     }
 
     @Override
@@ -73,12 +79,13 @@ public class DeviceServiceImpl implements IDeviceService {
     }
 
     @Override
+    public Device getDeviceById(String id) {
+        return deviceMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public List<Device> getDevice() {
         return deviceMapper.selectByExample(null);
     }
 
-    @Override
-    public Device getDeviceById(String id) {
-        return deviceMapper.selectByPrimaryKey(id);
-    }
 }

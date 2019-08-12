@@ -41,8 +41,15 @@ public class DeviceServiceImpl02 implements IDeviceService02 {
 
     //2.3 删
     @Override
-    public boolean delete_batch(String ids) {
-        return deviceTypeMapper.deleteByPrimaryKey(ids)==1;
+    public boolean delete_batch(String[] ids) {
+        boolean flag=true;
+        for (String id : ids) {
+            if (deviceTypeMapper.deleteByPrimaryKey(id)!=1) {
+                flag=false;
+                break;
+            }
+        }
+        return flag;
     }
 
     //2.4 模糊查询
@@ -57,6 +64,11 @@ public class DeviceServiceImpl02 implements IDeviceService02 {
         responseOV.setRows(deviceTypes);
         System.out.println(responseOV);
         return responseOV;
+    }
+
+    @Override
+    public DeviceType deviceType(String id) {
+        return deviceTypeMapper.selectByPrimaryKey(id);
     }
 
 }

@@ -1,16 +1,18 @@
 package com.team.controller;
 
+import com.team.bean.SysUser;
 import com.team.service.ISysUserService;
 import com.team.util.UserRoleUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,8 +35,20 @@ public class IndexController {
 
     @PostMapping("ajaxLogin")
     @ResponseBody
-    public Map<String, String> login(String username, String password, String randomcode) {
+    public Map<String, String> login(@Validated SysUser user,BindingResult bindingResult,
+                                     String randomcode ) {
+
         Map<String, String> map = new HashMap<>();
+
+        //数据校验
+        if (bindingResult.hasErrors()) {
+            FieldError fieldError = bindingResult.getFieldError();
+            String defaultMessage = fieldError.getDefaultMessage();
+            map.put("msg", "error");
+            map.put("error", defaultMessage);
+            return map;
+        }
+
         //验证码
         if (randomcode!= null) {
             String validateCode = (String)session.getAttribute("validateCode");
@@ -47,7 +61,7 @@ public class IndexController {
         Map<String, String> role = new HashMap<>();
         List<String> author = new ArrayList<>();
         //用户验证
-        int lock = userService.sysUserLogin(username, password);
+        int lock = userService.sysUserLogin(user.getUsername(), user.getPassword());
         switch (lock) {
             case -2:
                 map.put("msg", "account_error");
@@ -60,7 +74,7 @@ public class IndexController {
                 break;
             default:
                 map.put("msg", "success");
-                role.put("username", username);
+                role.put("username", user.getUsername());
                 UserRoleUtil.getAuthor(lock, role, author);
                 session.setAttribute("activeUser", role);
                 session.setAttribute("sysPermissionList", author);

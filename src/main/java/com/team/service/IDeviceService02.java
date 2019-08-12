@@ -11,7 +11,9 @@ public interface IDeviceService02 {
 
     boolean deviceTypeEdit(DeviceType deviceType);
 
-    boolean delete_batch(String ids);
+    boolean delete_batch(String[] ids);
 
     ResponseOV<DeviceType> search_deviceType_by_condition(int flag, String condition, int page, int rows);
+
+    DeviceType deviceType(String id);
 }

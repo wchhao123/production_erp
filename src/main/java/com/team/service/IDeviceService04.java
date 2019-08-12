@@ -13,9 +13,11 @@ public interface IDeviceService04 {
 
     boolean deviceFaultEdit(DeviceFault deviceFault);
 
-    boolean delete_batch(String ids);
+    boolean delete_batch(String[] ids);
 
     ResponseOV<DeviceFault> search_deviceFault_by_condition(int flag, String condition, int page, int rows);
 
     List<Device> getDeviceList();
+
+    DeviceFault deviceFault(String id);
 }
