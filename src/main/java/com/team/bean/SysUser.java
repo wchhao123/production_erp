@@ -1,10 +1,15 @@
 package com.team.bean;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class SysUser {
     private String id;
 
+    @NotNull(message = "{user.username.notnull}")
     private String username;
 
+    @Size(min = 2,max = 5,message = "{user.password.size}")
     private String password;
 
     private String locked;

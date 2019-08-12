@@ -56,11 +56,11 @@ public class FileController {
         return "redirect:" + fileName;
     }
 
-    @RequestMapping("pic/upload")
+    /*@RequestMapping("pic/upload")
     @ResponseBody
-    public Map<String, String> uploadImg(MultipartFile[] imgs) {
+    public Map<String, String> uploadImg(MultipartFile[] uploadFile) {
         Map<String, String> map = new HashMap<>();
-        for (MultipartFile img : imgs) {
+        for (MultipartFile img : uploadFile) {
             //File file = new File(context.getRealPath("/WEB-INF/upload" + img.getOriginalFilename()));
             String path = context.getRealPath("/WEB-INF/upload/" + img.getOriginalFilename());
             try {
@@ -74,6 +74,6 @@ public class FileController {
         }
         map.put("error", "1");
         return map;
-    }
+    }*/
 
 }

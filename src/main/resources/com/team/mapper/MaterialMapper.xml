@@ -221,4 +221,19 @@
 <select id="getPageMaterial" resultMap="pageResultSet">
   select material_id,material_type,status,remaining,note from material limit #{page},#{rows}
 </select>
+  <!--模糊查询-->
+  <select id="searchMaterialByCondition" resultMap="pageResultSet">
+    select material_id,material_type,status,remaining,note from material
+    <where>
+    <choose>
+      <when test="flag == 1">
+      material_id like #{searchValue}
+      </when>
+      <when test="flag == 2">
+      material_type like #{searchValue}
+      </when>
+    </choose>
+    </where>
+  </select>
+
 </mapper>

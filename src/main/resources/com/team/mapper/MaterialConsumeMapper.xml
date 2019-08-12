@@ -281,4 +281,25 @@
     material_consume c left join material m on c.material_id = m.material_id
     left join work w on  c.work_id = w.work_id
   </select>
+
+  <select id="searchMaterialByCondition" resultMap="materialConsume">
+       select  c.consume_id   , c.work_id ,  c.material_id ,  c.consume_amount , c.consume_date , c.sender , c.receiver , c.note ,
+    m.material_id  , m.note,
+    w.work_id from
+    material_consume c left join material m on c.material_id = m.material_id
+    left join work w on  c.work_id = w.work_id
+    <where>
+      <choose>
+        <when test="flag == 1">
+          c.consume_id like #{searchValue}
+        </when>
+        <when test="flag ==2">
+          c.material_id like #{searchValue}
+        </when>
+        <when test="flag ==3">
+          w.work_id like #{searchValue}
+        </when>
+      </choose>
+    </where>
+  </select>
 </mapper>
