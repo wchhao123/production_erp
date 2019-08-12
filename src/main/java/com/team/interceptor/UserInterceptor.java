@@ -1,5 +1,6 @@
 package com.team.interceptor;
 
+import com.team.util.ResourceUtil;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,9 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
         String home = request.getContextPath() + "/home";
 
         if (activeUser == null) {
+            if (ResourceUtil.isStaticResource(uri)) {
+                return true;
+            }
             if (!uri.equals(loginPage) && !uri.equals(login)) {
                 response.sendRedirect(loginPage);
                 return false;

@@ -22,7 +22,14 @@ public class UserRoleUtil {
             qualifyMonitor(list);
         }else if (lock == 4){
             map.put("rolename" , "物料监控管理员");
-                    materialManager(list);
+            materialManager(list);
+        } else if (lock == 9) {
+            map.put("rolename", "超级管理员");
+            planManger(list);
+            processManager(list);
+            deviceManger(list);
+            qualifyMonitor(list);
+            materialManager(list);
         }
 
     }

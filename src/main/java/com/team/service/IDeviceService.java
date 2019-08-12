@@ -14,7 +14,7 @@ public interface IDeviceService {
 
     boolean update(Device device);
 
-    ResponseOV<DeviceMaintain> findDeviceMaintainList(int page, int rows);
+    //ResponseOV<DeviceMaintain> findDeviceMaintainList(int page, int rows);
 
     List<Device> getDevice();
 
