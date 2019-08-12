@@ -6,12 +6,17 @@ import com.team.bean.*;
 import com.team.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
 @Service
 public class DeviceServiceImpl03 implements IDeviceService03 {
 
+    @Autowired
+    private IDeviceService deviceService;
     //3.设备检修
     @Autowired
     private DeviceCheckMapper deviceCheckMapper;
@@ -54,4 +59,6 @@ public class DeviceServiceImpl03 implements IDeviceService03 {
         System.out.println(responseOV);
         return responseOV;
     }
+
+
 }

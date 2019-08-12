@@ -78,7 +78,7 @@ public class DeviceServiceImpl implements IDeviceService {
     }
 
     @Override
-    public Device getDeviceById(String id) {
-        return deviceMapper.selectByPrimaryKey(id);
+    public DeviceType getDeviceTypeById(String id) {
+        return deviceTypeMapper.selectByPrimaryKey(id);
     }
 }
