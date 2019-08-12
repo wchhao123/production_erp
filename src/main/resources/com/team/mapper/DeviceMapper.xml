@@ -106,7 +106,7 @@
           d.device_purchase_price,
           d.device_manufacture_date,
           d.device_service_life,
-          e.emp_id,
+          d.device_keeper_id,
           e.emp_name,
           d.note
         FROM device d
