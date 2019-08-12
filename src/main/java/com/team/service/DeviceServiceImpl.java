@@ -50,10 +50,7 @@ public class DeviceServiceImpl implements IDeviceService {
         return i==1;
     }
 
-    @Override
-    public ResponseOV<DeviceMaintain> findDeviceMaintainList(int page, int rows) {
-        return null;
-    }
+
 
     @Override
     public boolean delete_batch(String ids) {
