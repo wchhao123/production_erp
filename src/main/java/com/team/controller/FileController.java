@@ -19,7 +19,7 @@ public class FileController {
     @Autowired
     private ServletContext context;
 
-    @RequestMapping("file/upload")
+    @RequestMapping({"file/upload"})
     @ResponseBody
     public Map<String, String> uploadFile(MultipartFile file) {
         Map<String, String> map = new HashMap<>();
@@ -56,24 +56,21 @@ public class FileController {
         return "redirect:" + fileName;
     }
 
-    /*@RequestMapping("pic/upload")
-    @ResponseBody
-    public Map<String, String> uploadImg(MultipartFile[] uploadFile) {
-        Map<String, String> map = new HashMap<>();
-        for (MultipartFile img : uploadFile) {
-            //File file = new File(context.getRealPath("/WEB-INF/upload" + img.getOriginalFilename()));
-            String path = context.getRealPath("/WEB-INF/upload/" + img.getOriginalFilename());
-            try {
-                ControllerUtil.saveFile(img, path);
-                map.put("error", "0");
-                map.put("url", path);
-                return map;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    @RequestMapping("pic/upload")
+    public Map<String, String> uploadImg(MultipartFile uploadFile,String dir) {
+        //Map<String, String> map = new HashMap<>();
+        //File file = new File(context.getRealPath("/WEB-INF/upload" + img.getOriginalFilename()));
+        String path = "/pic/" + uploadFile.getOriginalFilename();
+        /*try {
+            ControllerUtil.saveFile(uploadFile, context.getRealPath("/WEB-INF/upload" + path));
+            map.put("error", "0");
+            map.put("url", path);
+            return map;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        map.put("error", "1");
-        return map;
-    }*/
+        map.put("error", "1");*/
+        return ControllerUtil.saveFile(uploadFile, context.getRealPath(""), path);
+    }
 
 }

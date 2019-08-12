@@ -19,6 +19,24 @@ public class ControllerUtil {
 
     }
 
+    public static Map<String,String> saveFile(MultipartFile file,String prefix, String relative) {
+        HashMap<String, String> map = new HashMap<>();
+        File newFile = new File(prefix + relative);
+        if (!newFile.getParentFile().exists()) {
+            newFile.getParentFile().mkdirs();
+        }
+        try {
+            file.transferTo(newFile);
+            map.put("error", "0");
+            map.put("url", relative);
+            return map;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        map.put("error", "1");
+        return map;
+    }
+
     //更新、删除、新增结果返回值
     public static Map<String, String> returnMsg(boolean b) {
         Map<String,String> map = new HashMap<>();
