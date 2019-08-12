@@ -10,6 +10,7 @@
     <result column="commit_plan" jdbcType="TIMESTAMP" property="commitPlan" />
     <result column="technology_plan_start" jdbcType="TIMESTAMP" property="technologyPlanStart" />
     <result column="technology_plan_end" jdbcType="TIMESTAMP" property="technologyPlanEnd" />
+    <result column="technology_name" jdbcType="VARCHAR" property="technologyName"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,8 +71,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    technology_plan_id, technology_id, batch_amount, start_plan, end_plan, commit_plan, 
-    technology_plan_start, technology_plan_end
+    tp.technology_plan_id, tp.technology_id, tp.batch_amount, tp.start_plan, tp.end_plan, tp.commit_plan,
+    tp.technology_plan_start, tp.technology_plan_end,
+    t.technology_name
   </sql>
   <select id="selectByExample" parameterType="com.team.bean.TechnologyPlanExample" resultMap="BaseResultMap">
     select
@@ -80,7 +82,8 @@
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from technology_plan
+    from technology_plan tp
+    left join technology t on tp.technology_id=t.technology_id
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -260,7 +263,7 @@
     where technology_plan_id = #{technologyPlanId,jdbcType=VARCHAR}
   </update>
 
-  <!--<select id="getPageTechnologyPlan" resultType="com.team.bean.TechnologyPlan">-->
+
   <resultMap id="BaseResultMap1" type="com.team.bean.TechnologyPlan">
     <result column="technology_plan_id" jdbcType="VARCHAR" property="technologyPlanId" />
     <result column="technology_id" jdbcType="VARCHAR" property="technologyId" />
@@ -275,9 +278,9 @@
   <select id="getPageTechnologyPlan" resultMap="BaseResultMap1">
     select
     tp.technology_plan_id,tp.technology_id,tp.batch_amount,tp.start_plan,tp.end_plan,tp.commit_plan,tp.technology_plan_start,tp.technology_plan_end,
-    t.technology_name,t.technology_id
+    t.technology_name
     from technology_plan tp
-    left join technology t on tp.technology_plan_id=t.technology_id
+    left join technology t on tp.technology_id=t.technology_id
     limit #{index},#{pageSize}
   </select>
 
@@ -313,5 +316,16 @@
     tp.technology_plan_id,tp.technology_id,tp.batch_amount,tp.start_plan,tp.end_plan,tp.commit_plan,tp.technology_plan_start,tp.technology_plan_end
     from technology_plan tp
   </select>
+
+  <!--批删除-->
+  <delete id="batchDeleteByIds">
+    delete from technology_plan
+    <where>
+      technology_plan_id in
+      <foreach collection="ids" item="id" open="(" close=")" separator=",">
+        #{id}
+      </foreach>
+    </where>
+  </delete>
 
 </mapper>

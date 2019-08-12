@@ -274,4 +274,15 @@
       overfulfil_capacity = #{overfulfilCapacity,jdbcType=INTEGER}
     where technology_id = #{technologyId,jdbcType=VARCHAR}
   </update>
+
+  <!--批删除-->
+  <delete id="batchDeleteByIds">
+    delete from technology
+    <where>
+      technology_id in
+      <foreach collection="ids" item="id" open="(" close=")" separator=",">
+        #{id}
+      </foreach>
+    </where>
+  </delete>
 </mapper>

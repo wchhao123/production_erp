@@ -28,4 +28,5 @@ public interface TechnologyMapper {
 
     int updateByPrimaryKey(Technology record);
 
+    int batchDeleteByIds(@Param("ids") String[] ids);
 }

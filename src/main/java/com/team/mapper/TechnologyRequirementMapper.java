@@ -29,4 +29,8 @@ public interface TechnologyRequirementMapper {
     int updateByPrimaryKey(TechnologyRequirement record);
 
     List<TechnologyRequirement> mixTechnologyRequirement();
+
+    int batchDeleteByIds(@Param("ids") String[] ids);
+
+    List<TechnologyRequirement> selectByUpdate(Object o);
 }

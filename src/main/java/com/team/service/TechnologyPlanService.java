@@ -12,4 +12,14 @@ public interface TechnologyPlanService {
     TechnologyPlan getTechnologyPlanById(String id);
 
     List<TechnologyPlan> getTechnologyPlans();
+
+    boolean insertTechnologyPlan(TechnologyPlan technologyPlan);
+
+    boolean deleteByIds(String[] ids);
+
+    boolean updateTechnologyPlan(TechnologyPlan technologyPlan);
+
+    boolean updateTechnologyPlanNoteById(String technologyPlanId, String note);
+
+    ResponseOV<TechnologyPlan> searchTechnologyPlanByCondition(int flag, String searchValue, int page, int rows);
 }

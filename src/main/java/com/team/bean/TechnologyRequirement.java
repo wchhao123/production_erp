@@ -16,6 +16,7 @@ public class TechnologyRequirement {
     private Technology technology;
 
     private String technologyName;
+    private String note;
 
     public String getTechnologyName() {
         return technologyName;
@@ -71,5 +72,13 @@ public class TechnologyRequirement {
 
     public void setReviseTime(Date reviseTime) {
         this.reviseTime = reviseTime;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getNote() {
+        return note;
     }
 }

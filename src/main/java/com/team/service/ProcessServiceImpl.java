@@ -73,7 +73,6 @@ public class ProcessServiceImpl implements ProcessService {
         }
         List<Process> processes = processMapper.selectByExample(process);
         PageInfo<Process> info = new PageInfo<>(processes);
-
         ResponseOV<Process> ov = new ResponseOV<>();
         ov.setRows(processes);
         ov.setTotal((int) info.getTotal());
