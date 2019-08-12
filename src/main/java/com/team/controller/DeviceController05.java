@@ -17,13 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
-
+//设备维修deviceMaintain
 @Controller
 public class DeviceController05 {
     @Autowired
     private IDeviceService05 deviceService05;
 
-    //3.设备例检
     @GetMapping("device/deviceMaintain")
     public String getDeviceMaintainJsp(){
         return "/WEB-INF/jsp/deviceMaintain.jsp";
@@ -34,8 +33,7 @@ public class DeviceController05 {
     public ResponseOV<DeviceMaintain> findDeviceMaintainList(int page, int rows){
         return deviceService05.findDeviceMaintainList(page,rows);
     }
-    //3.1 增
-    //2.1 设备种类新增
+    //5.1 增
 
     @GetMapping("deviceMaintain/add_judge")
     @ResponseBody
@@ -47,7 +45,6 @@ public class DeviceController05 {
         return "/WEB-INF/jsp/deviceMaintain_add.jsp";
     }
 
-//    deviceFault/get_data（deviceFault/get_data、、、、employee/get_data）
     @PostMapping("deviceFault/get_data")
     @ResponseBody
     public List<DeviceFault> getdeviceFault() {
@@ -60,7 +57,7 @@ public class DeviceController05 {
         boolean b = deviceService05.deviceMaintainInsert(deviceMaintain);
         return ControllerUtil.returnMsg(b);
     }
-    //2.2 设备种类修改
+    //5.2 改
     @GetMapping("deviceMaintain/edit_judge")
     @ResponseBody
     public void edit_judge() {
@@ -77,7 +74,7 @@ public class DeviceController05 {
         boolean b = deviceService05.deviceMaintainEdit(deviceMaintain);
         return ControllerUtil.returnMsg(b);
     }
-    //2.3 设备种类删除
+    //5.3 删
     @GetMapping("deviceMaintain/delete_judge")
     @ResponseBody
     public void delete_judge() {
@@ -85,11 +82,11 @@ public class DeviceController05 {
     }
     @PostMapping("deviceMaintain/delete_batch")
     @ResponseBody
-    public Map<String, String> delete_batch(String ids) {
+    public Map<String, String> delete_batch(String[] ids) {
         boolean b = deviceService05.delete_batch(ids);
         return ControllerUtil.returnMsg(b);
     }
-    //2.4 模糊查询
+    //5.4 模糊查询
     @RequestMapping(value = {"deviceMaintain/search_deviceMaintain_by_deviceMaintainId",
             "deviceMaintain/search_deviceMaintain_by_deviceFaultId"})
     @ResponseBody

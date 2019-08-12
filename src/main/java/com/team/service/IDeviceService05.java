@@ -14,7 +14,7 @@ public interface IDeviceService05 {
 
     boolean deviceMaintainEdit(DeviceMaintain deviceMaintain);
 
-    boolean delete_batch(String ids);
+    boolean delete_batch(String[] ids);
 
     ResponseOV<DeviceMaintain> search_deviceMaintain_by_condition(int flag, String condition, int page, int rows);
 

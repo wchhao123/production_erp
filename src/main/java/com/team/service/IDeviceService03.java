@@ -11,7 +11,7 @@ public interface IDeviceService03 {
 
     boolean deviceCheckEdit(DeviceCheck deviceCheck);
 
-    boolean delete_batch(String ids);
+    boolean delete_batch(String[] ids);
 
     ResponseOV<DeviceCheck> search_deviceCheck_by_condition(int flag, String condition, int page, int rows);
 }

@@ -38,8 +38,15 @@ public class DeviceServiceImpl03 implements IDeviceService03 {
     }
 
     @Override
-    public boolean delete_batch(String ids) {
-        return deviceCheckMapper.deleteByPrimaryKey(ids)==1;
+    public boolean delete_batch(String[] ids) {
+        boolean flag=true;
+        for (String id : ids) {
+            if (deviceCheckMapper.deleteByPrimaryKey(id)!=1) {
+                flag=false;
+                break;
+            }
+        }
+        return flag;
     }
 
     @Override

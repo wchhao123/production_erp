@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
-
+//1.设备台账deviceList
 @Controller
 public class DeviceController {
     @Autowired
     private IDeviceService deviceService;
 
-    //1.设备台账
     @GetMapping("device/deviceList")
     public String find() {
         return "/WEB-INF/jsp/deviceList.jsp";
@@ -28,7 +27,7 @@ public class DeviceController {
     public ResponseOV<Device> list(int page, int rows) {
         return deviceService.getPageDevice(page, rows);
     }
-    //1.1.设备台账新增
+    //1.1.增
     @GetMapping("deviceList/add_judge")
     @ResponseBody
     public void getJsp() {
@@ -43,18 +42,14 @@ public class DeviceController {
     public List<DeviceType> getDeviceTypeList() {
         return deviceService.getDeviceTypeList();
     }
-    /*@PostMapping("employee/get_data")
-    @ResponseBody
-    public List<Employee> getEmployeeList() {
-        return deviceService.getEmployeeList();
-    }*/
+
     @PostMapping("deviceList/insert")
     @ResponseBody
     public Map<String, String> insertDevice(Device device) {
         boolean b = deviceService.insertDevice(device);
         return ControllerUtil.returnMsg(b);
     }
-    //1.2.设备台账修改
+    //1.2.改
     @GetMapping("deviceList/edit_judge")
     @ResponseBody
     public void edit_judge() {
@@ -70,7 +65,7 @@ public class DeviceController {
         boolean b = deviceService.update(device);
         return ControllerUtil.returnMsg(b);
     }
-    //1.3.设备台账删除
+    //1.3.删除
     @GetMapping("deviceList/delete_judge")
     @ResponseBody
     public void delete_judge() {
@@ -78,12 +73,11 @@ public class DeviceController {
     }
     @PostMapping("deviceList/delete_batch")
     @ResponseBody
-    public Map<String, String> delete_batch(String ids) {
+    public Map<String, String> delete_batch(String[] ids) {
         boolean b = deviceService.delete_batch(ids);
         return ControllerUtil.returnMsg(b);
     }
     //1.4.设备台账模糊查询
-    // deviceList/search_device_by_deviceName?searchValue=叉&page=1&rows=30
     @RequestMapping(value = {"deviceList/search_device_by_deviceId",
                                 "deviceList/search_device_by_deviceName",
                                 "deviceList/search_device_by_deviceTypeName"})
