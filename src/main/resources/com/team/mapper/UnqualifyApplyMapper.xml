@@ -315,7 +315,7 @@
       <choose>
         <when test="flag == 0"/>
         <when test="flag == 1">
-          unqualify_apply_id = #{searchValue}
+          unqualify_apply_id like #{searchValue}
         </when>
         <when test="flag == 2">
           product_name like  #{searchValue}
