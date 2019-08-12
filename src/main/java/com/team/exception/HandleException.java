@@ -17,7 +17,7 @@ public class HandleException implements HandlerExceptionResolver {
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object o, Exception e) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/error.jsp");
-        logger.error(e.getMessage());
+        modelAndView.addObject("message", e.getMessage());
         return modelAndView;
     }
 }
