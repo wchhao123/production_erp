@@ -98,6 +98,17 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+
+  <delete id="batchDeleteByIds">
+    delete from department
+    <where>
+      department_id in
+      <foreach collection="ids" item="id" open="(" close=")" separator=",">
+        #{id}
+      </foreach>
+    </where>
+  </delete>
+
   <insert id="insert" parameterType="com.team.bean.Department">
     insert into department (department_id, department_name, note
       )
@@ -179,4 +190,6 @@
       note = #{note,jdbcType=VARCHAR}
     where department_id = #{departmentId,jdbcType=VARCHAR}
   </update>
+
+
 </mapper>
