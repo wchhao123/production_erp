@@ -32,4 +32,6 @@ public interface EmployeeMapper {
     int updateByPrimaryKey(Employee record);
 
     Employee getEmployeeById(@Param("empId") String id);
+
+    List<Employee>queryEmployee();
 }
