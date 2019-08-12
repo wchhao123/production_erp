@@ -57,19 +57,20 @@ public class FileController {
     }
 
     @RequestMapping("pic/upload")
+    @ResponseBody
     public Map<String, String> uploadImg(MultipartFile uploadFile,String dir) {
-        //Map<String, String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         //File file = new File(context.getRealPath("/WEB-INF/upload" + img.getOriginalFilename()));
         String path = "/pic/" + uploadFile.getOriginalFilename();
-        /*try {
+        try {
             ControllerUtil.saveFile(uploadFile, context.getRealPath("/WEB-INF/upload" + path));
-            map.put("error", "0");
+            //map.put("error", "0");
             map.put("url", path);
             return map;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        map.put("error", "1");*/
+        map.put("error", "1");
         return ControllerUtil.saveFile(uploadFile, context.getRealPath(""), path);
     }
 
