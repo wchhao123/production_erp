@@ -3,11 +3,13 @@ package com.team.controller;
 import com.team.util.ControllerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -23,11 +25,11 @@ public class FileController {
     @ResponseBody
     public Map<String, String> uploadFile(MultipartFile file) {
         Map<String, String> map = new HashMap<>();
-        String fileRelativePath = "/file/" + file.getOriginalFilename();
+        String relativePath = "/file/" + file.getOriginalFilename();
         try {
-            ControllerUtil.saveFile(file, context.getRealPath("/WEB-INF/upload" + fileRelativePath));
+            ControllerUtil.saveFile(file, context.getRealPath("/WEB-INF/upload" + relativePath));
             map.put("error", "0");
-            map.put("url", fileRelativePath);
+            map.put("url", relativePath);
             return map;
         } catch (IOException e) {
             e.printStackTrace();
@@ -56,21 +58,20 @@ public class FileController {
         return "redirect:" + fileName;
     }
 
-    @RequestMapping("pic/upload")
-    public Map<String, String> uploadImg(MultipartFile uploadFile,String dir) {
-        //Map<String, String> map = new HashMap<>();
-        //File file = new File(context.getRealPath("/WEB-INF/upload" + img.getOriginalFilename()));
+    @PostMapping(value = "pic/upload" )
+    @ResponseBody
+    public Map<String, Object>  uploadImg( MultipartFile uploadFile, String dir ) {
+        Map<String, Object> map = new HashMap<>();
         String path = "/pic/" + uploadFile.getOriginalFilename();
-        /*try {
+       try {
             ControllerUtil.saveFile(uploadFile, context.getRealPath("/WEB-INF/upload" + path));
-            map.put("error", "0");
+            map.put("error", 0);
             map.put("url", path);
-            return map;
+           return map;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        map.put("error", "1");*/
-        return ControllerUtil.saveFile(uploadFile, context.getRealPath(""), path);
+        map.put("error", 1);
+         return map;
     }
-
 }
