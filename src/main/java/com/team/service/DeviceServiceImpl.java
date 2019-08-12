@@ -79,12 +79,13 @@ public class DeviceServiceImpl implements IDeviceService {
     }
 
     @Override
+    public Device getDeviceById(String id) {
+        return deviceMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public List<Device> getDevice() {
         return deviceMapper.selectByExample(null);
     }
 
-    @Override
-    public DeviceType getDeviceTypeById(String id) {
-        return deviceTypeMapper.selectByPrimaryKey(id);
-    }
 }

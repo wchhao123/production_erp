@@ -101,10 +101,10 @@ public class DeviceController {
 
 
 
-    @GetMapping("deviceType/get/{id}")
+    @GetMapping("deviceList/get/{id}")
     @ResponseBody
-    public DeviceType getDeviceById(@PathVariable("id") String id) {
-        return deviceService.getDeviceTypeById(id);
+    public Device getDeviceById(@PathVariable("id") String id) {
+        return deviceService.getDeviceById(id);
     }
 
     @GetMapping("deviceList/get_data")
