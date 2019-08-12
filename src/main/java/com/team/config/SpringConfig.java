@@ -1,6 +1,7 @@
 package com.team.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInterceptor;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.plugin.Interceptor;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.sql.SQLException;
 import java.util.Properties;
 
 @Configuration
@@ -33,7 +35,7 @@ public class SpringConfig {
 
     //数据源
     @Bean
-    public DataSource dataSource() throws IOException {
+    public DataSource dataSource() throws IOException, SQLException {
         InputStream in = Resources.getResourceAsStream("db.properties");
         Properties properties = new Properties();
         properties.load(in);
@@ -46,6 +48,7 @@ public class SpringConfig {
         dataSource.setUrl(properties.getProperty("db.url"));
         dataSource.setUsername(properties.getProperty("db.username"));
         dataSource.setPassword(properties.getProperty("db.password"));
+        dataSource.setFilters("stat");//druid监控
         return dataSource;
     }
 

@@ -29,4 +29,7 @@ public interface DepartmentMapper {
     int updateByPrimaryKeySelective(Department record);
 
     int updateByPrimaryKey(Department record);
+
+    int batchDeleteByIds(@Param("ids") String[] ids);
+
 }
