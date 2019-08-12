@@ -45,6 +45,18 @@ public class MaterialReceiveServiceImpl implements MaterialReceiveService {
         return update ==1;
     }
 
+    @Override
+    public ResponseOV<MaterialReceive> searchMaterialReceiveByCondition(int flag, String searchValue, int page, int rows) {
+        PageHelper.startPage(page , rows);
+        List<MaterialReceive> materialReceives = materialReceiveMapper.searchMaterialByCondition(flag, "%"+searchValue+"%");
+        PageInfo<MaterialReceive> info = new PageInfo<>(materialReceives);
+        ResponseOV<MaterialReceive> ov = new ResponseOV<>();
+        ov.setRows(materialReceives);
+        ov.setTotal((int) info.getTotal());
+        return ov;
+
+    }
+
 
 }
 

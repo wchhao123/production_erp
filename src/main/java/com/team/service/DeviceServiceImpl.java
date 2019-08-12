@@ -50,6 +50,8 @@ public class DeviceServiceImpl implements IDeviceService {
         return i==1;
     }
 
+
+
     @Override
     public boolean delete_batch(String ids) {
         int i = deviceMapper.deleteByPrimaryKey(ids);
@@ -76,7 +78,7 @@ public class DeviceServiceImpl implements IDeviceService {
     }
 
     @Override
-    public Device getDeviceById(String id) {
-        return deviceMapper.selectByPrimaryKey(id);
+    public DeviceType getDeviceTypeById(String id) {
+        return deviceTypeMapper.selectByPrimaryKey(id);
     }
 }

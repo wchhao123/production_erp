@@ -2,21 +2,23 @@ package com.team.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.team.bean.Device;
-import com.team.bean.DeviceFault;
-import com.team.bean.DeviceMaintain;
-import com.team.bean.ResponseOV;
+import com.team.bean.*;
 import com.team.mapper.DeviceFaultMapper;
 import com.team.mapper.DeviceMaintainMapper;
 import com.team.mapper.DeviceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
 @Service
 public class DeviceServiceImpl05 implements IDeviceService05 {
 
+    @Autowired
+    private IDeviceService deviceService;
     //3.设备检修
     @Autowired
     private DeviceMaintainMapper deviceMaintainMapper;
@@ -65,4 +67,5 @@ public class DeviceServiceImpl05 implements IDeviceService05 {
     public List<DeviceFault> getdeviceFault() {
         return deviceFaultMapper.selectByExample(null);
     }
+
 }

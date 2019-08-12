@@ -29,4 +29,6 @@ public interface MaterialMapper {
     int updateByPrimaryKey(Material record);
 
     List<Material> getPageMaterial(@Param("page") int page, @Param("rows") int rows);
+
+    List<Material> searchMaterialByCondition(@Param("flag")int flag , @Param("searchValue")String searchValue);
 }

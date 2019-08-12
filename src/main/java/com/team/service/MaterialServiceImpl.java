@@ -1,6 +1,7 @@
 package com.team.service;
 
-import com.team.bean.COrder;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.team.bean.Material;
 import com.team.bean.MaterialExample;
 import com.team.bean.ResponseOV;
@@ -57,5 +58,16 @@ public class MaterialServiceImpl implements  MaterialService {
     public boolean updateByPrimaryKey(Material record) {
         int update = materialMapper.updateByPrimaryKey(record);
         return update == 1;
+    }
+
+    @Override
+    public ResponseOV<Material> searchMaterialByCondition(int flag, String searchValue, int page, int rows) {
+        PageHelper.startPage(page , rows);
+        List<Material> materials = materialMapper.searchMaterialByCondition(flag, "%"+searchValue+"%");
+        PageInfo<Material> info = new PageInfo<>(materials);
+        ResponseOV<Material> ov = new ResponseOV<>();
+        ov.setRows(materials);
+        ov.setTotal((int) info.getTotal());
+        return ov;
     }
 }

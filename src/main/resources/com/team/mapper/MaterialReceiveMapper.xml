@@ -261,4 +261,22 @@ m.material_id  , m.note
 from
 material_receive c left join material m on c.material_id = m.material_id
   </select>
+
+  <!--模糊查询-->
+  <select id="searchMaterialByCondition" resultMap="MaterialResult">
+    select c.receive_id   ,c.material_id ,  c.amount , c.receive_date , c.sender , c.receiver , c.note ,
+m.material_id  , m.note
+from
+material_receive c left join material m on c.material_id = m.material_id
+<where>
+  <choose>
+    <when test="flag == 1">
+      c.receive_id like #{searchValue}
+    </when>
+    <when test="flag == 2">
+      c.material_id like #{searchValue}
+    </when>
+  </choose>
+</where>
+  </select>
 </mapper>

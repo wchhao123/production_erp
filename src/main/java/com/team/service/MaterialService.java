@@ -1,6 +1,5 @@
 package com.team.service;
 
-import com.team.bean.COrder;
 import com.team.bean.Material;
 import com.team.bean.MaterialExample;
 import com.team.bean.ResponseOV;
@@ -21,4 +20,8 @@ public interface MaterialService {
     boolean deleteByPrimaryKey(String materialId);
 
     boolean updateByPrimaryKey(Material record);
+
+    ResponseOV<Material> searchMaterialByCondition(int flag, String searchValue, int page, int rows);
+
+
 }

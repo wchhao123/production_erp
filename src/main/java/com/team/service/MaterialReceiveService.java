@@ -15,5 +15,5 @@ public interface MaterialReceiveService {
     boolean deleteByPrimaryKey(String receiveId);
     boolean insert(MaterialReceive record);
     boolean updateByPrimaryKeySelective(MaterialReceive record);
-
+    ResponseOV<MaterialReceive> searchMaterialReceiveByCondition(int flag, String searchValue, int page, int rows);
 }

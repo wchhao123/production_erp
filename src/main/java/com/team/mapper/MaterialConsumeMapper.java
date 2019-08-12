@@ -29,4 +29,6 @@ public interface MaterialConsumeMapper {
     int updateByPrimaryKey(MaterialConsume record);
 
     List<MaterialConsume>queryMaterialConsume();
+
+    List<MaterialConsume> searchMaterialByCondition(@Param("flag")int flag , @Param("searchValue") String searchValue);
 }

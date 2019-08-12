@@ -8,11 +8,13 @@ import com.team.service.MaterialService;
 import com.team.util.ControllerUtil;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -91,5 +93,18 @@ public class MaterialController {
     @ResponseBody
     public List<Material>getData(){
        return materialService.selectByExample();
+    }
+
+    //查询
+    @RequestMapping(value = {"material/search_material_by_materialId" , "material/search_material_by_materialType"})
+    @ResponseBody
+    public ResponseOV<Material> searchCondition(HttpServletRequest request , String searchValue , int page , int rows){
+        int flag;
+            if (request.getRequestURI().endsWith("material/search_material_by_materialId")){
+                flag = 1;
+            }else {
+                flag = 2;
+            }
+            return materialService.searchMaterialByCondition(flag ,searchValue , page , rows);
     }
 }

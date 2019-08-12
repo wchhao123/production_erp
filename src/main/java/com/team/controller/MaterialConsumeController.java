@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Controller
@@ -77,5 +78,20 @@ public String deletejudge(){
     public Map<String , String> updateAll(MaterialConsume materialConsume){
         boolean b = materialConsumeService.updateByPrimaryKey(materialConsume);
         return ControllerUtil.returnMsg(b);
+    }
+    //查询
+    @RequestMapping(value = {"materialConsume/search_materialConsume_by_consumeId" , "materialConsume/search_materialConsume_by_materialId"
+    ,"materialConsume/search_materialConsume_by_workId"})
+    @ResponseBody
+    public ResponseOV<MaterialConsume> searchCondition(HttpServletRequest request , String searchValue , int page , int rows){
+        int flag;
+        if (request.getRequestURI().endsWith("materialConsume/search_materialConsume_by_consumeId")){
+            flag =1;
+        }else if (request.getRequestURI().endsWith("materialConsume/search_materialConsume_by_materialId")){
+            flag = 2;
+        }else {
+            flag = 3;
+        }
+        return materialConsumeService.searchMaterialConsumeByCondition(flag , searchValue  ,page , rows);
     }
 }
