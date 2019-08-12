@@ -1,0 +1,6 @@
+1、平台事务管理器的bean未注册
+2、完成了登陆模块，很不错
+3、类的命名不规范，出现了DeviceController2,DeviceController3这样的命名,类的命名要有具体的含义
+4、json数据的返回值处理的不错
+5、service层命名的统一性，比如都叫IXXXXService，或直接XXXXService，可以创建impl包专门放置实现类
+6、整体完成还可以 继续加油
