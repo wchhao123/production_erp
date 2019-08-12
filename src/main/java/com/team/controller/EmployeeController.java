@@ -2,6 +2,7 @@ package com.team.controller;
 
 import com.team.bean.Employee;
 import com.team.bean.Employee;
+import com.team.bean.ResponseOV;
 import com.team.service.EmployeeService;
 import com.team.util.ControllerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,15 @@ public class EmployeeController {
         boolean b = employeeService.updateEmployee(employee);
         return ControllerUtil.returnMsg(b);
     }
+    @RequestMapping("find")
+    public String material(){
+        return "/WEB-INF/jsp/employee_list.jsp";
+    }
 
+    @RequestMapping("list")
+    @ResponseBody
+    public ResponseOV<Employee> list(int page, int rows) {
+        ResponseOV<Employee> pageEmployee = employeeService.getPageEmployee(page, rows);
+        return pageEmployee;
+    }
 }

@@ -375,4 +375,24 @@
     left join department dept on emp.department_id = dept.department_id
     where emp_id = #{empId}
   </select>
+
+  <select id="queryEmployee" resultMap="employeeResultMap">
+      select
+    emp.emp_id,
+    emp.emp_name,
+    emp.sex,
+    emp.id_code,
+    emp.birthday,
+    emp.join_date,
+    emp.status,
+    emp.education,
+    emp.degree,
+    emp.major,
+    emp.graduate_school,
+    emp.education_form,
+    dept.department_id,
+    dept.department_name
+    from employee emp
+    left join department dept on emp.department_id = dept.department_id
+  </select>
 </mapper>

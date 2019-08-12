@@ -23,13 +23,18 @@ public class UserRoleUtil {
         }else if (lock == 4){
             map.put("rolename" , "物料监控管理员");
             materialManager(list);
-        } else if (lock == 9) {
+        }else if (lock == 6){
+            map.put("rolename", "人员监控管理员");
+            employeeManager(list);
+        }
+        else if (lock == 9) {
             map.put("rolename", "超级管理员");
             planManger(list);
             processManager(list);
             deviceManger(list);
             qualifyMonitor(list);
             materialManager(list);
+            employeeManager(list);
         }
 
     }
@@ -75,6 +80,12 @@ public class UserRoleUtil {
             list.add("material" + s);
             list.add("materialReceive" + s);
             list.add("materialConsume" + s);
+        }
+    }
+    private static void employeeManager(List<String> list) {
+        for (String s : author) {
+            list.add("department" + s);
+            list.add("employee" + s);
         }
     }
 }
