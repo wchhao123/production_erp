@@ -6,21 +6,17 @@ import com.team.service.IDeviceService02;
 import com.team.util.ControllerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
-
+//2.设备类型deviceType
 @Controller
 public class DeviceController02 {
     @Autowired
     private IDeviceService02 deviceService02;
 
-    //2.设备种类
     @GetMapping("device/deviceType")
     public String find02() {
         return "/WEB-INF/jsp/deviceType.jsp";
@@ -31,7 +27,7 @@ public class DeviceController02 {
     public ResponseOV<DeviceType> list02(int page, int rows) {
         return deviceService02.getPageDeviceType(page, rows);
     }
-    //2.1 设备种类新增
+    //2.1 增
 
     @GetMapping("deviceType/add_judge")
     @ResponseBody
@@ -49,7 +45,7 @@ public class DeviceController02 {
         boolean b = deviceService02.deviceTypeInsert(deviceType);
         return ControllerUtil.returnMsg(b);
     }
-    //2.2 设备种类修改
+    //2.2 改
     @GetMapping("deviceType/edit_judge")
     @ResponseBody
     public void edit_judge() {
@@ -66,7 +62,7 @@ public class DeviceController02 {
         boolean b = deviceService02.deviceTypeEdit(deviceType);
         return ControllerUtil.returnMsg(b);
     }
-    //2.3 设备种类删除
+    //2.3 删
     @GetMapping("deviceType/delete_judge")
     @ResponseBody
     public void delete_judge() {
@@ -74,7 +70,7 @@ public class DeviceController02 {
     }
     @PostMapping("deviceType/delete_batch")
     @ResponseBody
-    public Map<String, String> delete_batch(String ids) {
+    public Map<String, String> delete_batch(String[] ids) {
         boolean b = deviceService02.delete_batch(ids);
         return ControllerUtil.returnMsg(b);
     }
@@ -95,5 +91,10 @@ public class DeviceController02 {
             flag = -1;
         }
         return deviceService02.search_deviceType_by_condition(flag,"%"+searchValue+"%", page, rows);
+    }
+    @RequestMapping("deviceType/get/{id}")
+    @ResponseBody
+    public DeviceType deviceType(@PathVariable("id") String id){
+        return deviceService02.deviceType(id);
     }
 }

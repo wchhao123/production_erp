@@ -14,13 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
-
+//3.设备例检
 @Controller
 public class DeviceController03 {
     @Autowired
     private IDeviceService03 deviceService03;
 
-    //3.设备例检
     @GetMapping("device/deviceCheck")
     public String getDeviceCheckJsp(){
         return "/WEB-INF/jsp/deviceCheck.jsp";
@@ -32,8 +31,6 @@ public class DeviceController03 {
         return deviceService03.findDeviceCheckList(page,rows);
     }
     //3.1 增
-    //2.1 设备种类新增
-
     @GetMapping("deviceCheck/add_judge")
     @ResponseBody
     public void add_judge() {
@@ -50,7 +47,7 @@ public class DeviceController03 {
         boolean b = deviceService03.deviceCheckInsert(deviceCheck);
         return ControllerUtil.returnMsg(b);
     }
-    //2.2 设备种类修改
+    //3.2 改
     @GetMapping("deviceCheck/edit_judge")
     @ResponseBody
     public void edit_judge() {
@@ -67,7 +64,7 @@ public class DeviceController03 {
         boolean b = deviceService03.deviceCheckEdit(deviceCheck);
         return ControllerUtil.returnMsg(b);
     }
-    //2.3 设备种类删除
+    //3.3 删
     @GetMapping("deviceCheck/delete_judge")
     @ResponseBody
     public void delete_judge() {
@@ -75,11 +72,11 @@ public class DeviceController03 {
     }
     @PostMapping("deviceCheck/delete_batch")
     @ResponseBody
-    public Map<String, String> delete_batch(String ids) {
+    public Map<String, String> delete_batch(String[] ids) {
         boolean b = deviceService03.delete_batch(ids);
         return ControllerUtil.returnMsg(b);
     }
-    //2.4 模糊查询
+    //3.4 模糊查询
     @RequestMapping(value = {"deviceCheck/search_deviceCheck_by_deviceCheckId",
             "deviceCheck/search_deviceCheck_by_deviceName"})
     @ResponseBody

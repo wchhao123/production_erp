@@ -17,9 +17,7 @@ import java.util.List;
 @Service
 public class DeviceServiceImpl05 implements IDeviceService05 {
 
-    @Autowired
-    private IDeviceService deviceService;
-    //3.设备检修
+    //设备检修
     @Autowired
     private DeviceMaintainMapper deviceMaintainMapper;
 
@@ -45,8 +43,15 @@ public class DeviceServiceImpl05 implements IDeviceService05 {
     }
 
     @Override
-    public boolean delete_batch(String ids) {
-        return deviceMaintainMapper.deleteByPrimaryKey(ids)==1;
+    public boolean delete_batch(String[] ids) {
+        boolean flag=true;
+        for (String id : ids) {
+            if (deviceMaintainMapper.deleteByPrimaryKey(id)!=1) {
+                flag=false;
+                break;
+            }
+        }
+        return flag;
     }
 
     @Override
@@ -67,5 +72,4 @@ public class DeviceServiceImpl05 implements IDeviceService05 {
     public List<DeviceFault> getdeviceFault() {
         return deviceFaultMapper.selectByExample(null);
     }
-
 }
