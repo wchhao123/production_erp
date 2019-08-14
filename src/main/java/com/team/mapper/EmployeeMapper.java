@@ -34,4 +34,6 @@ public interface EmployeeMapper {
     Employee getEmployeeById(@Param("empId") String id);
 
     List<Employee>queryEmployee();
+
+    List<Employee> searchEmployeeByCondition(@Param("flag") int flag , @Param("searchValue")String searchValue);
 }

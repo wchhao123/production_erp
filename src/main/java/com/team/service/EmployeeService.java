@@ -13,4 +13,10 @@ public interface EmployeeService {
     boolean updateEmployee(Employee employee);
 
     ResponseOV<Employee> getPageEmployee(int page, int rows);
+
+    boolean deleteByPrimaryKey(String id);
+
+    ResponseOV<Employee> searchEmployeeByCondition(int flag, String searchValue, int page, int rows);
+
+    boolean insert(Employee employee);
 }

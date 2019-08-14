@@ -1,5 +1,6 @@
 package com.team.bean;
 
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class Employee {
@@ -8,7 +9,7 @@ public class Employee {
     private String empName;
 
     private String sex;
-
+    @Size(min = 18,max = 18,message = "{employee.idCode.size}")
     private String idCode;
 
     private Date birthday;
