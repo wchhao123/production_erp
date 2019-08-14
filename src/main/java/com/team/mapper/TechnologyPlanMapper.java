@@ -34,4 +34,6 @@ public interface TechnologyPlanMapper {
     TechnologyPlan getTechnologyPlanById(String id);
 
     List<TechnologyPlan> getTechnologyPlans();
+
+    int batchDeleteByIds(@Param("ids") String[] ids);
 }

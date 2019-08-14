@@ -441,6 +441,10 @@ public class TechnologyRequirementExample {
         protected Criteria() {
             super();
         }
+
+        public void andTechnologyRequirementNameLike(String s) {
+
+        }
     }
 
     public static class Criterion {

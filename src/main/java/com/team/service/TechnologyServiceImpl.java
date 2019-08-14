@@ -2,9 +2,7 @@ package com.team.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.team.bean.Custom;
-import com.team.bean.ResponseOV;
-import com.team.bean.Technology;
+import com.team.bean.*;
 import com.team.mapper.TechnologyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TechnologyServiceImpl implements ITechnologyService{
+public class TechnologyServiceImpl implements TechnologyService {
 
     @Autowired
     private TechnologyMapper technologyMapper;
@@ -38,5 +36,48 @@ public class TechnologyServiceImpl implements ITechnologyService{
     @Override
     public List<Technology> getTechnologies() {
         return technologyMapper.selectByExample(null);
+    }
+
+    @Override
+    public boolean insertTechnology(Technology technology) {
+        return technologyMapper.insert(technology) == 1;
+    }
+
+    @Override
+    public boolean deleteByIds(String[] ids) {
+        return technologyMapper.batchDeleteByIds(ids) != 0;
+    }
+
+    @Override
+    public boolean updateTechnology(Technology technology) {
+        int i = technologyMapper.updateByPrimaryKey(technology);
+        return i == 1;
+    }
+
+    @Override
+    public boolean updateTechnologyNoteById(String technologyId, String note) {
+        Technology technology=new Technology();
+        technology.setTechnologyId(technologyId);
+        technology.setNote(note);
+        int i = technologyMapper.updateByPrimaryKeySelective(technology);
+        return i == 1;
+    }
+
+    @Override
+    public ResponseOV<Technology> searchTechnologyByCondition(int flag, String searchValue, int page, int rows) {
+        TechnologyExample technology = new TechnologyExample();
+        PageHelper.startPage(page, rows);
+        if (flag == 1) {
+            technology.createCriteria().andTechnologyIdLike("%" + searchValue + "%");
+        } else {
+            technology.createCriteria().andTechnologyNameLike("%" + searchValue + "%");
+        }
+        List<Technology> technologies = technologyMapper.selectByExample(technology);
+        PageInfo<Technology> info = new PageInfo<>(technologies);
+
+        ResponseOV<Technology> ov = new ResponseOV<>();
+        ov.setRows(technologies);
+        ov.setTotal((int) info.getTotal());
+        return ov;
     }
 }

@@ -611,6 +611,10 @@ public class TechnologyPlanExample {
         protected Criteria() {
             super();
         }
+
+        public void andTechnologyPlanNameLike(String s) {
+
+        }
     }
 
     public static class Criterion {

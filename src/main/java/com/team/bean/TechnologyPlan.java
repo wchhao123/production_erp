@@ -92,4 +92,8 @@ public class TechnologyPlan {
     public void setTechnologyPlanEnd(Date technologyPlanEnd) {
         this.technologyPlanEnd = technologyPlanEnd;
     }
+
+    public void setNote(String note) {
+
+    }
 }

@@ -1,6 +1,7 @@
 package com.team.bean;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Technology {
     private String technologyId;
@@ -91,5 +92,9 @@ public class Technology {
 
     public void setOverfulfilCapacity(Integer overfulfilCapacity) {
         this.overfulfilCapacity = overfulfilCapacity;
+    }
+
+    public void setNote(String note) {
+
     }
 }

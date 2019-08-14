@@ -7,6 +7,7 @@
     <result column="requirement" jdbcType="VARCHAR" property="requirement" />
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="revise_time" jdbcType="TIMESTAMP" property="reviseTime" />
+    <result column="technology_name" jdbcType="VARCHAR" property="technologyName" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,7 +68,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    technology_requirement_id, technology_id, requirement, add_time, revise_time
+    /*technology_requirement_id, technology_id, requirement, add_time, revise_time*/
+    tr.technology_requirement_id,tr.technology_id,tr.requirement,tr.add_time,tr.revise_time,
+    t.technology_name
   </sql>
   <select id="selectByExample" parameterType="com.team.bean.TechnologyRequirementExample" resultMap="BaseResultMap">
     select
@@ -76,7 +79,8 @@
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from technology_requirement
+    from technology_requirement tr
+    left join technology t on tr.technology_id=t.technology_id
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -84,10 +88,12 @@
       order by ${orderByClause}
     </if>
   </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from technology_requirement
+    from technology_requirement tr
+    left join technology t on tr.technology_id=t.technology_id
     where technology_requirement_id = #{technologyRequirementId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -219,10 +225,6 @@
       <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
       <result column="revise_time" jdbcType="TIMESTAMP" property="reviseTime" />
       <result column="technology_name" jdbcType="VARCHAR" property="technologyName"/>
-      <!--<association  property="technology"  javaType="com.team.bean.Technology">
-        <result column="technology_name" property="technologyName" jdbcType="VARCHAR"/>
-        <result column="technology_id" property="technologyId" jdbcType="VARCHAR"/>
-      </association>-->
     </resultMap>
     <select id="mixTechnologyRequirement" resultMap="BaseResultMap1">
       select tr.technology_requirement_id,tr.technology_id,tr.requirement,tr.add_time,tr.revise_time,
@@ -230,5 +232,25 @@
       from technology_requirement tr
       left join technology t on tr.technology_id=t.technology_id
     </select>
+
+  <resultMap id="BaseResultMap2" type="com.team.bean.Technology">
+    <result column="technology_id" jdbcType="VARCHAR" property="technologyId" />
+    <result column="technology_name" jdbcType="VARCHAR" property="technologyName" />
+  </resultMap>
+  <select id="selectByUpdate" resultMap="BaseResultMap2">
+      select *
+      from technology
+    </select>
+
+  <!--批删除-->
+  <delete id="batchDeleteByIds">
+    delete from technology_requirement
+    <where>
+      technology_requirement_id in
+      <foreach collection="ids" item="id" open="(" close=")" separator=",">
+        #{id}
+      </foreach>
+    </where>
+  </delete>
 
 </mapper>
